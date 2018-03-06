@@ -474,7 +474,6 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 		}
 
-		updateCameraInputs();
 	}
 
 	this.mouseup = function( event ) {
@@ -521,7 +520,6 @@ THREE.TrackballControls = function ( object, domElement ) {
 
 		}
 
-		updateCameraInputs();
 
 		_this.dispatchEvent( startEvent );
 		_this.dispatchEvent( endEvent );
