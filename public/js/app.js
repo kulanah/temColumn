@@ -33,7 +33,7 @@ let initCamera = function(){
     1000                                      //far plane
   );
 
-  camera.position.set(5, 5, 20);
+  camera.position.set(0,0,20);
   scene.add(camera);
 }
 
@@ -49,15 +49,35 @@ let render = function(){
 let animate = function(){
   requestAnimationFrame(animate);
   controls.update();
+  render();
 }
 
 let createScene = function(){
-  let coneGeo = new THREE.ConeGeometry(5, 5, 8, 2);
-  let coneMats = new THREE.MeshBasicMaterial({color: 0xff694b, wireframe: true});
+  let coneGeo = new THREE.ConeGeometry(5, 5, 8, 1);
+  let coneMats = new THREE.MeshBasicMaterial({color: 0xff69b4, wireframe: true});
 
   let cone = new THREE.Mesh(coneGeo, coneMats);
-  scene.add(cone);
+  cone.rotation.z = 0.4
 
+  let coneBSP = new ThreeBSP(cone);
+
+
+  let cubeGeo = new THREE.BoxGeometry(12,10,10);
+  let cubeMats = new THREE.MeshBasicMaterial({color: 0x00ffff, wireframe: true});
+
+  let cube = new THREE.Mesh(cubeGeo, cubeMats);
+  cube.position.y -= 5;
+
+  let cubeBSP = new ThreeBSP(cube);
+
+  let subBSP = coneBSP.subtract(cubeBSP);
+  let result = subBSP.toMesh(new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true}));
+
+  result.geometry.computeVertexNormals();
+  scene.add(result);
+
+  // scene.add(cube);
+  // scene.add(cone);
 }
 
 
