@@ -111,7 +111,11 @@ let columnInit = function(){
   window.temColumn = temColumn;
 
   temColumn = new column(columnHeight);
+
+  temColumn.addLens(1);
+
   temColumn.drawColumn();
+  temColumn.drawLenses();
 
 }
 
