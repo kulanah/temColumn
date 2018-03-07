@@ -2,11 +2,15 @@
 
 let renderer, scene, camera, controls;
 
+//this sets the column height and gives us a camera offset
+let columnHeight = 40;
+
 let init = function(){
   initRenderer();
   initLight();
   initCamera();
   initControls();
+  initPointSphere();
 }
 
 let initRenderer = function(){
@@ -41,13 +45,14 @@ let initCamera = function(){
     1000                                      //far plane
   );
 
-  camera.position.set(0,0,20);
+  camera.position.set(0, -columnHeight / 2,80);
   scene.add(camera);
 }
 
 let initControls = function(){
   controls = new THREE.TrackballControls(camera, document.getElementById('threejscanvas'));
   controls.addEventListener('change', render)
+  controls.target.set(0, -columnHeight / 2,80);
 }
 
 let render = function(){
@@ -88,8 +93,31 @@ let createShapes = function(){
   // scene.add(cone);
 }
 
+let initPointSphere = function(){
+  let geo = new THREE.SphereGeometry(.25,.25,1,1);
+  let mats = new THREE.MeshBasicMaterial({color: 0xffffff});
+
+  let shape = new THREE.Mesh(geo, mats);
+  shape.position.x = 0;
+  shape.position.y = 0;
+  shape.position.z = 0;
+
+  scene.add(shape);
+}
+
+
+let columnInit = function(){
+  let temColumn;
+  window.temColumn = temColumn;
+
+  temColumn = new column(columnHeight);
+  temColumn.drawColumn();
+
+}
+
 
 init();
-createShapes  ();
+// createShapes();
 animate();
 render();
+columnInit();
