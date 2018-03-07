@@ -34,7 +34,7 @@ let initLight = function(){
 
   scene.add(backLight);
   scene.add(keyLight);
-  scene.add(underLight)     ;
+  scene.add(underLight);
 }
 
 let initCamera = function(){
@@ -52,7 +52,7 @@ let initCamera = function(){
 let initControls = function(){
   controls = new THREE.TrackballControls(camera, document.getElementById('threejscanvas'));
   controls.addEventListener('change', render)
-  controls.target.set(0, -columnHeight / 2,80);
+  controls.target.set(0, -columnHeight / 2, 0);
 }
 
 let render = function(){
