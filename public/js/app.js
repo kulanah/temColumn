@@ -1,6 +1,6 @@
 'use strict';
 
-let renderer, scene, camera, light, controls;
+let renderer, scene, camera, controls;
 
 let init = function(){
   initRenderer();
@@ -10,7 +10,7 @@ let init = function(){
 }
 
 let initRenderer = function(){
-    renderer = new THREE.WebGLRenderer();
+    renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.domElement.id = 'threejscanvas';
     document.getElementById('viewport').appendChild(renderer.domElement);
@@ -19,17 +19,25 @@ let initRenderer = function(){
 }
 
 let initLight = function(){
-  light = new THREE.PointLight(0xfffff);
-  light.position.set(1,1,1).normalize();
+  let keyLight = new THREE.DirectionalLight(0xff0000, 1, 0);
+  keyLight.position.set(4,5,1);
   
-  scene.add(light);
+  let backLight = new THREE.DirectionalLight(0x00ffff,  1, 0);
+  backLight.position.set(-7, 3, -5);
+
+  let underLight = new THREE.DirectionalLight(0xffffff, 1, 0);
+  underLight.position.set(0,-5,0);
+
+  scene.add(backLight);
+  scene.add(keyLight);
+  scene.add(underLight)     ;
 }
 
 let initCamera = function(){
   camera = new THREE.PerspectiveCamera(
     35,                                       //fov
     window.innerWidth / window.innerHeight,   //aspect ratio  
-    1,                                        //near plane 
+    0.5,                                      //near plane 
     1000                                      //far plane
   );
 
@@ -52,8 +60,8 @@ let animate = function(){
   render();
 }
 
-let createScene = function(){
-  let coneGeo = new THREE.ConeGeometry(5, 5, 8, 1);
+let createShapes = function(){
+  let coneGeo = new THREE.ConeGeometry(2, 5, 100, 1);
   let coneMats = new THREE.MeshBasicMaterial({color: 0xff69b4, wireframe: true});
 
   let cone = new THREE.Mesh(coneGeo, coneMats);
@@ -71,9 +79,9 @@ let createScene = function(){
   let cubeBSP = new ThreeBSP(cube);
 
   let subBSP = coneBSP.subtract(cubeBSP);
-  let result = subBSP.toMesh(new THREE.MeshBasicMaterial({color: 0xffffff, wireframe: true}));
+  let result = subBSP.toMesh(new THREE.MeshBasicMaterial({transparent: false, color: 0xffffff, wireframe: true, wireframeLinejoin: "miter", wireframeLinewidth: 10})); 
 
-  result.geometry.computeVertexNormals();
+  // result.geometry.computeVertexNormals();
   scene.add(result);
 
   // scene.add(cube);
@@ -81,11 +89,7 @@ let createScene = function(){
 }
 
 
-
-
-
-
 init();
-createScene();
+createShapes  ();
 animate();
 render();
