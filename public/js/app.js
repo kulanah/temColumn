@@ -110,7 +110,7 @@ let columnInit = function(){
   let temColumn;
   window.temColumn = temColumn;
 
-  temColumn = new column(columnHeight);
+  temColumn = new Column(columnHeight);
 
   temColumn.addLens(1);
 
