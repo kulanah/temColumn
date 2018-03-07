@@ -1,7 +1,10 @@
-class column{
-  constructor(columnHeight){
+class Column{
+  constructor(columnHeight, lensWidth){
     this.components = new Array();
     this.columnHeight = columnHeight;
+    this.lensOffset = 0;
+    this.lensWidth = lensWidth;
+
 
   }
 
@@ -14,5 +17,15 @@ class column{
     this.mesh.position.y = -this.columnHeight / 2;
 
     scene.add(this.mesh);
+  }
+  
+  addLens(focalLength){
+    this.components.push(new SimpleComponent());
+  }
+
+  drawLenses(){
+    for (let i = 0; i < this.components.length; ++i){
+      components[i].draw();
+    }
   }
 };
