@@ -2,11 +2,11 @@ class SimpleComponent{
   constructor(){
 
   }
-  constructor(f, y, lH){
-    this.focalLength = f;
-    this.yOffset = y;
-    this.lensHeight = lH + y;
-  }
+  // constructor(f, y, lH){
+  //   this.focalLength = f;
+  //   this.yOffset = y;
+  //   this.lensHeight = lH + y;
+  // }
 
   drawLens(){
     this.lensShape = new THREE.SphereGeometry(4, 16, 12);
@@ -20,7 +20,7 @@ class SimpleComponent{
 
 
   draw(){
-    drawLens();
+    this.drawLens();
   }
 
 

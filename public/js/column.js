@@ -25,7 +25,7 @@ class Column{
 
   drawLenses(){
     for (let i = 0; i < this.components.length; ++i){
-      components[i].draw();
+      this.components[i].draw();
     }
   }
 };
