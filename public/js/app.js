@@ -46,14 +46,17 @@ let initCamera = function(){
   );
 
   // camera.position.set(0, -columnHeight / 2,80);
-  camera.position.set(0, -columnHeight / 8, 30);
+  // camera.position.set(0, -columnHeight / 8, 30);
+  camera.position.set(5, 10, 35);
+  // camera.position.set(0,0,20);
   scene.add(camera);
 }
 
 let initControls = function(){
   controls = new THREE.TrackballControls(camera, document.getElementById('threejscanvas'));
   controls.addEventListener('change', render)
-  controls.target.set(0, -columnHeight / 8, 0);
+  // controls.target.set(0, 19, 29 );
+  // controls.target.set(0, -columnHeight / 8, 0);
   // controls.target.set(0, -columnHeight / 2, 0);
 }
 
@@ -97,14 +100,24 @@ let createShapes = function(){
 
 let initPointSphere = function(){
   let geo = new THREE.SphereGeometry(.25,.25,1,1);
-  let mats = new THREE.MeshBasicMaterial({color: 0xffffff});
+  let mats = new THREE.MeshBasicMaterial({ wireframe: true, color: 0xffffff});
 
   let shape = new THREE.Mesh(geo, mats);
-  shape.position.x = 0;
-  shape.position.y = 0;
+  shape.position.x = 4;
+  shape.position.y = 4.5;
   shape.position.z = 0;
 
   scene.add(shape);
+
+
+
+  let cGeo = new THREE.ConeGeometry(4,9,9);
+  let cShape = new THREE.Mesh(cGeo, mats);
+
+  cShape.rotation.z = 2
+  cShape.position.x = 4;
+  cShape.position.y = 4.5;
+  scene.add(cShape);
 }
 
 
@@ -120,8 +133,36 @@ let columnInit = function(){
 
 }
 
+
+let initFacing = function(){
+  var material = new THREE.MeshBasicMaterial( { color : 0x00cc00 } );
+
+  //create a triangular geometry
+  var geometry = new THREE.Geometry();
+  geometry.vertices.push( new THREE.Vector3( -5, -5, 0 ) );
+  geometry.vertices.push( new THREE.Vector3(  5, -5, 0 ) );
+  geometry.vertices.push( new THREE.Vector3(  5,  5, 0 ) );
+
+  //create a new face using vertices 0, 1, 2
+  var normal = new THREE.Vector3( 0, 1, 0 ); //optional
+  var color = new THREE.Color( 0xffaa00 ); //optional
+  var materialIndex = 0; //optional
+  var face = new THREE.Face3( 0, 1, 2);
+
+  //add the face to the geometry's faces array
+  geometry.faces.push( face );
+
+  //the face normals and vertex normals can be calculated automatically if not supplied above
+  geometry.computeFaceNormals();
+  geometry.computeVertexNormals();
+
+  scene.add( new THREE.Mesh( geometry, material));
+}
 init();
 // createShapes();
 animate();
 render();
-columnInit();
+// columnInit();
+
+// initFacing();
+render();
