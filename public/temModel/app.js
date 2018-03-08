@@ -77,7 +77,8 @@ let animate = function(){
 };
 
 let createLenses = function(){
-  temColumn.addLens(2.5, 0);
+  temColumn.addLens(2.5, 4);
+  temColumn.addLens(2, 5);
 
 
 
