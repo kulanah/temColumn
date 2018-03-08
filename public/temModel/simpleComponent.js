@@ -1,49 +1,55 @@
 class simpleComponent{
-  constructor(focalLength, startY, width, centerPoint){
+  constructor(focalLength, startY, width, centerPoint, lensHeight){
     this.focalLength = focalLength;
     this.startY = startY;
     this.width = width;
     this.centerPoint = centerPoint;
+    this.lensHeight = lensHeight;
 
 
 
   }
-  createLens(){
-    this.lensCurve = new THREE.EllipseCurve(0, -this.focalLength * 2, 5, .5, 0, 2 * Math.PI);
-    this.points = this.lensCurve.getPoints(50);
 
-    this.lensShape = new THREE.Geometry().setFromPoints(this.points);
-    this.lensMaterial = new THREE.LineBasicMaterial({color: 0x2222ff});
+  drawLens(){
+    this.lensShape = new THREE.SphereGeometry(.5, 16, 12);
+    this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 1.5, 0.5, this.width * 1.25));
+    // this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.lensWidth * 1.5, 0.5, this.lensWidth * 1.25));
 
-    this.ellipses = new THREE.Line(this.lensShape, this.lensMaterial);
-    scene.add(this.ellipses);
+    this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, wireframe: false});
 
+    this.lensMesh = new THREE.Mesh(this.lensShape, this.lensMat);
+    this.lensMesh.position.y = -this.lensHeight - this.startY;
+
+    scene.add(this.lensMesh);
+  }
+  
+  drawRays(){
     this.rayshape = new THREE.Geometry();
-    this.raymaterial = new THREE.LineBasicMaterial({color: 0x00ff00, linewidth: 4});
 
     //hourglass section
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, 0 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(0, -this.focalLength * 2 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.focalLength * 4 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.focalLength * 4 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, 0 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, 0 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(0, -this.focalLength * 2 + this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(this.width, 0 - this.startY)); 
+    this.rayshape.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY)); 
+    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight * 2 - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight * 2 - this.startY));
 
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.focalLength * 2 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.focalLength * 4 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.focalLength * 4 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.focalLength * 2 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.focalLength * 2 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, 0 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, 0 + this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.focalLength * 2 + this.startY));
+    this.rayshape.faces.push(new THREE.Face3(0,1,2));
+    this.rayshape.faces.push(new THREE.Face3(3,4,5));
 
-
-
-    this.ray= new THREE.Line(this.rayshape, this.raymaterial);
+    let faceMat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 0.5});
+    this.rayF = new THREE.Mesh(this.rayshape, faceMat);
+    this.ray= new THREE.Mesh(this.rayshape, faceMat);
     scene.add(this.ray);
+  }
 
+  draw(){
+    this.drawLens();
+    this.drawRays();
+  }
+
+  getHeight(){
+    return this.lensHeight * 2;
   }
 
   updateFocalLength(newLen){
@@ -55,7 +61,7 @@ class simpleComponent{
     this.focalLength = newLen;
     this.rayshape = null;
     this.raymaterial = null;
-    this.createLens();
+    this.draw();
     render();
   }
 
