@@ -45,14 +45,16 @@ let initCamera = function(){
     1000                                      //far plane
   );
 
-  camera.position.set(0, -columnHeight / 2,80);
+  // camera.position.set(0, -columnHeight / 2,80);
+  camera.position.set(0, -columnHeight / 8, 30);
   scene.add(camera);
 }
 
 let initControls = function(){
   controls = new THREE.TrackballControls(camera, document.getElementById('threejscanvas'));
   controls.addEventListener('change', render)
-  controls.target.set(0, -columnHeight / 2, 0);
+  controls.target.set(0, -columnHeight / 8, 0);
+  // controls.target.set(0, -columnHeight / 2, 0);
 }
 
 let render = function(){
@@ -106,19 +108,17 @@ let initPointSphere = function(){
 }
 
 
+let temColumn;
 let columnInit = function(){
-  let temColumn;
-  window.temColumn = temColumn;
 
   temColumn = new Column(columnHeight);
 
-  temColumn.addLens(1);
+  temColumn.addLens(1, 3, 4);
 
   temColumn.drawColumn();
   temColumn.drawLenses();
 
 }
-
 
 init();
 // createShapes();
