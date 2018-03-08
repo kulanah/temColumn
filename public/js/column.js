@@ -11,7 +11,7 @@ class Column{
   drawColumn(){
     //radiusTop, radiusBottom, height, radialSegments, heightSegments, openEnded, thetaStart, thetaLength
     this.shape = new THREE.CylinderGeometry(5, 5, this.columnHeight, 8, 1, true, 1.6, Math.PI);
-    this.mats = new THREE.MeshBasicMaterial({color: 0xff69b4, side: THREE.DoubleSide  });
+    this.mats = new THREE.MeshBasicMaterial({color: 0x333333, side: THREE.DoubleSide  });
 
     this.mesh = new THREE.Mesh(this.shape, this.mats);
     this.mesh.position.y = -this.columnHeight / 2;
@@ -19,8 +19,8 @@ class Column{
     scene.add(this.mesh);
   }
   
-  addLens(focalLength){
-    this.components.push(new SimpleComponent());
+  addLens(focalLength, lensHeight, lensWidth){
+    this.components.push(new SimpleComponent(focalLength, this.lensOffset, lensHeight, lensWidth));
   }
 
   drawLenses(){
