@@ -39,7 +39,7 @@ let initLights = function() {
   let mat = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff69b4});
   let sphere = new THREE.Mesh(geo, mat);
   sphere.position.x = 0;
-  sphere.position.y = -3;
+  sphere.position.y = -45;
   sphere.position.z = 0;
 
   scene.add(sphere);
