@@ -6,6 +6,7 @@ class simpleComponent{
     this.centerPoint = centerPoint;
     this.lensHeight = lensHeight;
 
+    this.faceMat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 0.5});
 
 
   }
@@ -25,6 +26,7 @@ class simpleComponent{
   
   drawRays(){
     this.rayshape = new THREE.Geometry();
+
 
     //hourglass section
     this.rayshape.vertices.push(new THREE.Vector3(this.width, 0 - this.startY)); 
@@ -48,9 +50,10 @@ class simpleComponent{
     this.rayshape.faces.push(new THREE.Face3(6,7,8));
     this.rayshape.faces.push(new THREE.Face3(9,10,11));
 
-    let faceMat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 0.5});
-    this.rayF = new THREE.Mesh(this.rayshape, faceMat);
-    this.ray= new THREE.Mesh(this.rayshape, faceMat);
+    console.log(this.rayshape);
+    console.log(this.lensHeight);
+
+    this.ray= new THREE.Mesh(this.rayshape, this.faceMat);
     scene.add(this.ray);
   }
 
@@ -60,18 +63,15 @@ class simpleComponent{
   }
 
   getHeight(){
-    return this.lensHeight * 2;
+    return this.lensHeight * 2 + this.startY;
   }
 
   updateFocalLength(newLen){
     scene.remove(this.ray);
-    scene.remove(this.ellipses);
     this.ray = null;
-    this.ellipses = null;
 
     this.focalLength = Number(newLen);
     this.rayshape = null;
-    this.raymaterial = null;
     this.draw();
     render();
   }

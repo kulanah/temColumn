@@ -17,7 +17,7 @@ class column{
     this.lineMaterial = new THREE.LineBasicMaterial({color: 0xff0000});
     this.lineGeometry = new THREE.Geometry();
 
-    // this.cGeometry = new THREE.MeshBasicMaterial({
+    // this.cGeometry =d new THREE.MeshBasicMaterial({
     //   side:  THREE.DoubleSide, 
     //   color: 0xaaaaaa,
     // });
@@ -32,18 +32,19 @@ class column{
     if (this.components.length == 0){
       let newComp = new simpleComponent(focal, 0, this.width, 0, lensHeight);
       this.components.push(newComp);
-      this.drawLenses();
+      // this.drawLenses();
     } else {
       let startY = this.components[this.components.length - 1].getHeight();
       let newComp = new simpleComponent(focal, startY, this.width, 0, lensHeight);
       this.components.push(newComp);
-      this.drawLenses();
+      // this.drawLenses();
     }
   }
 
   drawLenses(){
     for (let i = 0; i < this.components.length; ++i){
       this.components[i].draw();
+      console.log(i);
     }
   }
 
