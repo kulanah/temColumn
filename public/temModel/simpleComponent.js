@@ -31,17 +31,22 @@ class simpleComponent{
     this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY));
     this.rayshape.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY));
 
-    // this.rayshape.vertices.push(new THREE.Vector3(0, -this.focalLength - this.startY)); 
-    // this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
-    // this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY)); 
+    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY)); 
+    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY)); 
 
-    // this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
-    // this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY));
-    // this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY));
+
+    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY)); 
+    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight * 2 - this.startY));
+    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight * 2 - this.startY)); 
 
     this.rayshape.faces.push(new THREE.Face3(0,1,2));
     this.rayshape.faces.push(new THREE.Face3(3,4,5));
     this.rayshape.faces.push(new THREE.Face3(6,7,8));
+    this.rayshape.faces.push(new THREE.Face3(9,10,11));
 
     let faceMat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 0.5});
     this.rayF = new THREE.Mesh(this.rayshape, faceMat);
