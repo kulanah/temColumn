@@ -28,7 +28,7 @@ class column{
     this.init = this.init.bind(this);
   }
 
-  addLens(focal, lensHeight){
+  addSimpleLens(focal, lensHeight){
     if (this.components.length == 0){
       let newComp = new SimpleLens(focal, 0, this.width, 0, lensHeight);
       this.components.push(newComp);
@@ -39,6 +39,10 @@ class column{
       this.components.push(newComp);
       // this.drawLenses();
     }
+  }
+
+  addAngledLens(){
+
   }
 
   drawLenses(){
