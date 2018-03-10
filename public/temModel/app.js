@@ -67,7 +67,7 @@ let render = function(){
 };
 
 let drawScene = function(){
-  temColumn.init();
+  userColumn.init();
   render();
 };
 
@@ -77,17 +77,17 @@ let animate = function(){
 };
 
 let createLenses = function(){
-  temColumn.addSimpleLens(1.2, 8);
-  temColumn.addSimpleLens(2, 5);
-  temColumn.addAngledLens(2, 5);
+  userColumn.addSimpleLens(1.2, 8);
+  userColumn.addSimpleLens(2, 5);
+  userColumn.addAngledLens(2, 5);
 
-  temColumn.drawLenses(); 
+  userColumn.drawLenses(); 
 
 
 };
 
 
-let temColumn = new column(columnHeight);
+let userColumn = new Column(columnHeight);
 
 
 let draggables = [];

@@ -1,4 +1,4 @@
-class column{
+class Column{
   constructor(height ){
     this.components = new Array();
     this.height = height;
