@@ -1,4 +1,4 @@
-class simpleComponent{
+class SimpleLens{
   constructor(focalLength, startY, width, centerPoint, lensHeight){
     this.focalLength = focalLength;
     this.startY = startY;
@@ -7,8 +7,6 @@ class simpleComponent{
     this.lensHeight = lensHeight;
 
     this.faceMat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 0.5});
-
-
   }
 
   drawLens(){
@@ -49,9 +47,6 @@ class simpleComponent{
     this.rayshape.faces.push(new THREE.Face3(3,4,5));
     this.rayshape.faces.push(new THREE.Face3(6,7,8));
     this.rayshape.faces.push(new THREE.Face3(9,10,11));
-
-    console.log(this.rayshape);
-    console.log(this.lensHeight);
 
     this.ray= new THREE.Mesh(this.rayshape, this.faceMat);
     scene.add(this.ray);

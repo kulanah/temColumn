@@ -30,12 +30,12 @@ class column{
 
   addLens(focal, lensHeight){
     if (this.components.length == 0){
-      let newComp = new simpleComponent(focal, 0, this.width, 0, lensHeight);
+      let newComp = new SimpleLens(focal, 0, this.width, 0, lensHeight);
       this.components.push(newComp);
       // this.drawLenses();
     } else {
       let startY = this.components[this.components.length - 1].getHeight();
-      let newComp = new simpleComponent(focal, startY, this.width, 0, lensHeight);
+      let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight);
       this.components.push(newComp);
       // this.drawLenses();
     }
@@ -44,7 +44,6 @@ class column{
   drawLenses(){
     for (let i = 0; i < this.components.length; ++i){
       this.components[i].draw();
-      console.log(i);
     }
   }
 
