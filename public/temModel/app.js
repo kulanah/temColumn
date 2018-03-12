@@ -81,8 +81,9 @@ let animate = function(){
 
 let createLenses = function(){
   userColumn.addSimpleLens(1.2, 8);
-  userColumn.addSimpleLens(2, 5);
-  // userColumn.addAngledLens(2, 5);
+  // userColumn.addSimpleLens(2, 5);
+  userColumn.addAngledLens(2, 5, -2, -1);
+
 
   userColumn.drawLenses(); 
 
