@@ -54,12 +54,21 @@ class SimpleLens{
     rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
     //9
     rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
-
     //10
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY,-this.width));
+    //11
+    rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength,0));
+
+    //12
+    rayShape.vertices.push(new THREE.Vector3(-this.width, -2 * this.lensHeight - this.startY, 0));
+    //13
+    rayShape.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.width));
+    //14
+    rayShape.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY,0));
 
 
-    
+
+
     rayShape.faces.push(new THREE.Face3(2,3,4));
     rayShape.faces.push(new THREE.Face3(4,3,0));
     rayShape.faces.push(new THREE.Face3(2,5,4));
@@ -67,12 +76,20 @@ class SimpleLens{
     rayShape.faces.push(new THREE.Face3(6,7,8));
     rayShape.faces.push(new THREE.Face3(6,7,9));
     rayShape.faces.push(new THREE.Face3(6,8,10));
+    rayShape.faces.push(new THREE.Face3(11,10,8));
+    rayShape.faces.push(new THREE.Face3(11,7,8));
+    rayShape.faces.push(new THREE.Face3(11,9,7));
+    rayShape.faces.push(new THREE.Face3(11,10,9));
+
+    rayShape.faces.push(new THREE.Face3(11,12,13));
+    rayShape.faces.push(new THREE.Face3(11,13,14));
+    rayShape.faces.push(new THREE.Face3(11,12,13));
 
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
     this.ray= new THREE.Mesh(rayShape, this.faceMat);
 
-    this.ray.rotation.y = Math.PI / 8;
+    // this.ray.rotation.y = Math.PI / 8;
     scene.add(this.ray);
   }
 
