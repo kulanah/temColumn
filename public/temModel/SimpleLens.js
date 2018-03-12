@@ -6,7 +6,12 @@ class SimpleLens{
     this.centerPoint = centerPoint;
     this.lensHeight = lensHeight;
 
-    this.faceMat = new THREE.MeshBasicMaterial({color: 0xffff00, side: THREE.DoubleSide, transparent: true, opacity: 0.5});
+    this.faceMat = new THREE.MeshLambertMaterial({
+      color: 0xff69b4, 
+      wireframe: false, 
+      side: THREE.DoubleSide, 
+      transparent: true, 
+      opacity: 0.5});
   }
 
   drawLens(){
@@ -23,32 +28,41 @@ class SimpleLens{
   }
   
   drawRays(){
-    this.rayshape = new THREE.Geometry();
+    let rayShape = new THREE.Geometry();
 
 
     //hourglass section
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, 0 - this.startY)); 
-    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(this.width, 0 - this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY, 0));
 
-    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY)); 
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY)); 
+    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.width)); 
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width));
 
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY)); 
+    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY)); 
 
-    this.rayshape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY)); 
-    this.rayshape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight * 2 - this.startY));
-    this.rayshape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight * 2 - this.startY)); 
+    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY));
 
-    this.rayshape.faces.push(new THREE.Face3(0,1,2));
-    this.rayshape.faces.push(new THREE.Face3(3,4,5));
-    this.rayshape.faces.push(new THREE.Face3(6,7,8));
-    this.rayshape.faces.push(new THREE.Face3(9,10,11));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY)); 
+    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight * 2 - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight * 2 - this.startY)); 
 
-    this.ray= new THREE.Mesh(this.rayshape, this.faceMat);
+    rayShape.faces.push(new THREE.Face3(2,3,4));
+    rayShape.faces.push(new THREE.Face3(4,3,0));
+    rayShape.faces.push(new THREE.Face3(2,5,4));
+    rayShape.faces.push(new THREE.Face3(4,5,0));
+    // rayShape.faces.push(new THREE.Face3(9,10,11));
+
+    rayShape.computeFaceNormals();
+    rayShape.computeVertexNormals();
+    this.ray= new THREE.Mesh(rayShape, this.faceMat);
+
+    this.ray.rotation.y = Math.PI / 8;
     scene.add(this.ray);
   }
 
@@ -66,7 +80,7 @@ class SimpleLens{
     this.ray = null;
 
     this.focalLength = Number(newLen);
-    this.rayshape = null;
+    this.rayShape = null;
     this.draw();
     render();
   }
