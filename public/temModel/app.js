@@ -31,26 +31,27 @@ let init = function(){
 
 
 let initLights = function() {
-  let xVal = 0;
-  let yVal = 0;
-  let zVal = -140;
+  let xVal = -5;
+  let yVal = -20;
+  let zVal = 10;
 
   let geo = new THREE.SphereGeometry(.25, 3, 3);
   let mat = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff69b4});
   let sphere = new THREE.Mesh(geo, mat);
-  sphere.position.x = 0;
-  sphere.position.y = -45;
-  sphere.position.z = 0;
+  sphere.position.x = xVal;
+  sphere.position.y = yVal;
+  sphere.position.z = zVal;
 
   scene.add(sphere);
 
   // let keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 100%, 100%)'), 1);
   let keyLight = new THREE.PointLight(new THREE.Color('hsl(0, 100%, 100%)'), 1.4);
-  keyLight.position.set(xVal, yVal, zVal);
+  keyLight.position.set(0, 0, -140);
   // keyLight.target.position.set = (0,-10,0);
   
   let fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(285, 100%, 100%)'), 1);
-  fillLight.position.set(-10, 0, 5);
+  fillLight.position.set(xVal, yVal, zVal).normalize();
+  fillLight.target.position.set(0,-20,0);
   
   let backLight = new THREE.DirectionalLight(new THREE.Color('hsl(58, 100%, 100%)'), 1);
   backLight.position.set(0,0,50);
@@ -58,8 +59,10 @@ let initLights = function() {
   let topLight = new THREE.DirectionalLight(new THREE.Color('hsl(338, 100%, 100%)'), 1);
   topLight.position.set(0, 10, 0).normalize();
 
-  scene.add(keyLight);
+  scene.add(fillLight);
+  // scene.add(keyLight);
   // scene.add(backLight);
+  // scene.add(topLight);
 };
 
 let render = function(){
@@ -79,7 +82,7 @@ let animate = function(){
 let createLenses = function(){
   userColumn.addSimpleLens(1.2, 8);
   userColumn.addSimpleLens(2, 5);
-  userColumn.addAngledLens(2, 5);
+  // userColumn.addAngledLens(2, 5);
 
   userColumn.drawLenses(); 
 
