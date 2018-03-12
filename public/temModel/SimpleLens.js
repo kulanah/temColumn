@@ -32,31 +32,41 @@ class SimpleLens{
 
 
     //hourglass section
+    //0
     rayShape.vertices.push(new THREE.Vector3(this.width, 0 - this.startY, 0));
+    //1
     rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY, 0));
+    //2
     rayShape.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY, 0));
 
+    //3
     rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.width)); 
+    //4
     rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY));
+    //5
     rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width));
 
-    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY)); 
-    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
-    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY)); 
+    //6
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY, 0));
+    //7
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY,this.width));
+    //8
+    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
+    //9
+    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
 
-    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY));
-    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY));
-    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY));
+    //10
+    rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY,-this.width));
 
-    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.focalLength - this.startY)); 
-    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight * 2 - this.startY));
-    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight * 2 - this.startY)); 
 
+    
     rayShape.faces.push(new THREE.Face3(2,3,4));
     rayShape.faces.push(new THREE.Face3(4,3,0));
     rayShape.faces.push(new THREE.Face3(2,5,4));
     rayShape.faces.push(new THREE.Face3(4,5,0));
-    // rayShape.faces.push(new THREE.Face3(9,10,11));
+    rayShape.faces.push(new THREE.Face3(6,7,8));
+    rayShape.faces.push(new THREE.Face3(6,7,9));
+    rayShape.faces.push(new THREE.Face3(6,8,10));
 
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
