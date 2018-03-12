@@ -57,9 +57,6 @@ class Column{
       this.components.push(newComp);
       // this.drawLenses();
     }
-    console.log(x1);
-    console.log(x2);
-
   }
 
   drawLenses(){
