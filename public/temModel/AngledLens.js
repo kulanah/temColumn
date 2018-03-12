@@ -7,10 +7,7 @@ class AngledLens extends SimpleLens{
   }
   drawRays(){
     let rayShape = new THREE.Geometry();
-
-
-    console.log(this.width);
-    console.log(this.x1);
+    let newMid = (Number(this.x1) + Number(this.x2)) / 2;
 
     //hourglass section
     //0
@@ -26,13 +23,13 @@ class AngledLens extends SimpleLens{
     rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width));
 
     //5
-    rayShape.vertices.push(new THREE.Vector3((this.x1 + this.x2) / 2, -this.lensHeight - this.startY,this.width));
+    rayShape.vertices.push(new THREE.Vector3(newMid , -this.lensHeight - this.startY,this.width));
     //6
     rayShape.vertices.push(new THREE.Vector3(this.x1, -this.lensHeight - this.startY, 0));
     //7
     rayShape.vertices.push(new THREE.Vector3(this.x2, -this.lensHeight - this.startY, 0));
     //8
-    rayShape.vertices.push(new THREE.Vector3((this.x1 + this.x2) / 2,-this.lensHeight - this.startY,-this.width));
+    rayShape.vertices.push(new THREE.Vector3(newMid,-this.lensHeight - this.startY,-this.width));
     //9
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength,0));
 
@@ -70,4 +67,23 @@ class AngledLens extends SimpleLens{
     scene.add(this.ray);
   }
 
+  updatex1(newWidth){
+    scene.remove(this.ray);
+    this.ray = null;
+
+    this.x1 = newWidth;
+    this.rayShape = null;
+    this.drawRays();
+    render();
+  }
+
+  updatex2(newWidth){
+    scene.remove(this.ray);
+    this.ray = null;
+
+    this.x2 = newWidth;
+    this.rayShape = null;
+    this.drawRays();
+    render();
+  }
 }
