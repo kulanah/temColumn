@@ -6,21 +6,26 @@ class Column{
     this.cMaterial = new THREE.CylinderGeometry(10, 10, this.height, 20, 1, true, 1.5, 3);
     this.cGeometry = new THREE.MeshPhongMaterial({
     // this.cGeometry = new THREE.MeshBasicMaterial({
-      side:  THREE.DoubleSide, 
+      side:  THREE.FrontSide, 
+      shadowSide: THREE.BackSide,
       wireframe: false, 
-      color: 0xaaaaaa
+      color: 0xffffff
     });
 
 
     this.width = 2.5; 
 
-    this.lineMaterial = new THREE.LineBasicMaterial({color: 0xff0000});
+    this.lineMaterial = new THREE.LineBasicMaterial({color: 0xff0000, side: THREE.DoubleSide});
     this.lineGeometry = new THREE.Geometry();
 
-    // this.cGeometry =d new THREE.MeshBasicMaterial({
+    // this.cGeometry = new THREE.MeshBasicMaterial({
     //   side:  THREE.DoubleSide, 
     //   color: 0xaaaaaa,
     // });
+
+    this.cMaterial.computeFaceNormals();
+    this.cMaterial.computeVertexNormals();
+
     this.cMesh = new THREE.Mesh(this.cMaterial, this.cGeometry);
 
     this.cMesh.position.y = this.height / 2;
