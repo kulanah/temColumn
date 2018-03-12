@@ -46,7 +46,19 @@ class Column{
     }
   }
 
-  addAngledLens(){
+  addAngledLens(focal, lensHeight, x1, x2){
+    if (this.components.length == 0){
+      let newComp = new AngledLens(focal, 0, this.width, 0, lensHeight, x1, x2);
+      this.components.push(newComp);
+      // this.drawLenses();
+    } else {
+      let startY = this.components[this.components.length - 1].getHeight();
+      let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2);
+      this.components.push(newComp);
+      // this.drawLenses();
+    }
+    console.log(x1);
+    console.log(x2);
 
   }
 
