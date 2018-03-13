@@ -1,0 +1,22 @@
+{
+  "name": "temcolumn",
+  "version": "1.0.0",
+  "description": "THREEjs representation of the inside of the tem column.\t",
+  "main": "./public/app.js",
+  "scripts": {
+    "test": "mocha tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kulanah/temColumn.git"
+  },
+  "author": "Devon Butler at Center for Electron Microscopy and Nanofabrication",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kulanah/temColumn/issues"
+  },
+  "homepage": "https://github.com/kulanah/temColumn#readme",
+  "devDependencies": {
+    "webpack": "^4.1.1"
+  }
+}
