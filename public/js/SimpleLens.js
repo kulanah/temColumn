@@ -100,13 +100,12 @@ class SimpleLens{
   }
 
   updateFocalLength(newLen){
-    scene.remove(this.ray);
+    this.scene.remove(this.ray);
     this.ray = null;
 
     this.focalLength = Number(newLen);
     this.rayShape = null;
     this.draw();
-    render();
   }
 
 

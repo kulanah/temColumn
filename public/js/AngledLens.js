@@ -69,22 +69,20 @@ class AngledLens extends SimpleLens{
   }
 
   updatex1(newWidth){
-    scene.remove(this.ray);
+    this.scene.remove(this.ray);
     this.ray = null;
 
     this.x1 = newWidth;
     this.rayShape = null;
     this.drawRays();
-    render();
   }
 
   updatex2(newWidth){
-    scene.remove(this.ray);
+    this.scene.remove(this.ray);
     this.ray = null;
 
     this.x2 = newWidth;
     this.rayShape = null;
     this.drawRays();
-    render();
   }
 }
