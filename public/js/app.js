@@ -100,4 +100,20 @@ class MicroscopeColumn {
 
     this.microscope.drawLenses(); 
   }
+
+
+  updateFocalLength(lensNum, focalLen){
+    this.microscope.updateFocalLength(lensNum, focalLen);
+    this.render();
+  }
+
+  updateLeftBoundry(lensNum, leftBound){
+    this.microscope.updateLeftBoundry(lensNum, leftBound);
+    this.render();
+  }
+
+  updateRightBoundry(lensNum, rightBound){
+    this.microscope.updateRightBoundry(lensNum, rightBound);
+    this.render();
+  }
 }

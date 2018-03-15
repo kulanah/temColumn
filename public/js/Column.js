@@ -78,4 +78,16 @@ class Column{
     this.drawColumn();
   }
 
+  updateFocalLength(lensNum, focalLen){
+    this.components[lensNum].updateFocalLength(focalLen);
+  }
+
+  updateLeftBoundry(lensNum, leftBound){
+    this.components[lensNum].updatex1(leftBound);
+  }
+
+  updateRightBoundry(lensNum, rightBound){
+    this.components[lensNum].updatex2(rightBound);
+  }
+
 }
