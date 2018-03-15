@@ -1,7 +1,8 @@
 class AngledLens extends SimpleLens{
-  constructor(focalLength, startY, width, centerPoint, lensHeight, x1, x2){
+  constructor(focalLength, startY, width, centerPoint, lensHeight, x1, x2, scene){
     super(focalLength, startY, width, centerPoint, lensHeight);
 
+    this.scene = scene;
     this.x1 = x1;
     this.x2 = x2;
   }
@@ -64,7 +65,7 @@ class AngledLens extends SimpleLens{
     this.ray= new THREE.Mesh(rayShape, this.faceMat);
 
     // this.ray.rotation.y = Math.PI / 8;
-    scene.add(this.ray);
+    this.scene.add(this.ray);
   }
 
   updatex1(newWidth){

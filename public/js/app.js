@@ -1,113 +1,103 @@
-let scene = new THREE.Scene();
-let camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.1, 1500);
-let controls;
-let renderer;
-let columnHeight = -45;
+class MicroscopeColumn {
+  constructor(){
+    this.scene = new THREE.Scene();
+    this.camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.1, 1500);
+    this.controls;
+    this.renderer;
+    this.columnHeight = -45;
 
-let init = function(){
-  renderer = new THREE.WebGLRenderer();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.domElement.id = 'threeCanvas';
-  document.body.appendChild(renderer.domElement);
+    this.animate = this.animate.bind(this);
+    this.init = this.init.bind(this);
+    this.render = this.render.bind(this);
 
-  controls = new THREE.TrackballControls(camera, document.getElementById('threeCanvas'));
-  controls.addEventListener('change', render);
+    this.init();
+    this.animate();
+    this.drawScene();
+  }
 
+  init(){
+    this.renderer = new THREE.WebGLRenderer();
+    
+    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.domElement.id = 'threeCanvas';
+    document.body.appendChild(this.renderer.domElement);
 
-  let xVal = -3;
-  // camera.positon.set(0,0,0);
-  // camera.positon.set(new THREE.Vector3(0,0,0));
-  camera.position.x = 0;
-  camera.position.z = 200;
-  camera.position.y = 0;
-  camera.position.x = xVal;
+    this.controls = new THREE.TrackballControls(this.camera, document.getElementById('threeCanvas'));
 
-  controls.target = new THREE.Vector3(xVal, columnHeight / 2, 0);
-  initLights();
+    let xVal = -3;
+    // camera.positon.set(0,0,0);
+    // camera.positon.set(new THREE.Vector3(0,0,0));
+    this.camera.position.x = 0;
+    this.camera.position.z = 200;
+    this.camera.position.y = 0;
+    this.camera.position.x = xVal;
 
-  createLenses();
+    this.controls.target = new THREE.Vector3(xVal, this.columnHeight / 2, 0);
+    this.initLights();
+    this.initColumn();
+    this.controls.addEventListener('change', this.render);
+  }
 
-};
+  initLights(){
+    let xVal = -5;
+    let yVal = -20;
+    let zVal = 10;
 
+    let geo = new THREE.SphereGeometry(.25, 3, 3);
+    let mat = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff69b4});
+    let sphere = new THREE.Mesh(geo, mat);
+    sphere.position.x = xVal;
+    sphere.position.y = yVal;
+    sphere.position.z = zVal;
 
-let initLights = function() {
-  let xVal = -5;
-  let yVal = -20;
-  let zVal = 10;
+    this.scene.add(sphere);
 
-  let geo = new THREE.SphereGeometry(.25, 3, 3);
-  let mat = new THREE.MeshBasicMaterial({wireframe: true, color: 0xff69b4});
-  let sphere = new THREE.Mesh(geo, mat);
-  sphere.position.x = xVal;
-  sphere.position.y = yVal;
-  sphere.position.z = zVal;
+    // let keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 100%, 100%)'), 1);
+    let keyLight = new THREE.PointLight(new THREE.Color('hsl(0, 100%, 100%)'), 1.4);
+    keyLight.position.set(0, 0, -140);
+    // keyLight.target.position.set = (0,-10,0);
+    
+    let fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(285, 100%, 100%)'), 1);
+    fillLight.position.set(xVal, yVal, zVal).normalize();
+    fillLight.target.position.set(0,-20,0);
+    
+    let backLight = new THREE.DirectionalLight(new THREE.Color('hsl(58, 100%, 100%)'), 1);
+    backLight.position.set(0,0,50);
+    
+    let topLight = new THREE.DirectionalLight(new THREE.Color('hsl(338, 100%, 100%)'), 1);
+    topLight.position.set(0, 10, 0).normalize();
 
-  scene.add(sphere);
+    this.scene.add(fillLight);
+    // this.scene.add(keyLight);
+    // this.scene.add(backLight);
+    // this.scene.add(topLight);
+  }
 
-  // let keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 100%, 100%)'), 1);
-  let keyLight = new THREE.PointLight(new THREE.Color('hsl(0, 100%, 100%)'), 1.4);
-  keyLight.position.set(0, 0, -140);
-  // keyLight.target.position.set = (0,-10,0);
-  
-  let fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(285, 100%, 100%)'), 1);
-  fillLight.position.set(xVal, yVal, zVal).normalize();
-  fillLight.target.position.set(0,-20,0);
-  
-  let backLight = new THREE.DirectionalLight(new THREE.Color('hsl(58, 100%, 100%)'), 1);
-  backLight.position.set(0,0,50);
-  
-  let topLight = new THREE.DirectionalLight(new THREE.Color('hsl(338, 100%, 100%)'), 1);
-  topLight.position.set(0, 10, 0).normalize();
+  initColumn(){
+    this.microscope = new Column(this.columnHeight, this.scene);
+    this.createLenses();
+  }
 
-  scene.add(fillLight);
-  // scene.add(keyLight);
-  // scene.add(backLight);
-  // scene.add(topLight);
-};
+  render(){ 
+    // console.trace();
+    this.renderer.render(this.scene, this.camera);
+  }
 
-let render = function(){
-  renderer.render(scene, camera);
-};
+  drawScene(){
+    this.microscope.init();
+    this.render();
+  }
 
-let drawScene = function(){
-  userColumn.init();
-  render();
-};
+  animate(){
+    requestAnimationFrame(this.animate);
+    this.controls.update();
+  }
 
-let animate = function(){
-  requestAnimationFrame(animate);
-  controls.update();
-};
+  createLenses(){
+    this.microscope.addSimpleLens(1.2, 8);
+    // userColumn.addSimpleLens(2, 5);
+    this.microscope.addAngledLens(2, 5, -2, -1);
 
-let createLenses = function(){
-  userColumn.addSimpleLens(1.2, 8);
-  // userColumn.addSimpleLens(2, 5);
-  userColumn.addAngledLens(2, 5, -2, -1);
-
-
-  userColumn.drawLenses(); 
-
-
-};
-
-
-let userColumn = new Column(columnHeight);
-
-
-let draggables = [];
-
-for (let i = 0; i < draggables.length; ++i){
-  $('#' + draggables[i]).draggable({
-    addClasses: true,
-    // cancel: 'map, iframe',
-    // iframeFix: true,
-    cursor: 'move'
-  });
+    this.microscope.drawLenses(); 
+  }
 }
-
-$('.hidden').hide();
-
-
-init();
-animate();
-drawScene();

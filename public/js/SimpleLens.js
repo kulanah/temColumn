@@ -1,10 +1,11 @@
 class SimpleLens{
-  constructor(focalLength, startY, width, centerPoint, lensHeight){
+  constructor(focalLength, startY, width, centerPoint, lensHeight, scene){
     this.focalLength = focalLength;
     this.startY = startY;
     this.width = width;
     this.centerPoint = centerPoint;
     this.lensHeight = lensHeight;
+    this.scene = scene;
 
     this.faceMat = new THREE.MeshLambertMaterial({
       color: 0xff69b4, 
@@ -24,7 +25,7 @@ class SimpleLens{
     this.lensMesh = new THREE.Mesh(this.lensShape, this.lensMat);
     this.lensMesh.position.y = -this.lensHeight - this.startY;
 
-    scene.add(this.lensMesh);
+    this.scene.add(this.lensMesh);
   }
   
   drawRays(){
@@ -86,7 +87,7 @@ class SimpleLens{
     this.ray= new THREE.Mesh(rayShape, this.faceMat);
 
     // this.ray.rotation.y = Math.PI / 8;
-    scene.add(this.ray);
+    this.scene.add(this.ray);
   }
 
   draw(){
