@@ -1,26 +1,32 @@
 class MicroscopeColumn {
-  constructor(){
-    this.scene = new THREE.Scene();
-    this.camera = new THREE.PerspectiveCamera(15, window.innerWidth / window.innerHeight, 0.1, 1500);
-    this.controls;
-    this.renderer;
-    this.columnHeight = -45;
+  constructor(divId){
 
-    this.animate = this.animate.bind(this);
-    this.init = this.init.bind(this);
-    this.render = this.render.bind(this);
+    if (document.getElementById(divId) === null){
+      console.error('ERROR: Couldn\'t the provided div ' + divId);
+    } else {
+      this.window = $('#' + divId);
+      this.scene = new THREE.Scene();
+      this.camera = new THREE.PerspectiveCamera(15, 1, 0.1, 1500);
+      this.controls;
+      this.renderer;
+      this.columnHeight = -45;
 
-    this.init();
-    this.animate();
-    this.drawScene();
+      this.animate = this.animate.bind(this);
+      this.init = this.init.bind(this);
+      this.render = this.render.bind(this);
+
+      this.init();
+      this.animate();
+      this.drawScene();
+    }
   }
 
   init(){
     this.renderer = new THREE.WebGLRenderer();
     
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(this.window.width(), this.window.height());
     this.renderer.domElement.id = 'threeCanvas';
-    document.body.appendChild(this.renderer.domElement);
+    this.window.append(this.renderer.domElement);
 
     this.controls = new THREE.TrackballControls(this.camera, document.getElementById('threeCanvas'));
 
