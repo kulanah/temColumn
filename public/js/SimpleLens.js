@@ -1,11 +1,12 @@
 class SimpleLens{
-  constructor(focalLength, startY, width, centerPoint, lensHeight, scene){
+  constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title){
     this.focalLength = focalLength;
     this.startY = startY;
     this.width = width;
     this.centerPoint = centerPoint;
     this.lensHeight = lensHeight;
     this.scene = scene;
+    this.title = title;
 
     this.faceMat = new THREE.MeshLambertMaterial({
       color: 0xff69b4, 

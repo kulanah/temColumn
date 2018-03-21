@@ -103,11 +103,11 @@ class MicroscopeColumn {
   }
 
   createLenses(){
-    this.microscope.addSimpleLens(1.2, 3);
-    this.microscope.addSimpleLens(2, 5);
-    this.microscope.addSimpleLens(2, 5);
-    this.microscope.addSimpleLens(2, 5);
-    this.microscope.addAngledLens(2, 3, -2, -1);
+    this.microscope.addSimpleLens(1.2, 3, "First Lens");
+    this.microscope.addSimpleLens(2, 5, "Second Lens");
+    this.microscope.addSimpleLens(2, 5, "Third Lens");
+    this.microscope.addSimpleLens(2, 5, "Fourth Lens");
+    this.microscope.addAngledLens(2, 3, -2, -1, "Fifth Lens");
 
     this.microscope.drawLenses(); 
   }

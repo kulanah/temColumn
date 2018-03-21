@@ -1,6 +1,6 @@
 class AngledLens extends SimpleLens{
-  constructor(focalLength, startY, width, centerPoint, lensHeight, x1, x2, scene){
-    super(focalLength, startY, width, centerPoint, lensHeight);
+  constructor(focalLength, startY, width, centerPoint, lensHeight, x1, x2, scene, title){
+    super(focalLength, startY, width, centerPoint, lensHeight, title);
 
     this.scene = scene;
     this.x1 = x1;

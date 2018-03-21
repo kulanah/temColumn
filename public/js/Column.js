@@ -29,21 +29,21 @@ class Column{
     this.init = this.init.bind(this);
   }
 
-  addSimpleLens(focal, lensHeight){
+  addSimpleLens(focal, lensHeight, title){
     let startY = 0;
     if (this.components.length != 0){
       startY = this.components[this.components.length - 1].getStartY();
     } 
-    let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene);
+    let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene, title);
     this.components.push(newComp);
   }
 
-  addAngledLens(focal, lensHeight, x1, x2){
+  addAngledLens(focal, lensHeight, x1, x2, title){
     let startY = 0;
     if (this.components.length != 0){
       startY = this.components[this.components.length - 1].getStartY();
     } 
-    let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene);
+    let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene, title);
     this.components.push(newComp);
   }
 
