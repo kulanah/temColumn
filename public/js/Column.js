@@ -35,7 +35,7 @@ class Column{
       this.components.push(newComp);
       // this.drawLenses();
     } else {
-      let startY = this.components[this.components.length - 1].getHeight();
+      let startY = this.components[this.components.length - 1].getStartY();
       let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene);
       this.components.push(newComp);
       // this.drawLenses();
@@ -46,12 +46,10 @@ class Column{
     if (this.components.length == 0){
       let newComp = new AngledLens(focal, 0, this.width, 0, lensHeight, x1, x2, this.scene);
       this.components.push(newComp);
-      // this.drawLenses();
     } else {
-      let startY = this.components[this.components.length - 1].getHeight();
+      let startY = this.components[this.components.length - 1].getStartY();
       let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene);
       this.components.push(newComp);
-      // this.drawLenses();
     }
   }
 
@@ -70,6 +68,16 @@ class Column{
     this.line = new THREE.Line(this.lineGeometry, this.lineMaterial);
 
     this.scene.add(this.line);
+  }
+
+
+  focusColumn(height, lensNum){
+    /*
+      get top of lens wanted
+      
+
+    */
+
   }
 
 

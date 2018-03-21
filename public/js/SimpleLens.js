@@ -95,7 +95,7 @@ class SimpleLens{
     this.drawRays();
   }
 
-  getHeight(){
+  getStartY(){
     return this.lensHeight * 2 + this.startY;
   }
 
