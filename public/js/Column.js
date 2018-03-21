@@ -71,13 +71,8 @@ class Column{
   }
 
 
-  focusColumn(height, lensNum){
-    /*
-      get top of lens wanted
-      
-
-    */
-
+  focusColumn(lensNum){
+    return this.components[lensNum].getMiddle();
   }
 
 
