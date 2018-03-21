@@ -9,27 +9,25 @@
 		</style>
 	</head>
 	<body>
-		<div style='width: 400px; height: 800px; border: solid red 5px;' id='testThree'></div>
-		<input style='position: absolute; top: 0; left: 0;' id='focalslider' type='number' value='2' step='0.1'>
+		<div style='width: 400px; height: 800px; border: solid grey 2px; box-shadow:' id='testThree'></div>
+		<!-- <input style='position: absolute; top: 0; left: 0;' id='focalslider' type='number' value='2' step='0.1'>
 		<input style='position: absolute; top: 1.8em; left: 0;' id='focalslider2' type='number' value='2' step='0.1'>
 
 		<input style='position: absolute; top: 5.0em; left: 0;' id='x1' type='number' value='-2' step='0.1'>
-		<input style='position: absolute; top: 6.8em; left: 0;' id='x2' type='number' value='-1' step='0.1'>
+		<input style='position: absolute; top: 6.8em; left: 0;' id='x2' type='number' value='-1' step='0.1'> -->
 
 		<script src="./public/js/libraries/three.min.js"></script>
 		<script src="./public/js/libraries/jquery.js"></script>
 		<script src="./public/js/libraries/TrackBallControls.js"></script>
 
+
+		<script src="./public/js/onchange.js"></script>
 		<script src="./public/js/SimpleLens.js"></script>
 		<script src="./public/js/AngledLens.js"></script>
-		<script src="./public/js/onchange.js"></script>
     <script src="./public/js/Column.js"></script>
 		<script src="./public/js/app.js"></script>
-		
 		<script>
 			column = new MicroscopeColumn('testThree');
-
-		
 		</script>
 	</body>
 </html
