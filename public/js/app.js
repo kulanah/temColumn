@@ -30,13 +30,11 @@ class MicroscopeColumn {
 
     this.controls = new THREE.TrackballControls(this.camera, document.getElementById('threeCanvas'));
 
-    let xVal = -3;
-    this.camera.position.x = 0;
     this.camera.position.z = 200;
     this.camera.position.y = 0;
-    this.camera.position.x = xVal;
+    this.camera.position.x = 0;
 
-    this.controls.target = new THREE.Vector3(xVal, this.columnHeight / 2, 0);
+    this.controls.target = new THREE.Vector3(0, this.columnHeight / 2, 0);
     this.initLights();
     this.initColumn();
     this.controls.addEventListener('change', this.render);
@@ -85,9 +83,11 @@ class MicroscopeColumn {
   }
 
   createLenses(){
-    this.microscope.addSimpleLens(1.2, 8);
-    // userColumn.addSimpleLens(2, 5);
-    this.microscope.addAngledLens(2, 5, -2, -1);
+    this.microscope.addSimpleLens(1.2, 3);
+    this.microscope.addSimpleLens(2, 5);
+    this.microscope.addSimpleLens(2, 5);
+    this.microscope.addSimpleLens(2, 5);
+    this.microscope.addAngledLens(2, 3, -2, -1);
 
     this.microscope.drawLenses(); 
   }
@@ -107,4 +107,14 @@ class MicroscopeColumn {
     this.microscope.updateRightBoundry(lensNum, rightBound);
     this.render();
   }
+
+  focusColumn(lensNum){
+    let newCameraY = - this.microscope.focusColumn(lensNum);
+    this.camera.position.y = newCameraY;
+
+    this.controls.target.y = newCameraY;
+    this.camera.position.z = 50;
+    this.render();
+  }
 }
+
