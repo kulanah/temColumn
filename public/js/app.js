@@ -15,6 +15,8 @@ class MicroscopeColumn {
       this.init = this.init.bind(this);
       this.render = this.render.bind(this);
 
+      this.sceneHeight = this.window.height() - 35;
+
       this.init();
       this.animate();
       this.drawScene();
@@ -22,9 +24,10 @@ class MicroscopeColumn {
   }
 
   init(){
+    this.initTitle();
     this.renderer = new THREE.WebGLRenderer();
     
-    this.renderer.setSize(this.window.width(), this.window.height());
+    this.renderer.setSize(this.window.width(), this.sceneHeight);
     this.renderer.domElement.id = 'threeCanvas';
     this.window.append(this.renderer.domElement);
 
@@ -38,6 +41,23 @@ class MicroscopeColumn {
     this.initLights();
     this.initColumn();
     this.controls.addEventListener('change', this.render);
+  }
+
+  initTitle(){
+    this.titleSpace = $('<div>w</div>');
+    this.titleSpace.css('background', '#00cbcc');
+    this.titleSpace.css('color', '#00cbcc');
+    this.titleSpace.css('font-size', '0.5em');
+    this.title = $('<div>Overall Column</div>');
+    this.title.css('padding-top', '0.25em');
+    this.title.css('padding-left', '1em');
+    this.title.css('padding-bottom', '0.25em');
+
+    this.title.css('background', '#18ffff');
+    this.title.css('font-family', 'Roboto,Noto,sans-serif');
+    this.title.css('box-shadow', '30px, 30px, 3px, white');
+    this.window.append(this.titleSpace);
+    this.window.append(this.title);
   }
 
   initLights(){
