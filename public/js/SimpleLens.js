@@ -96,6 +96,11 @@ class SimpleLens{
     this.drawRays();
   }
 
+
+  getTitle(){
+    return this.title;
+  }
+
   getMiddle(){
     return this.lensHeight + this.startY;
   }

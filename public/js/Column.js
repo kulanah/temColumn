@@ -70,6 +70,10 @@ class Column{
   }
 
 
+  getTitle(lensNum){
+    return this.components[lensNum].getTitle();
+  }
+
   init(){
     this.drawColumn();
   }
