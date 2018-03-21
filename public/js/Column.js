@@ -30,27 +30,21 @@ class Column{
   }
 
   addSimpleLens(focal, lensHeight){
-    if (this.components.length == 0){
-      let newComp = new SimpleLens(focal, 0, this.width, 0, lensHeight, this.scene);
-      this.components.push(newComp);
-      // this.drawLenses();
-    } else {
-      let startY = this.components[this.components.length - 1].getStartY();
-      let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene);
-      this.components.push(newComp);
-      // this.drawLenses();
-    }
+    let startY = 0;
+    if (this.components.length != 0){
+      startY = this.components[this.components.length - 1].getStartY();
+    } 
+    let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene);
+    this.components.push(newComp);
   }
 
   addAngledLens(focal, lensHeight, x1, x2){
-    if (this.components.length == 0){
-      let newComp = new AngledLens(focal, 0, this.width, 0, lensHeight, x1, x2, this.scene);
-      this.components.push(newComp);
-    } else {
-      let startY = this.components[this.components.length - 1].getStartY();
-      let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene);
-      this.components.push(newComp);
-    }
+    let startY = 0;
+    if (this.components.length != 0){
+      startY = this.components[this.components.length - 1].getStartY();
+    } 
+    let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene);
+    this.components.push(newComp);
   }
 
   drawLenses(){
