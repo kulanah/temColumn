@@ -2,7 +2,7 @@ class MicroscopeColumn {
   constructor(divId){
 
     if (document.getElementById(divId) === null){
-      console.error('ERROR: Couldn\'t the provided div ' + divId);
+      console.error('ERROR: Couldn\'t find the provided div ' + divId);
     } else {
       this.window = $('#' + divId);
       this.scene = new THREE.Scene();
