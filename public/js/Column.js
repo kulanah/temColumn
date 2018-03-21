@@ -2,7 +2,6 @@ class Column{
   constructor(height, scene){
     this.components = new Array();
     this.height = height;
-    //radius top, radius bottom, height, radial segments, height segments, open ended, theta start, theta length
     this.cMaterial = new THREE.CylinderGeometry(10, 10, this.height, 20, 1, true, 1.5, 3);
     this.cGeometry = new THREE.MeshPhongMaterial({
     // this.cGeometry = new THREE.MeshBasicMaterial({
