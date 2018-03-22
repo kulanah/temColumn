@@ -125,4 +125,12 @@ class AngledLens extends SimpleLens{
     this.rayShape1 = null;
     this.drawRays();
   }
+
+  updateFocalLength(newLen){
+    this.scene.remove(this.ray2);
+    this.ray2 = null;
+
+    super.updateFocalLength(newLen);
+
+  }
 }
