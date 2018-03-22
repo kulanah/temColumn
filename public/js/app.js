@@ -103,11 +103,12 @@ class MicroscopeColumn {
   }
 
   createLenses(){
-    this.microscope.addSimpleLens(1.2, 3, 'First Lens');
-    this.microscope.addSimpleLens(2, 5, 'Second Lens');
-    this.microscope.addSimpleLens(2, 5, 'Third Lens');
-    this.microscope.addSimpleLens(2, 5, 'Fourth Lens');
-    this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
+    // this.microscope.addSimpleLens(2, 5, 'Second Lens');
+    // this.microscope.addSimpleLens(2, 5, 'Third Lens');
+    this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
+    this.microscope.addAngledLens(2, 3, -2, -1, 'Double Angled Lens');
+    // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
+    // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
 
     this.microscope.drawLenses(); 
   }
@@ -132,11 +133,13 @@ class MicroscopeColumn {
     let newCameraY = - this.microscope.focusColumn(lensNum);
     let newTitle = this.microscope.getTitle(lensNum);
     this.camera.position.y = newCameraY;
+    this.camera.position.x = 0;
 
     this.controls.target.y = newCameraY;
+    this.controls.target.x = 0;
     this.camera.position.z = 50;
     this.title.text(newTitle);
     this.render();
   }
-}
 
+}
