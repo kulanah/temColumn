@@ -6,4 +6,14 @@ class ColumnComponent{
     this.scene = scene;
     this.title = title;
   }
+
+
+  getStartY(){
+    return this.startY;
+  }
+
+  draw(){
+    throw new Error('Must implement draw method, ColumnComponent is an abstract base class');
+  }
+  
 }
