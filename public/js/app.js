@@ -83,6 +83,7 @@ class MicroscopeColumn {
     topLight.position.set(0, 10, 0).normalize();
 
     this.scene.add(fillLight);
+    this.scene.add(topLight);
   }
 
   initBackground(){
@@ -125,6 +126,7 @@ class MicroscopeColumn {
   createLenses(){
     // this.microscope.addSimpleLens(2, 5, 'Second Lens');
     // this.microscope.addSimpleLens(2, 5, 'Third Lens');
+    this.microscope.addGun('Electron Gun');
     this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     this.microscope.addAngledLens(2, 3, -2, -1, 'Double Angled Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
