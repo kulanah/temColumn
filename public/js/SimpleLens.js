@@ -1,19 +1,15 @@
-class SimpleLens{
+class SimpleLens extends ColumnComponent{
   constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title){
+    super(startY, width, scene, title);
     this.focalLength = focalLength;
-    this.startY = startY;
-    this.width = width;
+    this.depth = width * .6;
     this.centerPoint = centerPoint;
     this.lensHeight = lensHeight;
-    this.scene = scene;
-    this.title = title;
 
     this.faceMat = new THREE.MeshLambertMaterial({
       color: 0xff69b4, 
       wireframe: false, 
-      side: THREE.DoubleSide, 
-      transparent: true, 
-      opacity: 0.5});
+      side: THREE.DoubleSide});
   }
 
   drawLens(){
@@ -40,27 +36,27 @@ class SimpleLens{
     rayShape.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY, 0));
 
     //2
-    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.width)); 
+    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.depth)); 
     //3
-    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY, 0));
     //4
-    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width));
+    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width, 0));
 
     //5
-    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY,this.width));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY,this.width, 0));
     //6
     rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
     //7
     rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
     //8
-    rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY,-this.width));
+    rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY, -this.depth));
     //9
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength,0));
 
     //10
     rayShape.vertices.push(new THREE.Vector3(-this.width, -2 * this.lensHeight - this.startY, 0));
     //11
-    rayShape.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.width));
+    rayShape.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.depth));
     //12
     rayShape.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY,0));
 
