@@ -20,6 +20,10 @@ class Gun extends ColumnComponent{
 
   }
 
+  getStartY(){
+    return this.startY - 0.1;
+  }
+
   draw(){
     this.drawGun();
 
