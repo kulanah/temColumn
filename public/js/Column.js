@@ -54,8 +54,6 @@ class Column{
   }
 
   drawColumn(){
-    this.scene.add(this.cMesh);
-
     this.lineGeometry.vertices.push(new THREE.Vector3(0,0,0));
     this.lineGeometry.vertices.push(new THREE.Vector3(0,-45 ,0));
 
