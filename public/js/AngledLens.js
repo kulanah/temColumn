@@ -16,29 +16,29 @@ class AngledLens extends SimpleLens{
     rayShape1.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY, 0));
 
     //2
-    rayShape1.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.width)); 
+    rayShape1.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.depth)); 
     //3
-    rayShape1.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY));
+    rayShape1.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY, 0));
     //4
-    rayShape1.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width));
+    rayShape1.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width, 0));
 
     //5
-    rayShape1.vertices.push(new THREE.Vector3(newMid , -this.lensHeight - this.startY,this.width));
+    rayShape1.vertices.push(new THREE.Vector3(newMid, -this.lensHeight - this.startY, this.depth));
     //6
     rayShape1.vertices.push(new THREE.Vector3(this.x1, -this.lensHeight - this.startY, 0));
     //7
     rayShape1.vertices.push(new THREE.Vector3(this.x2, -this.lensHeight - this.startY, 0));
     //8
-    rayShape1.vertices.push(new THREE.Vector3(newMid,-this.lensHeight - this.startY,-this.width));
+    rayShape1.vertices.push(new THREE.Vector3(newMid, -this.lensHeight - this.startY, -this.depth));
     //9
-    rayShape1.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength,0));
+    rayShape1.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY -this.focalLength, 0));
 
     //10
     rayShape1.vertices.push(new THREE.Vector3(-this.width, -2 * this.lensHeight - this.startY, 0));
     //11
-    rayShape1.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.width));
+    rayShape1.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.depth));
     //12
-    rayShape1.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY,0));
+    rayShape1.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY, 0));
 
 
 
@@ -70,13 +70,13 @@ class AngledLens extends SimpleLens{
     rayShape2.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width));
 
     //2
-    rayShape2.vertices.push(new THREE.Vector3(-newMid , -this.lensHeight - this.startY,this.width));
+    rayShape2.vertices.push(new THREE.Vector3(-newMid , -this.lensHeight - this.startY, this.depth));
     //3
     rayShape2.vertices.push(new THREE.Vector3(-this.x1, -this.lensHeight - this.startY, 0));
     //4
     rayShape2.vertices.push(new THREE.Vector3(-this.x2, -this.lensHeight - this.startY, 0));
     //5
-    rayShape2.vertices.push(new THREE.Vector3(-newMid,-this.lensHeight - this.startY,-this.width));
+    rayShape2.vertices.push(new THREE.Vector3(-newMid,-this.lensHeight - this.startY, -this.depth));
     //6
     rayShape2.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength,0));
 
