@@ -25,10 +25,11 @@ class MicroscopeColumn {
 
   init(){
     this.initTitle();
-    this.renderer = new THREE.WebGLRenderer();
     
+    this.renderer = new THREE.WebGLRenderer({alpha: true, antialias: false});
     this.renderer.setSize(this.window.width(), this.sceneHeight);
     this.renderer.domElement.id = 'threeCanvas';
+
     this.window.append(this.renderer.domElement);
 
     this.controls = new THREE.TrackballControls(this.camera, document.getElementById('threeCanvas'));
@@ -40,6 +41,7 @@ class MicroscopeColumn {
     this.controls.target = new THREE.Vector3(0, this.columnHeight / 2, 0);
     this.initLights();
     this.initColumn();
+    this.initBackground();
     this.controls.addEventListener('change', this.render);
   }
 
@@ -81,6 +83,24 @@ class MicroscopeColumn {
     topLight.position.set(0, 10, 0).normalize();
 
     this.scene.add(fillLight);
+  }
+
+  initBackground(){
+    let manager = new THREE.LoadingManager();
+    let loader = new THREE.TextureLoader(manager);
+
+    let backgroundTexture;
+
+    loader.load('./public/img/columnbackground.png', function(texture){
+      backgroundTexture = texture;
+    });
+
+    manager.onLoad = function(){
+      this.scene.background = backgroundTexture;
+
+      this.render();
+    };
+    manager.onLoad = manager.onLoad.bind(this);
   }
 
   initColumn(){
