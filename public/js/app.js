@@ -130,7 +130,7 @@ class MicroscopeColumn {
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
 
-    this.microscope.drawLenses(); 
+    this.microscope.draw(); 
   }
 
 

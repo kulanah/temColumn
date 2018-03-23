@@ -47,19 +47,21 @@ class Column{
     this.components.push(newComp);
   }
 
-  drawLenses(){
+  addGun(title){
+    let baseGun = new Gun(this.width, this.scene, title);
+    this.components.push(baseGun);
+  }
+
+  draw(){
     for (let i = 0; i < this.components.length; ++i){
       this.components[i].draw();
     }
-  }
+    // this.lineGeometry.vertices.push(new THREE.Vector3(0,0,0));
+    // this.lineGeometry.vertices.push(new THREE.Vector3(0,-45 ,0));
 
-  drawColumn(){
-    this.lineGeometry.vertices.push(new THREE.Vector3(0,0,0));
-    this.lineGeometry.vertices.push(new THREE.Vector3(0,-45 ,0));
+    // this.line = new THREE.Line(this.lineGeometry, this.lineMaterial);
 
-    this.line = new THREE.Line(this.lineGeometry, this.lineMaterial);
-
-    this.scene.add(this.line);
+    // this.scene.add(this.line);
   }
 
 
@@ -73,7 +75,7 @@ class Column{
   }
 
   init(){
-    this.drawColumn();
+    // this.drawColumn();
   }
 
   updateFocalLength(lensNum, focalLen){
