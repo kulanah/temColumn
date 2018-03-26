@@ -93,8 +93,7 @@ class MicroscopeColumn {
     let sphereMat = new THREE.MeshBasicMaterial({color: 0xffffff});
 
     let sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    sphereMesh.position.y = -0.8;
-    // sphereMesh.position.z = 10;
+    sphereMesh.position.y = -6;
     this.scene.add(sphereMesh);
   }
 
@@ -139,9 +138,10 @@ class MicroscopeColumn {
     // this.microscope.addSimpleLens(2, 5, 'Second Lens');
     // this.microscope.addSimpleLens(2, 5, 'Third Lens');
     this.microscope.addGun('Electron Gun');
-    this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     this.microscope.addAngledLens(2, 3, -2, -1, 'Double Angled Lens');
-    // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
+    this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');
+    this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
+    // this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
 
     this.microscope.draw(); 
