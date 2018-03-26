@@ -48,9 +48,9 @@ class Column{
     this.components.push(newComp);
   }
 
-  addGun(title){
-    let baseGun = new Gun(this.width, this.scene, title);
-    this.components.push(baseGun);
+  addExtractorBeam(title){
+    let baseExtractorBeam = new ExtractorBeam(this.width, this.scene, title);
+    this.components.push(baseExtractorBeam);
   }
 
   draw(){
