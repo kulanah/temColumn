@@ -17,6 +17,10 @@ class ColumnComponent{
     throw new Error('Must implement get end method, ColumnComponent is an abstract base class');
   }
 
+  getTitle(){
+    return this.title;
+  }
+
   draw(){
     throw new Error('Must implement draw method, ColumnComponent is an abstract base class');
   }
