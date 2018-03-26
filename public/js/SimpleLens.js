@@ -52,9 +52,6 @@ class SimpleLens extends ColumnComponent{
     //9
     rayShape.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY, 0));
 
-
-
-
     rayShape.faces.push(new THREE.Face3(0,2,3));
     rayShape.faces.push(new THREE.Face3(0,2,4));
     rayShape.faces.push(new THREE.Face3(0,3,5));
@@ -71,9 +68,29 @@ class SimpleLens extends ColumnComponent{
     this.scene.add(this.ray);
   }
 
+  drawLabel(){
+    this.labelGeo = new THREE.CubeGeometry(0.5, 0.4, 0.5, 1, 1, 1);
+    this.labelMat = new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true});
+
+    this.labelBox1 = new THREE.Mesh(this.labelGeo, this.labelMat);
+
+    this.labelBox1.position.x = this.width;
+    this.labelBox1.position.y = - this.startY - (this.lensHeight / 2);
+
+    this.scene.add(this.labelBox1);
+
+    this.labelBox2 = new THREE.Mesh(this.labelGeo, this.labelMat);
+
+    this.labelBox2.position.x = -this.width;
+    this.labelBox2.position.y = - this.startY - (this.lensHeight / 2);
+
+    this.scene.add(this.labelBox2);
+  }
+
   draw(){
     this.drawLens();
     this.drawRays();
+    this.drawLabel();
   }
 
   getMiddle(){
@@ -106,6 +123,5 @@ class SimpleLens extends ColumnComponent{
     this.rayShape = null;
     this.draw();
   }
-
 
 }
