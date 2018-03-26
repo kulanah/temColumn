@@ -10,54 +10,31 @@ class AngledLens extends SimpleLens{
     let rayShape1 = new THREE.Geometry();
     let newMid = (Number(this.x1) + Number(this.x2)) / 2;
 
-    //0
-    rayShape1.vertices.push(new THREE.Vector3(this.width, 0 - this.startY, 0));
-    //1
-    rayShape1.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY, 0));
 
-    //2
-    rayShape1.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.depth)); 
-    //3
-    rayShape1.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY, 0));
-    //4
+    //0
+    rayShape1.vertices.push(new THREE.Vector3(0, - this.startY, 0));
+    //1
     rayShape1.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width, 0));
 
-    //5
+    //2
     rayShape1.vertices.push(new THREE.Vector3(newMid, -this.lensHeight - this.startY, this.depth));
-    //6
+    //3
     rayShape1.vertices.push(new THREE.Vector3(this.x1, -this.lensHeight - this.startY, 0));
-    //7
+    //4
     rayShape1.vertices.push(new THREE.Vector3(this.x2, -this.lensHeight - this.startY, 0));
-    //8
+    //5
     rayShape1.vertices.push(new THREE.Vector3(newMid, -this.lensHeight - this.startY, -this.depth));
-    //9
+    //6
     rayShape1.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY -this.focalLength, 0));
 
-    //10
-    rayShape1.vertices.push(new THREE.Vector3(-this.width, -2 * this.lensHeight - this.startY, 0));
-    //11
-    rayShape1.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.depth));
-    //12
-    rayShape1.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY, 0));
+    rayShape1.faces.push(new THREE.Face3(0,2,3));
+    rayShape1.faces.push(new THREE.Face3(0,2,4));
+    rayShape1.faces.push(new THREE.Face3(0,3,5));
+    rayShape1.faces.push(new THREE.Face3(6,5,3));
+    rayShape1.faces.push(new THREE.Face3(6,2,3));
+    rayShape1.faces.push(new THREE.Face3(6,4,2));
+    rayShape1.faces.push(new THREE.Face3(6,5,6));
 
-
-
-
-    rayShape1.faces.push(new THREE.Face3(1,2,3));
-    rayShape1.faces.push(new THREE.Face3(3,2,0));
-    rayShape1.faces.push(new THREE.Face3(1,4,3));
-    rayShape1.faces.push(new THREE.Face3(3,4,0));
-    rayShape1.faces.push(new THREE.Face3(3,5,6));
-    rayShape1.faces.push(new THREE.Face3(3,5,7));
-    rayShape1.faces.push(new THREE.Face3(3,6,8));
-    rayShape1.faces.push(new THREE.Face3(9,8,6));
-    rayShape1.faces.push(new THREE.Face3(9,5,6));
-    rayShape1.faces.push(new THREE.Face3(9,7,5));
-    rayShape1.faces.push(new THREE.Face3(9,8,7));
-
-    rayShape1.faces.push(new THREE.Face3(9,10,11));
-    rayShape1.faces.push(new THREE.Face3(9,11,12));
-    rayShape1.faces.push(new THREE.Face3(9,10,11));
 
     rayShape1.computeFaceNormals();
     rayShape1.computeVertexNormals();
@@ -65,7 +42,7 @@ class AngledLens extends SimpleLens{
 
     let rayShape2 = new THREE.Geometry();
     //0
-    rayShape2.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY));
+    rayShape2.vertices.push(new THREE.Vector3(0, - this.startY, 0));
     //1
     rayShape2.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.width));
 
@@ -78,7 +55,7 @@ class AngledLens extends SimpleLens{
     //5
     rayShape2.vertices.push(new THREE.Vector3(-newMid,-this.lensHeight - this.startY, -this.depth));
     //6
-    rayShape2.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength,0));
+    rayShape2.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY -this.focalLength,0));
 
 
     rayShape2.faces.push(new THREE.Face3(0,2,3));
@@ -103,11 +80,7 @@ class AngledLens extends SimpleLens{
   }
 
   updatex1(newWidth){
-    this.scene.remove(this.ray);
-    this.ray = null;
-
-    this.scene.remove(this.ray2);
-    this.ray2 = null;
+    this.clearScene();
 
     this.x1 = newWidth;
     this.rayShape1 = null;
@@ -115,11 +88,7 @@ class AngledLens extends SimpleLens{
   }
 
   updatex2(newWidth){
-    this.scene.remove(this.ray);
-    this.ray = null;
-
-    this.scene.remove(this.ray2);
-    this.ray2 = null;
+    this.clearScene();
 
     this.x2 = newWidth;
     this.rayShape1 = null;
@@ -127,10 +96,27 @@ class AngledLens extends SimpleLens{
   }
 
   updateFocalLength(newLen){
-    this.scene.remove(this.ray2);
-    this.ray2 = null;
+    this.clearScene();
 
     super.updateFocalLength(newLen);
+  }
 
+  clearScene(){
+    this.scene.remove(this.ray);
+    this.ray = null;
+
+    this.scene.remove(this.ray2);
+    this.ray2 = null;
+  }
+
+  updateStartY(newStart){
+    this.clearScene();
+    let startDiff = this.startY - newStart;
+    this.startY = newStart;
+    this.lensHeight += startDiff;
+    this.draw();
+  }
+  getEndY(){
+    return this.startY + this.lensHeight + this.focalLength;
   }
 }
