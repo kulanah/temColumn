@@ -29,55 +29,39 @@ class SimpleLens extends ColumnComponent{
     let rayShape = new THREE.Geometry();
 
 
-    //hourglass section
     //0
-    rayShape.vertices.push(new THREE.Vector3(this.width, 0 - this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
     //1
-    rayShape.vertices.push(new THREE.Vector3(-this.width, 0 - this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY, -this.depth));
 
     //2
-    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, this.depth)); 
-    //3
-    rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight + this.focalLength - this.startY, 0));
-    //4
-    rayShape.vertices.push(new THREE.Vector3(0, 0 - this.startY, -this.depth));
-
-    //5
     rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY, this.depth, 0));
-    //6
+    //3
     rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
-    //7
+    //4
     rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
-    //8
+    //5
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY, -this.depth));
-    //9
+    //6
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength, 0));
 
-    //10
+    //7
     rayShape.vertices.push(new THREE.Vector3(-this.width, -2 * this.lensHeight - this.startY, 0));
-    //11
+    //8
     rayShape.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.depth));
-    //12
+    //9
     rayShape.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY, 0));
 
 
 
 
-    rayShape.faces.push(new THREE.Face3(1,2,3));
-    rayShape.faces.push(new THREE.Face3(3,2,0));
-    rayShape.faces.push(new THREE.Face3(1,4,3));
-    rayShape.faces.push(new THREE.Face3(3,4,0));
-    rayShape.faces.push(new THREE.Face3(3,5,6));
-    rayShape.faces.push(new THREE.Face3(3,5,7));
-    rayShape.faces.push(new THREE.Face3(3,6,8));
-    rayShape.faces.push(new THREE.Face3(9,8,6));
-    rayShape.faces.push(new THREE.Face3(9,5,6));
-    rayShape.faces.push(new THREE.Face3(9,7,5));
-    rayShape.faces.push(new THREE.Face3(9,8,7));
-
-    rayShape.faces.push(new THREE.Face3(9,10,11));
-    rayShape.faces.push(new THREE.Face3(9,11,12));
-    rayShape.faces.push(new THREE.Face3(9,10,11));
+    rayShape.faces.push(new THREE.Face3(0,2,3));
+    rayShape.faces.push(new THREE.Face3(0,2,4));
+    rayShape.faces.push(new THREE.Face3(0,3,5));
+    rayShape.faces.push(new THREE.Face3(6,5,3));
+    rayShape.faces.push(new THREE.Face3(6,2,3));
+    rayShape.faces.push(new THREE.Face3(6,4,2));
+    rayShape.faces.push(new THREE.Face3(6,5,4));
 
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
@@ -92,23 +76,31 @@ class SimpleLens extends ColumnComponent{
     this.drawRays();
   }
 
-
-  getTitle(){
-    return this.title;
-  }
-
   getMiddle(){
     return this.lensHeight + this.startY;
   }
 
 
-  getStartY(){
-    return this.lensHeight * 2 + this.startY;
+  getEndY(){
+    return this.startY + this.lensHeight + this.focalLength;
+  }
+
+  updateStartY(newStart){
+    this.clear();
+    let startDiff = this.startY - newStart;
+    this.startY = newStart;
+    this.lensHeight += startDiff;
+    this.draw();
+
+  }
+
+  clear(){
+    this.scene.remove(this.ray);
+    this.ray = null;
   }
 
   updateFocalLength(newLen){
-    this.scene.remove(this.ray);
-    this.ray = null;
+    this.clear();
 
     this.focalLength = Number(newLen);
     this.rayShape = null;
