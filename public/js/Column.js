@@ -42,6 +42,7 @@ class Column{
     let startY = 0;
     if (this.components.length != 0){
       startY = this.components[this.components.length - 1].getEndY();
+      console.log(startY);
     } 
     let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene, title);
     this.components.push(newComp);
@@ -80,6 +81,10 @@ class Column{
 
   updateFocalLength(lensNum, focalLen){
     this.components[lensNum].updateFocalLength(focalLen);
+    if (this.components[lensNum + 1]){
+      this.components[lensNum + 1].updateStartY(this.components[lensNum].getEndY());
+    }
+
   }
 
   updateLeftBoundry(lensNum, leftBound){
