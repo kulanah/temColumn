@@ -32,7 +32,7 @@ class Column{
   addSimpleLens(focal, lensHeight, title){
     let startY = 0;
     if (this.components.length != 0){
-      startY = this.components[this.components.length - 1].getStartY();
+      startY = this.components[this.components.length - 1].getEndY();
     } 
     let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene, title);
     this.components.push(newComp);
@@ -41,7 +41,7 @@ class Column{
   addAngledLens(focal, lensHeight, x1, x2, title){
     let startY = 0;
     if (this.components.length != 0){
-      startY = this.components[this.components.length - 1].getStartY();
+      startY = this.components[this.components.length - 1].getEndY();
     } 
     let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene, title);
     this.components.push(newComp);
