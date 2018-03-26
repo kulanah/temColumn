@@ -1,9 +1,9 @@
 $('#focalslider').on('input', function(){
-  column.updateFocalLength(0, this.value);
+  column.updateFocalLength(1, this.value);
 });
 
 $('#focalslider2').on('input', function(){
-  column.updateFocalLength(1, this.value);
+  column.updateFocalLength(2, this.value);
 });
 
 $('#x1').on('input', function(){
