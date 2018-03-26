@@ -68,6 +68,9 @@ class Gun extends ColumnComponent{
 
   draw(){
     this.drawGun();
-
+  }
+  
+  getMiddle(){
+    return (this.startY + this.endY) / 2;
   }
 }
