@@ -135,9 +135,12 @@ class MicroscopeColumn {
   }
 
   createLenses(){
+    //TODO pull this out to public API and create public access ot this section
     // this.microscope.addSimpleLens(2, 5, 'Second Lens');
     // this.microscope.addSimpleLens(2, 5, 'Third Lens');
     this.microscope.addGun('Electron Gun');
+    this.microscope.addLabel(0, 0.2);
+    this.microscope.addLabel(0, 0.4);
     this.microscope.addExtractorBeam('Electron Extractor');
     this.microscope.addSimpleLens(1.2, 4, 'Simple Lens');
     this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');
