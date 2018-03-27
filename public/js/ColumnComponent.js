@@ -13,6 +13,10 @@ class ColumnComponent{
     return this.startY;
   }
 
+  getMiddle(){
+    return (this.startY + this.endY) / 2;
+  }
+
   getEndY(){
     throw new Error('Must implement get end method, ColumnComponent is an abstract base class');
   }
