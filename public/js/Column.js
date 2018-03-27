@@ -42,15 +42,27 @@ class Column{
     let startY = 0;
     if (this.components.length != 0){
       startY = this.components[this.components.length - 1].getEndY();
-      console.log(startY);
     } 
     let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene, title);
     this.components.push(newComp);
   }
 
   addExtractorBeam(title){
-    let baseExtractorBeam = new ExtractorBeam(this.width, this.scene, title);
+    let startY = 0;
+    if (this.components.length != 0){
+      startY = this.components[this.components.length - 1].getEndY();
+    } 
+    let baseExtractorBeam = new ExtractorBeam(this.width / 4, this.scene, title, startY);
     this.components.push(baseExtractorBeam);
+  }
+
+  addGun(title){
+    //Placeholder options:
+    let startY = -0.2;
+    let width = 0.5;
+    let endY = 0.4;
+    let gun = new Gun(startY, width,this.scene, title, endY)
+    this.components.push(gun);
   }
 
   draw(){
