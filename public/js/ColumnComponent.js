@@ -17,12 +17,16 @@ class ColumnComponent{
     return (this.startY + this.endY) / 2;
   }
 
+  getTitle(){
+    return this.title;
+  }
+
   getEndY(){
     throw new Error('Must implement get end method, ColumnComponent is an abstract base class');
   }
 
-  getTitle(){
-    return this.title;
+  addLabel(){
+    throw new Error('Must implement add label method, ColumnComponent is an abstract base class');
   }
 
   draw(){
