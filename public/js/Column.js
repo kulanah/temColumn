@@ -29,6 +29,7 @@ class Column{
     this.init = this.init.bind(this);
   }
 
+
   addSimpleLens(focal, lensHeight, title){
     let startY = 0;
     if (this.components.length != 0){
@@ -37,6 +38,7 @@ class Column{
     let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene, title);
     this.components.push(newComp);
   }
+
 
   addAngledLens(focal, lensHeight, x1, x2, title){
     let startY = 0;
@@ -47,6 +49,7 @@ class Column{
     this.components.push(newComp);
   }
 
+
   addExtractorBeam(title){
     let startY = 0;
     if (this.components.length != 0){
@@ -55,6 +58,7 @@ class Column{
     let baseExtractorBeam = new ExtractorBeam(this.width / 4, this.scene, title, startY);
     this.components.push(baseExtractorBeam);
   }
+
 
   addGun(title){
     //Placeholder options:
@@ -65,16 +69,20 @@ class Column{
     this.components.push(gun);
   }
 
+
+  addLabel(lensNum, percentage){
+    if (this.components[lensNum]){
+      this.components[lensNum].addLabel(percentage);
+    } else {
+      throw new Error ('The component you\'re trying to add a label for doesn\'t exist');
+    }
+  }
+
+
   draw(){
     for (let i = 0; i < this.components.length; ++i){
       this.components[i].draw();
     }
-    // this.lineGeometry.vertices.push(new THREE.Vector3(0,0,0));
-    // this.lineGeometry.vertices.push(new THREE.Vector3(0,-45 ,0));
-
-    // this.line = new THREE.Line(this.lineGeometry, this.lineMaterial);
-
-    // this.scene.add(this.line);
   }
 
 
@@ -87,24 +95,26 @@ class Column{
     return this.components[lensNum].getTitle();
   }
 
+
   init(){
     // this.drawColumn();
   }
+
 
   updateFocalLength(lensNum, focalLen){
     this.components[lensNum].updateFocalLength(focalLen);
     if (this.components[lensNum + 1]){
       this.components[lensNum + 1].updateStartY(this.components[lensNum].getEndY());
     }
-
   }
+
 
   updateLeftBoundry(lensNum, leftBound){
     this.components[lensNum].updatex1(leftBound);
   }
 
+
   updateRightBoundry(lensNum, rightBound){
     this.components[lensNum].updatex2(rightBound);
   }
-
 }
