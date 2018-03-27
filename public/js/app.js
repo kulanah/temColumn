@@ -139,10 +139,12 @@ class MicroscopeColumn {
     // this.microscope.addSimpleLens(2, 5, 'Second Lens');
     // this.microscope.addSimpleLens(2, 5, 'Third Lens');
     this.microscope.addGun('Electron Gun');
-    this.microscope.addLabel(0, 0.2);
-    this.microscope.addLabel(0, 0.4);
     this.microscope.addExtractorBeam('Electron Extractor');
+    this.microscope.addLabel(1, 1, 0.2);
+    this.microscope.addLabel(1, 1, 0.4);
     this.microscope.addSimpleLens(1.2, 4, 'Simple Lens');
+    this.microscope.addLabel(2, 2, 0.1);
+    this.microscope.addLabel(2, 2, 0.25);
     this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');
     this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');
     this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');

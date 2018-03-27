@@ -70,9 +70,9 @@ class Column{
   }
 
 
-  addLabel(lensNum, percentage){
+  addLabel(lensNum, size, percentage){
     if (this.components[lensNum]){
-      this.components[lensNum].addLabel(percentage);
+      this.components[lensNum].addLabel(size, percentage);
     } else {
       throw new Error ('The component you\'re trying to add a label for doesn\'t exist');
     }
