@@ -1,6 +1,5 @@
 class MicroscopeColumn {
   constructor(divId){
-
     if (document.getElementById(divId) === null){
       throw new Error('ERROR: Couldn\'t find the provided div ' + divId);
     } else {
@@ -89,11 +88,12 @@ class MicroscopeColumn {
 
 
   initPositionChecker(){
-    let sphereGeo = new THREE.SphereGeometry(0.25, 10, 10);
+    let sphereGeo = new THREE.SphereGeometry(0.1, 10, 10);
     let sphereMat = new THREE.MeshBasicMaterial({color: 0xffffff});
 
     let sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    sphereMesh.position.y = -6;
+    sphereMesh.position.y = -0.6;
+    sphereMesh.position.z = 6;
     this.scene.add(sphereMesh);
   }
 
@@ -138,10 +138,12 @@ class MicroscopeColumn {
     // this.microscope.addSimpleLens(2, 5, 'Second Lens');
     // this.microscope.addSimpleLens(2, 5, 'Third Lens');
     this.microscope.addGun('Electron Gun');
-    this.microscope.addExtractorBeam('Electron Extractor Beam');
-    this.microscope.addAngledLens(2, 3, -2, -1, 'Double Angled Lens');
+    this.microscope.addExtractorBeam('Electron Extractor');
+    this.microscope.addSimpleLens(1.2, 4, 'Simple Lens');
     this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');
-    this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
+    this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');
+    this.microscope.addSimpleLens(1.2, 2, 'Simple Lens');
+    // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
     // this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
 
@@ -167,12 +169,12 @@ class MicroscopeColumn {
   focusColumn(lensNum){
     let newCameraY = - this.microscope.focusColumn(lensNum);
     let newTitle = this.microscope.getTitle(lensNum);
-    this.camera.position.y = newCameraY;
+    this.camera.position.z = 50;
     this.camera.position.x = 0;
+    this.camera.position.y = newCameraY;
 
     this.controls.target.y = newCameraY;
     this.controls.target.x = 0;
-    this.camera.position.z = 50;
     this.title.text(newTitle);
     this.render();
   }
