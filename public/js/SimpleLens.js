@@ -5,6 +5,7 @@ class SimpleLens extends ColumnComponent{
     this.depth = width * .6;
     this.centerPoint = centerPoint;
     this.lensHeight = lensHeight;
+    this.endY = this.startY + this.focalLength + this.lensHeight;
 
     this.faceMat = new THREE.MeshPhongMaterial({
       color: 0xff69b4, 
@@ -69,8 +70,8 @@ class SimpleLens extends ColumnComponent{
   }
 
   drawLabel(){
-    this.labelGeo = new THREE.CubeGeometry(0.5, 0.4, 0.5, 1, 1, 1);
-    this.labelMat = new THREE.MeshBasicMaterial({color: 0x000000, wireframe: true});
+    this.labelGeo = new THREE.CubeGeometry(1, 0.5, 1, 1, 1, 1);
+    this.labelMat = new THREE.MeshBasicMaterial({color: 0xffc000, wireframe: true});
 
     this.labelBox1 = new THREE.Mesh(this.labelGeo, this.labelMat);
 
@@ -93,11 +94,6 @@ class SimpleLens extends ColumnComponent{
     this.drawLabel();
   }
 
-  getMiddle(){
-    return this.lensHeight + this.startY;
-  }
-
-
   getEndY(){
     return this.startY + this.lensHeight + this.focalLength;
   }
@@ -108,10 +104,12 @@ class SimpleLens extends ColumnComponent{
     this.startY = newStart;
     this.lensHeight += startDiff;
     this.draw();
-
   }
 
   clear(){
+    this.scene.remove(this.labelBox1);
+    this.scene.remove(this.labelBox2);
+
     this.scene.remove(this.ray);
     this.ray = null;
   }
