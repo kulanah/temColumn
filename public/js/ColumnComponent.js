@@ -10,12 +10,12 @@ class ColumnComponent{
     this.labels = new Array();
   }
 
-  addLabel(percentage){
+  addLabel(size, percentage){
     let middle = (this.endY - this.startY / 2);
     middle *= percentage;
     let yPos = middle + this.startY;
 
-    this.labels.push(new Label(this.width, 0.25, this.scene, yPos));
+    this.labels.push(new Label(this.width * 1.5 , 0.25 * size, this.scene, yPos));
   }
 
 
@@ -37,15 +37,18 @@ class ColumnComponent{
 
 
   draw(){
-    for (label in this.labels){
-      this.scene.add(label);
+    let i = this.labels.length - 1;
+    while(i >= 0){
+      this.labels[i].draw();
+      --i;
     }
   }
 
   clear(){
-    for (label in this.labels){
-      this.scene.remove(label);
+    let i = this.labels.length;
+    while(i > 0){
+      this.labels[i].clear();
+      --i;
     }
   }
-  
 }
