@@ -68,6 +68,7 @@ class ExtractorBeam extends ColumnComponent{
   }
 
   draw(){
+    super.draw();
     this.drawExtractorBeam();
   }
   

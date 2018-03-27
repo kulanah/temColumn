@@ -89,6 +89,7 @@ class SimpleLens extends ColumnComponent{
   }
 
   draw(){
+    super.draw();
     this.drawLens();
     this.drawRays();
     this.drawLabel();

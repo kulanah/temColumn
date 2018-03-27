@@ -17,6 +17,7 @@ class Gun extends ColumnComponent{
   }
 
   draw(){
+    super.draw();
     this.drawGun();
   }
 }
