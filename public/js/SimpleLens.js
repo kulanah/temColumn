@@ -69,30 +69,10 @@ class SimpleLens extends ColumnComponent{
     this.scene.add(this.ray);
   }
 
-  drawLabel(){
-    this.labelGeo = new THREE.CubeGeometry(1, 0.5, 1, 1, 1, 1);
-    this.labelMat = new THREE.MeshBasicMaterial({color: 0xffc000, wireframe: true});
-
-    this.labelBox1 = new THREE.Mesh(this.labelGeo, this.labelMat);
-
-    this.labelBox1.position.x = this.width;
-    this.labelBox1.position.y = - this.startY - (this.lensHeight / 2);
-
-    this.scene.add(this.labelBox1);
-
-    this.labelBox2 = new THREE.Mesh(this.labelGeo, this.labelMat);
-
-    this.labelBox2.position.x = -this.width;
-    this.labelBox2.position.y = - this.startY - (this.lensHeight / 2);
-
-    this.scene.add(this.labelBox2);
-  }
-
   draw(){
     super.draw();
     this.drawLens();
     this.drawRays();
-    this.drawLabel();
   }
 
   getEndY(){
