@@ -11,9 +11,9 @@ class ColumnComponent{
   }
 
   addLabel(size, percentage){
-    let middle = (this.endY - this.startY / 2);
-    middle *= percentage;
-    let yPos = middle + this.startY;
+    let height = (Number(this.endY - this.startY));
+    height *= percentage;
+    let yPos = height + this.startY;
 
     this.labels.push(new Label(this.width * 1.5 , 0.25 * size, this.scene, yPos));
   }
