@@ -2,7 +2,7 @@ class Label{
   constructor(xPos, width, scene, startY){
     this.scene = scene;
 
-    this.labelGeom = new THREE.CubeGeometry(width, width * 2, width, 1, 1 ,1);
+    this.labelGeom = new THREE.CubeGeometry(width, width / 2, width, 1, 1 ,1);
     this.labelMaterial = new THREE.MeshBasicMaterial({color: 0xffc000, wireframe: true});
 
     this.label1 = new THREE.Mesh(this.labelGeom, this.labelMaterial);
