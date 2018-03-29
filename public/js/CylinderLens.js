@@ -9,11 +9,8 @@ class CylinderLens extends ColumnComponent{
     this.endY = this.startY + this.focalLength + this.lensHeight;
     this.height = this.endY - this.startY;
 
-    this.lensMat = new THREE.MeshPhongMaterial({
-      color: 0xff69b4,
-      wireframe: true,
-      side: THREE.DoubleSide
-    });
+
+    this.rayMat = new THREE.MeshPhongMaterial({color: 0xff69b4});
   }
 
   drawLens(){
@@ -30,12 +27,35 @@ class CylinderLens extends ColumnComponent{
 
 
   drawRays(){
-    let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.height, 8, 1);
-    let rayMat = new THREE.MeshPhongMaterial({color: 0xff694b});
 
-    this.rayMesh = new THREE.Mesh(rayShape, rayMat);
+    let topRay = new THREE.Geometry();
+    
+    //0
+    topRay.vertices.push(new THREE.Vector3(0, -this.startY, 0));
+    //1
+    topRay.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY, this.width));
+    //2
+    topRay.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
+    //3
+    topRay.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
+    //4
+    topRay.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY, -this.width));
+
+    topRay.faces.push(new THREE.Face3(0,2,1));
+    topRay.faces.push(new THREE.Face3(0,1,3));
+    topRay.faces.push(new THREE.Face3(0,4,2));
+    topRay.faces.push(new THREE.Face3(0,3,4));
+
+    topRay.computeFaceNormals();
+    topRay.computeVertexNormals();
+    this.topRay = new THREE.Mesh(topRay, this.rayMat);
+
+    let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.height, 8, 1);
+
+    this.rayMesh = new THREE.Mesh(rayShape, this.rayMat);
     this.rayMesh.position.y = -this.startY - this.lensHeight - (this.height / 2);
     this.scene.add(this.rayMesh);
+    this.scene.add(this.topRay);
   }
 
 
@@ -56,6 +76,9 @@ class CylinderLens extends ColumnComponent{
     this.radiusBottom = this.width * newRadPercent;
     this.clear();
     this.draw();
+  }
 
+  getEndY(){
+    return this.lensHeight + this.height + this.startY;
   }
 }
