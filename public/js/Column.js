@@ -43,6 +43,20 @@ class Column{
   }
 
 
+  addCylinderLens(focal, lensHeight, title, radiusPercentage){
+    let radiusBot = this.width * radiusPercentage;
+    let newComp = new CylinderLens(
+      focal, 
+      this.getStartY(), 
+      lensHeight, 
+      this.width, 
+      this.scene, 
+      title, 
+      radiusBot
+    );
+    this.components.push(newComp);
+  }
+
   getStartY(){
     let startY = 0;
     if (this.components.length != 0){
