@@ -7,6 +7,7 @@ class CylinderLens extends ColumnComponent{
     this.radiusBottom = radiusBottom;
     this.lensHeight = lensHeight;
     this.endY = this.startY + this.focalLength + this.lensHeight;
+    this.height = this.endY - this.startY;
 
     this.lensMat = new THREE.MeshPhongMaterial({
       color: 0xff69b4,
@@ -29,11 +30,11 @@ class CylinderLens extends ColumnComponent{
 
 
   drawRays(){
-    let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.endY - this.startY, 8, 1);
+    let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.height, 8, 1);
     let rayMat = new THREE.MeshPhongMaterial({color: 0xff694b});
 
     this.rayMesh = new THREE.Mesh(rayShape, rayMat);
-    this.rayMesh.position.y = -this.startY;
+    this.rayMesh.position.y = -this.startY - this.lensHeight - (this.height / 2);
     this.scene.add(this.rayMesh);
   }
 
