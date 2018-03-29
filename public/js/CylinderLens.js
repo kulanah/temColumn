@@ -1,3 +1,4 @@
+'use strict';
 class CylinderLens extends ColumnComponent{
   //use width as top radius
   constructor(focalLength, startY, lensHeight, width, scene, title, radiusBottom){
@@ -14,5 +15,40 @@ class CylinderLens extends ColumnComponent{
     });
   }
 
+  drawLens(){
+    let lensShape = new THREE.SphereGeometry(.5, 16, 12);
+    lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 2.75, 0.5, this.width * 2.5));
 
+    let lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: false, wireframe: false});
+
+    this.lensMesh = new THREE.Mesh(lensShape, lensMat);
+    this.lensMesh.position.y = -this.lensHeight - this.startY;
+
+    this.scene.add(this.lensMesh);
+  }
+
+
+  drawRays(){
+    let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.endY - this.startY, 8, 1);
+    let rayMat = new THREE.MeshPhongMaterial({color: 0xff694b});
+
+    this.rayMesh = new THREE.Mesh(rayShape, rayMat);
+    this.rayMesh.position.y = this.startY;
+    this.scene.add(this.rayMesh);
+  }
+
+
+  draw(){
+    super.draw();
+    this.drawLens();
+    this.drawRays();
+  }
+
+  clear(){
+    super.clear();
+
+    this.scene.remove(this.rayMesh);
+    this.scene.remove(this.lensMesh);
+
+  }
 }
