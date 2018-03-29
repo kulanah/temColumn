@@ -1,3 +1,4 @@
+'use strict';
 $('#focalslider').on('input', function(){
   column.updateFocalLength(2, this.value);
 });

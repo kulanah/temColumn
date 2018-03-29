@@ -1,3 +1,4 @@
+'use strict';
 class AngledLens extends SimpleLens{
   constructor(focalLength, startY, width, centerPoint, lensHeight, x1, x2, scene, title){
     super(focalLength, startY, width, centerPoint, lensHeight, scene, title);

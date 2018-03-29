@@ -1,3 +1,4 @@
+'use strict';
 class Gun extends ColumnComponent{
   constructor(startY, width, scene, title, endY){
     super(startY, width, scene, title, endY);

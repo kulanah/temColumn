@@ -1,3 +1,4 @@
+'use strict';
 class Label{
   constructor(xPos, width, scene, startY){
     this.scene = scene;

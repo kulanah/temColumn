@@ -1,3 +1,4 @@
+'use strict';
 class MicroscopeColumn {
   constructor(divId){
     if (document.getElementById(divId) === null){

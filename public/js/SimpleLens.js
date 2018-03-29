@@ -1,3 +1,4 @@
+'use strict';
 class SimpleLens extends ColumnComponent{
   constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title){
     super(startY, width, scene, title);
@@ -88,6 +89,7 @@ class SimpleLens extends ColumnComponent{
   }
 
   clear(){
+    super.clear();
     this.scene.remove(this.labelBox1);
     this.scene.remove(this.labelBox2);
 

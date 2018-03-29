@@ -1,3 +1,4 @@
+'use strict';
 class ExtractorBeam extends ColumnComponent{
   constructor(width, scene, title, startY){
     let height = 1.5;

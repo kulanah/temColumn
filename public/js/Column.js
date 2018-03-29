@@ -1,3 +1,4 @@
+'use strict';
 class Column{
   constructor(height, scene){
     this.components = new Array();

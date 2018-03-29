@@ -1,3 +1,4 @@
+'use strict';
 class ColumnComponent{
   constructor(startY, width, scene, title, endY){
 
