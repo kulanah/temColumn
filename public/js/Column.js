@@ -134,4 +134,8 @@ class Column{
   updateRightBoundry(lensNum, rightBound){
     this.components[lensNum].updatex2(rightBound);
   }
+
+  updateBotRadius(lensNum, newRadiusPercentage){
+    this.components[lensNum].updateBotRadius(newRadiusPercentage);
+  }
 }
