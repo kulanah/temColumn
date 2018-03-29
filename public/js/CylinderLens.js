@@ -2,7 +2,7 @@
 class CylinderLens extends ColumnComponent{
   //use width as top radius
   constructor(focalLength, startY, lensHeight, width, scene, title, radiusBottom){
-    super(startY, width, scene, title, endY);
+    super(startY, width, scene, title);
     this.focalLength = focalLength;
     this.radiusBottom = radiusBottom;
     this.lensHeight = lensHeight;
@@ -33,7 +33,7 @@ class CylinderLens extends ColumnComponent{
     let rayMat = new THREE.MeshPhongMaterial({color: 0xff694b});
 
     this.rayMesh = new THREE.Mesh(rayShape, rayMat);
-    this.rayMesh.position.y = this.startY;
+    this.rayMesh.position.y = -this.startY;
     this.scene.add(this.rayMesh);
   }
 
