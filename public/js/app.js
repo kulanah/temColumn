@@ -175,6 +175,11 @@ class MicroscopeColumn {
     this.render();
   }
 
+  updateBotRadius(lensNum, newRadPercent){
+    this.microscope.updateBotRadius(lensNum, newRadPercent)
+    this.render();
+  }
+
   focusColumn(lensNum){
     let newCameraY = - this.microscope.focusColumn(lensNum);
     let newTitle = this.microscope.getTitle(lensNum);
