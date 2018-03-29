@@ -151,6 +151,7 @@ class MicroscopeColumn {
     this.microscope.addSimpleLens(0.5, 2, 'Simple Lens');
     this.microscope.addLabel(4, 2, 0.1);
     this.microscope.addLabel(4, 2, 0.3);
+    this.microscope.addCylinderLens(5, 3, 'Cylinder Lens', 1);
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
     // this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
