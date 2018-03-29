@@ -32,24 +32,25 @@ class Column{
 
 
   addSimpleLens(focal, lensHeight, title){
-    let startY = 0;
-    if (this.components.length != 0){
-      startY = this.components[this.components.length - 1].getEndY();
-    } 
-    let newComp = new SimpleLens(focal, startY, this.width, 0, lensHeight, this.scene, title);
+    let newComp = new SimpleLens(focal, this.getStartY(), this.width, 0, lensHeight, this.scene, title);
     this.components.push(newComp);
   }
 
 
   addAngledLens(focal, lensHeight, x1, x2, title){
+    let newComp = new AngledLens(focal, this.getStartY(), this.width, 0, lensHeight, x1, x2, this.scene, title);
+    this.components.push(newComp);
+  }
+
+
+  getStartY(){
     let startY = 0;
     if (this.components.length != 0){
       startY = this.components[this.components.length - 1].getEndY();
     } 
-    let newComp = new AngledLens(focal, startY, this.width, 0, lensHeight, x1, x2, this.scene, title);
-    this.components.push(newComp);
-  }
 
+    return startY;
+  }
 
   addExtractorBeam(title){
     let startY = 0;
@@ -59,6 +60,7 @@ class Column{
     let baseExtractorBeam = new ExtractorBeam(this.width / 4, this.scene, title, startY);
     this.components.push(baseExtractorBeam);
   }
+
 
 
   addGun(title){
