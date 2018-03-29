@@ -50,6 +50,12 @@ class CylinderLens extends ColumnComponent{
 
     this.scene.remove(this.rayMesh);
     this.scene.remove(this.lensMesh);
+  }
+
+  updateBotRadius(newRadPercent){
+    this.radiusBottom = this.width * newRadPercent;
+    this.clear();
+    this.draw();
 
   }
 }
