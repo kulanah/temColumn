@@ -6,3 +6,7 @@ $('#focalslider').on('input', function(){
 $('#focalslider2').on('input', function(){
   column.updateFocalLength(3, this.value);
 });
+
+$('#rayradiusslider').on('input', function(){
+  column.updateBotRadius(5, this.value);
+});
