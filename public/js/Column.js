@@ -57,6 +57,12 @@ class Column{
     this.components.push(newComp);
   }
 
+  addScreen(title){
+    let startY = this.getStartY();
+    let newComp = new Specimen(startY, this.width, this.scene, title);
+    this.components.push(newComp);
+  }
+
   getStartY(){
     let startY = 0;
     if (this.components.length != 0){
@@ -104,7 +110,7 @@ class Column{
 
 
   focusColumn(lensNum){
-    return this.components[lensNum].getMiddle();
+    return this.components[lensNum].getMiddle() + 2;
   }
 
 
