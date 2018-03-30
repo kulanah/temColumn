@@ -11,7 +11,7 @@ class SimpleLens extends ColumnComponent{
     this.faceMat = new THREE.MeshPhongMaterial({
       color: 0xff69b4, 
       wireframe: false, 
-      side: THREE.DoubleSide});
+    });
   }
 
   drawLens(){
@@ -34,33 +34,25 @@ class SimpleLens extends ColumnComponent{
     //0
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
     //1
-    rayShape.vertices.push(new THREE.Vector3(0, -this.startY, -this.depth));
-
-    //2
     rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY, this.depth, 0));
-    //3
+    //2
     rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
-    //4
+    //3
     rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
-    //5
+    //4
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY, -this.depth));
-    //6
+    //5
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY -this.focalLength, 0));
 
-    //7
-    rayShape.vertices.push(new THREE.Vector3(-this.width, -2 * this.lensHeight - this.startY, 0));
-    //8
-    rayShape.vertices.push(new THREE.Vector3(0, -2 * this.lensHeight - this.startY, this.depth));
-    //9
-    rayShape.vertices.push(new THREE.Vector3(this.width, -2 * this.lensHeight - this.startY, 0));
 
-    rayShape.faces.push(new THREE.Face3(0,2,3));
-    rayShape.faces.push(new THREE.Face3(0,2,4));
-    rayShape.faces.push(new THREE.Face3(0,3,5));
-    rayShape.faces.push(new THREE.Face3(6,5,3));
-    rayShape.faces.push(new THREE.Face3(6,2,3));
-    rayShape.faces.push(new THREE.Face3(6,4,2));
-    rayShape.faces.push(new THREE.Face3(6,5,4));
+    rayShape.faces.push(new THREE.Face3(0,2,1));
+    rayShape.faces.push(new THREE.Face3(0,1,3));
+    rayShape.faces.push(new THREE.Face3(0,4,2));
+    rayShape.faces.push(new THREE.Face3(0,3,4));
+    rayShape.faces.push(new THREE.Face3(5,2,4));
+    rayShape.faces.push(new THREE.Face3(5,1,2));
+    rayShape.faces.push(new THREE.Face3(5,3,1));
+    rayShape.faces.push(new THREE.Face3(5,4,3));
 
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
