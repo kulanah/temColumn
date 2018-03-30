@@ -12,6 +12,11 @@ class SimpleLens extends ColumnComponent{
       color: 0xff69b4, 
       wireframe: false, 
     });
+    this.frameMat = new THREE.MeshPhongMaterial({
+      // color: 0xd8227d, 
+      color: 0xf4a1c8,
+      wireframe: true, 
+    });
   }
 
   drawLens(){
@@ -56,10 +61,11 @@ class SimpleLens extends ColumnComponent{
 
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
-    this.ray= new THREE.Mesh(rayShape, this.faceMat);
+    this.ray = new THREE.Mesh(rayShape, this.faceMat);
+    this.wire = new THREE.Mesh(rayShape, this.frameMat);
 
-    // this.ray.rotation.y = Math.PI / 8;
     this.scene.add(this.ray);
+    this.scene.add(this.wire);
   }
 
   draw(){
@@ -86,6 +92,7 @@ class SimpleLens extends ColumnComponent{
     this.scene.remove(this.labelBox2);
 
     this.scene.remove(this.ray);
+    this.scene.remove(this.wire);
     this.ray = null;
   }
 

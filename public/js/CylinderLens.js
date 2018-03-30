@@ -9,8 +9,15 @@ class CylinderLens extends ColumnComponent{
     this.endY = this.startY + this.focalLength + this.lensHeight;
     this.height = this.endY - this.startY;
 
+    this.rayMat = new THREE.MeshPhongMaterial({
+      color: 0xff69b4, 
+      wireframe: false, 
+    });
 
-    this.rayMat = new THREE.MeshPhongMaterial({color: 0xff69b4});
+    this.frameMat = new THREE.MeshPhongMaterial({
+      color: 0x000000,
+      wireframe: true,
+    });
   }
 
   drawLens(){
@@ -53,8 +60,15 @@ class CylinderLens extends ColumnComponent{
     let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.height, 8, 1);
 
     this.rayMesh = new THREE.Mesh(rayShape, this.rayMat);
+    this.wireMesh = new THREE.Mesh(rayShape, this.frameMat);
+    this.topWireMesh = new THREE.Mesh(topRay, this.frameMat);
+
     this.rayMesh.position.y = -this.startY - this.lensHeight - (this.height / 2);
+    this.wireMesh.position.y = this.rayMesh.position.y;
+
     this.scene.add(this.rayMesh);
+    this.scene.add(this.wireMesh);
+    this.scene.add(this.topWireMesh);
     this.scene.add(this.topRay);
   }
 
@@ -69,6 +83,8 @@ class CylinderLens extends ColumnComponent{
     super.clear();
 
     this.scene.remove(this.rayMesh);
+    this.scene.remove(this.wireMesh);
+    this.scene.remove(this.topWireMesh);
     this.scene.remove(this.lensMesh);
   }
 
