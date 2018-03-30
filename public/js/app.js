@@ -17,6 +17,8 @@ class MicroscopeColumn {
 
       this.sceneHeight = this.window.height() - 35;
 
+      this.delta = -0.1;
+
       this.init();
       this.animate();
       this.drawScene();
@@ -34,9 +36,9 @@ class MicroscopeColumn {
 
     this.controls = new THREE.TrackballControls(this.camera, document.getElementById('threeCanvas'));
 
-    this.camera.position.z = 100;
+    this.camera.position.z = 80;
     this.camera.position.y = 0;
-    this.camera.position.x = 0;
+    this.camera.position.x = 40;
 
     this.controls.target = new THREE.Vector3(0, this.columnHeight / 4, 0);
     this.initLights();
@@ -69,13 +71,20 @@ class MicroscopeColumn {
     let zVal = 10;
 
     // let keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 100%, 100%)'), 1);
-    let keyLight = new THREE.PointLight(new THREE.Color('hsl(0, 100%, 100%)'), 1.4);
-    keyLight.position.set(0, 0, -140);
-    // keyLight.target.position.set = (0,-10,0);
-    
+    this.keyLight = new THREE.SpotLight(new THREE.Color('hsl(0, 100%, 100%)'), 1.4);
+    this.keyLight.position.set(0, -0.01, 10);
+    this.keyLight.target.position.set = (0,-10,0);
+    this.keyLight.angle = 0.1;
+    this.keyLight.penumbra = 1;
+    // this.keyLight.power = 8;
+    // this.keyLight.decay = .2;
+
+
+    let ambientLight = new THREE.AmbientLight('#ffd7b8', 0.5);
+
     let fillLight = new THREE.DirectionalLight(new THREE.Color('hsl(285, 100%, 100%)'), 1);
     fillLight.position.set(xVal, yVal, zVal).normalize();
-    fillLight.target.position.set(0,-20,0);
+    fillLight.target.position.set(0,0,0);
     
     let backLight = new THREE.DirectionalLight(new THREE.Color('hsl(58, 100%, 100%)'), 1);
     backLight.position.set(0,0,50);
@@ -83,19 +92,21 @@ class MicroscopeColumn {
     let topLight = new THREE.DirectionalLight(new THREE.Color('hsl(338, 100%, 100%)'), 1);
     topLight.position.set(0, 10, 0).normalize();
 
-    this.scene.add(fillLight);
-    this.scene.add(topLight);
+    this.scene.add(ambientLight);
+    this.scene.add(this.keyLight);
+    this.scene.add(this.keyLight.target);
+    // this.scene.add(topLight);
   }
 
 
   initPositionChecker(){
-    let sphereGeo = new THREE.SphereGeometry(0.1, 10, 10);
-    let sphereMat = new THREE.MeshBasicMaterial({color: 0xffffff});
+    let sphereGeo = new THREE.SphereGeometry(.01, 10, 10);
+    let sphereMat = new THREE.MeshBasicMaterial({color: 0xff0000});
 
-    let sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    sphereMesh.position.y = -0.6;
-    sphereMesh.position.z = 6;
-    this.scene.add(sphereMesh);
+    this.sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+    this.sphereMesh.position.y = -0.6;
+    this.sphereMesh.position.z = 6;
+    this.scene.add(this.  sphereMesh);
   }
 
   initBackground(){
@@ -133,6 +144,30 @@ class MicroscopeColumn {
   animate(){
     requestAnimationFrame(this.animate);
     this.controls.update();
+
+    this.moveLight();
+  }
+
+  moveLight(){ 
+    if (this.keyLight.position.y < -20){
+      this.delta = 0.1;
+    } else if (this.keyLight.position.y > 0){
+      this.delta = -0.1;
+    }
+
+    // console.log(this.keyLight.position.y);
+    this.scene.remove(this.keyLight);
+    this.scene.remove(this.keyLight.target);
+    let x = this.keyLight.position.x;
+    let y = this.keyLight.position.y += this.delta;
+    let z = this.keyLight.position.z;
+    this.keyLight.position.set(x, y, z);
+    this.keyLight.target.position.y = y;
+    this.scene.add(this.keyLight);
+    this.scene.add(this.keyLight.target);
+
+    // this.sphereMesh.position.y = y;
+    this.render();
   }
 
   createLenses(){
@@ -152,6 +187,7 @@ class MicroscopeColumn {
     this.microscope.addLabel(4, 2, 0.1);
     this.microscope.addLabel(4, 2, 0.3);
     this.microscope.addCylinderLens(1, 1, 'EDX Detector', 1);
+    // this.microscope.addScreen(1, 1, 'EDX Detector', 1);
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
     // this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
@@ -183,17 +219,17 @@ class MicroscopeColumn {
   focusColumn(lensNum){
     let newTitle;
     if (lensNum == -1){
-      this.camera.position.z = 100;
+      this.camera.position.z = 80;
       this.camera.position.y = 0;
-      this.camera.position.x = 0;
+      this.camera.position.x = 40;
       this.controls.target = new THREE.Vector3(0, this.columnHeight / 4, 0);
       newTitle = 'Overall Column';
 
     } else {
       let newCameraY = - this.microscope.focusColumn(lensNum);
       newTitle = this.microscope.getTitle(lensNum);
-      this.camera.position.z = 50;
-      this.camera.position.x = 0;
+      this.camera.position.z = 40;
+      this.camera.position.x = 40;
       this.camera.position.y = newCameraY;
 
       this.controls.target.y = newCameraY;
