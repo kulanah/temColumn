@@ -17,7 +17,7 @@ class CylinderLens extends ColumnComponent{
     let lensShape = new THREE.SphereGeometry(.5, 16, 12);
     lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 2.75, 0.5, this.width * 2.5));
 
-    let lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: false, wireframe: false});
+    let lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
 
     this.lensMesh = new THREE.Mesh(lensShape, lensMat);
     this.lensMesh.position.y = -this.lensHeight - this.startY;
