@@ -181,14 +181,24 @@ class MicroscopeColumn {
   }
 
   focusColumn(lensNum){
-    let newCameraY = - this.microscope.focusColumn(lensNum);
-    let newTitle = this.microscope.getTitle(lensNum);
-    this.camera.position.z = 50;
-    this.camera.position.x = 0;
-    this.camera.position.y = newCameraY;
+    let newTitle;
+    if (lensNum == -1){
+      this.camera.position.z = 200;
+      this.camera.position.y = 0;
+      this.camera.position.x = 0;
+      this.controls.target = new THREE.Vector3(0, this.columnHeight / 2, 0);
+      newTitle = 'Overall Column';
 
-    this.controls.target.y = newCameraY;
-    this.controls.target.x = 0;
+    } else {
+      let newCameraY = - this.microscope.focusColumn(lensNum);
+      newTitle = this.microscope.getTitle(lensNum);
+      this.camera.position.z = 50;
+      this.camera.position.x = 0;
+      this.camera.position.y = newCameraY;
+
+      this.controls.target.y = newCameraY;
+      this.controls.target.x = 0;
+    }
     this.title.text(newTitle);
     this.render();
   }
