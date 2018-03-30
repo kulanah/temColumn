@@ -34,11 +34,11 @@ class MicroscopeColumn {
 
     this.controls = new THREE.TrackballControls(this.camera, document.getElementById('threeCanvas'));
 
-    this.camera.position.z = 200;
+    this.camera.position.z = 100;
     this.camera.position.y = 0;
     this.camera.position.x = 0;
 
-    this.controls.target = new THREE.Vector3(0, this.columnHeight / 2, 0);
+    this.controls.target = new THREE.Vector3(0, this.columnHeight / 4, 0);
     this.initLights();
     this.initColumn();
     this.initBackground();
@@ -183,10 +183,10 @@ class MicroscopeColumn {
   focusColumn(lensNum){
     let newTitle;
     if (lensNum == -1){
-      this.camera.position.z = 200;
+      this.camera.position.z = 100;
       this.camera.position.y = 0;
       this.camera.position.x = 0;
-      this.controls.target = new THREE.Vector3(0, this.columnHeight / 2, 0);
+      this.controls.target = new THREE.Vector3(0, this.columnHeight / 4, 0);
       newTitle = 'Overall Column';
 
     } else {
