@@ -48,7 +48,7 @@ class ColumnComponent{
   clear(){
     let i = this.labels.length;
     while(i > 0){
-      this.labels[i].clear();
+      this.labels[i - 1].clear();
       --i;
     }
   }
