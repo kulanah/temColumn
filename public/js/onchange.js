@@ -10,3 +10,7 @@ $('#focalslider2').on('input', function(){
 $('#rayradiusslider').on('input', function(){
   column.updateBotRadius(5, this.value);
 });
+
+$('#focusslider').on('input', function(){
+  column.focusColumn(this.value - 1);
+});
