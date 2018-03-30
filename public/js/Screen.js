@@ -19,7 +19,7 @@ class Screen extends ColumnComponent{
 
   draw(){
     super.draw();
-    drawScreen();
+    this.drawScreen();
 
   }
 
