@@ -25,10 +25,13 @@ class Specimen extends ColumnComponent{
     return this.startY - 0.25;
   }
 
+  getEndY(){
+    return this.startY + 0.25;
+  }
+
   draw(){
     super.draw();
     this.drawScreen();
-
   }
 
   clear(){
