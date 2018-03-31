@@ -57,6 +57,24 @@ class Column{
     this.components.push(newComp);
   }
 
+  addLowerObjectiveLens(focal, lensHeight, title){
+    let innerLeft = -2;
+    let innerRight = 2;
+
+    let newComp = new LowerObjectiveLens(
+      focal, 
+      this.getStartY(), 
+      this.width, 
+      0,
+      lensHeight, 
+      this.scene, 
+      title,
+      innerLeft,
+      innerRight
+    );
+    this.components.push(newComp);
+  }
+
   addScreen(title){
     let startY = this.getStartY();
     let newComp = new Specimen(startY, this.width, this.scene, title);
@@ -64,23 +82,17 @@ class Column{
   }
 
   getStartY(){
-    let startY = 0;
     if (this.components.length != 0){
-      startY = this.components[this.components.length - 1].getEndY();
-    } 
-
-    return startY;
+      return this.components[this.components.length - 1].getEndY();
+    }
+    return 0;
   }
 
   addExtractorBeam(title){
-    let startY = 0;
-    if (this.components.length != 0){
-      startY = this.components[this.components.length - 1].getEndY();
-    } 
+    let startY = this.getStartY();
     let baseExtractorBeam = new ExtractorBeam(this.width / 4, this.scene, title, startY);
     this.components.push(baseExtractorBeam);
   }
-
 
 
   addGun(title){
@@ -88,7 +100,7 @@ class Column{
     let startY = -0.2;
     let width = 0.5;
     let endY = 0.4;
-    let gun = new Gun(startY, width,this.scene, title, endY)
+    let gun = new Gun(startY, width,this.scene, title, endY);
     this.components.push(gun);
   }
 
