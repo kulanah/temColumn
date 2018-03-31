@@ -71,15 +71,14 @@ class MicroscopeColumn {
     let zVal = 10;
 
     // let keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 100%, 100%)'), 1);
-    this.keyLight = new THREE.SpotLight(new THREE.Color('hsl(0, 100%, 100%)'), 1.4);
-    this.keyLight.position.set(0, -0.01, 10);
+    this.keyLight = new THREE.SpotLight(new THREE.Color('hsl(0, 100%, 100%)'), 5, 20);
+    this.keyLight.position.set(0, -0.1, 10);
     this.keyLight.target.position.set = (0,-10,0);
-    this.keyLight.angle = 0.1;
+    this.keyLight.angle = 0.2;
     this.keyLight.penumbra = 1;
     this.keyLight.decay = 2;
 
 
-    let ambientLight = new THREE.AmbientLight('#ffd7b8', 0.5);
     this.pointLight = new THREE.PointLight('#ffd7b8', 0.5);
 
     this.pointLight.position.y = -10;
@@ -101,7 +100,6 @@ class MicroscopeColumn {
 
     // this.scene.add(keyHelper);
     // this.scene.add(pointHelper);
-    // this.scene.add(ambientLight);
     this.scene.add(this.keyLight);
     this.scene.add(this.keyLight.target);
     this.scene.add(this.pointLight);
@@ -159,8 +157,9 @@ class MicroscopeColumn {
 
   moveLight(){ 
     if (this.keyLight.position.y < -20){
-      this.delta = 0.1;
-    } else if (this.keyLight.position.y > 0){
+      this.keyLight.position.y = 4;
+      // this.delta = 0.1;
+    } else if (this.keyLight.position.y > 1){
       this.delta = -0.1;
     }
 
@@ -168,10 +167,10 @@ class MicroscopeColumn {
     this.scene.remove(this.keyLight);
     this.scene.remove(this.keyLight.target);
     let x = this.keyLight.position.x;
-    let y = this.keyLight.position.y += this.delta;
+    let y = this.keyLight.position.y = this.keyLight.position.y + this.delta;
     let z = this.keyLight.position.z;
     this.keyLight.position.set(x, y, z);
-    this.keyLight.target.position.y = y;
+    this.keyLight.target.position.y = y - 2 ;
     this.scene.add(this.keyLight);
     this.scene.add(this.keyLight.target);
 
@@ -197,6 +196,7 @@ class MicroscopeColumn {
     this.microscope.addLabel(4, 2, 0.3);
     this.microscope.addCylinderLens(1, 1, 'EDX Detector', 1);
     this.microscope.addScreen('Specimen');
+    this.microscope.addLowerObjectiveLens(2, 3, 'Lower Objective Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
     // this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
