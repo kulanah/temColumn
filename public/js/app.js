@@ -197,6 +197,7 @@ class MicroscopeColumn {
     this.microscope.addCylinderLens(1, 1, 'EDX Detector', 1);
     this.microscope.addScreen('Specimen');
     this.microscope.addLowerObjectiveLens(2, 3, 'Lower Objective Lens');
+    this.microscope.addOverhangLens(1, 2, 0.25, 'Diffraction Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
     // this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
     // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');

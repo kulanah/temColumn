@@ -57,6 +57,7 @@ class Column{
     this.components.push(newComp);
   }
 
+
   addLowerObjectiveLens(focal, lensHeight, title){
     let innerLeft = -2;
     let innerRight = 2;
@@ -72,6 +73,12 @@ class Column{
       innerLeft,
       innerRight
     );
+    this.components.push(newComp);
+  }
+
+
+  addOverhangLens(focal, lensHeight, delta, title){
+    let newComp = new OverhangLens(focal, this.getStartY(), this.width, 0, lensHeight, this.scene, title, delta);
     this.components.push(newComp);
   }
 
