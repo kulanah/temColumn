@@ -1,23 +1,12 @@
 'use strict';
-class CylinderLens extends ColumnComponent{
+class CylinderLens extends SimpleLens{
   //use width as top radius
   constructor(focalLength, startY, lensHeight, width, scene, title, radiusBottom){
-    super(startY, width, scene, title);
-    this.focalLength = focalLength;
+    super(focalLength, startY, width, 0, lensHeight, scene, title);
     this.radiusBottom = radiusBottom;
-    this.lensHeight = lensHeight;
     this.endY = this.startY + this.focalLength + this.lensHeight;
     this.height = this.endY - this.startY;
 
-    this.rayMat = new THREE.MeshPhongMaterial({
-      color: 0xff69b4, 
-      wireframe: false, 
-    });
-
-    this.frameMat = new THREE.MeshPhongMaterial({
-      color: 0x000000,
-      wireframe: true,
-    });
   }
 
   drawLens(){
@@ -55,11 +44,11 @@ class CylinderLens extends ColumnComponent{
 
     topRay.computeFaceNormals();
     topRay.computeVertexNormals();
-    this.topRay = new THREE.Mesh(topRay, this.rayMat);
+    this.topRay = new THREE.Mesh(topRay, this.faceMat);
 
     let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.height, 8, 1);
 
-    this.rayMesh = new THREE.Mesh(rayShape, this.rayMat);
+    this.rayMesh = new THREE.Mesh(rayShape, this.faceMat);
     this.wireMesh = new THREE.Mesh(rayShape, this.frameMat);
     this.topWireMesh = new THREE.Mesh(topRay, this.frameMat);
 
@@ -75,8 +64,6 @@ class CylinderLens extends ColumnComponent{
 
   draw(){
     super.draw();
-    this.drawLens();
-    this.drawRays();
   }
 
   clear(){
