@@ -13,7 +13,6 @@ class SimpleLens extends ColumnComponent{
       wireframe: false, 
     });
     this.frameMat = new THREE.MeshPhongMaterial({
-      // color: 0xd8227d, 
       color: 0xf4a1c8,
       wireframe: true, 
     });
