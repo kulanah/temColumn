@@ -18,7 +18,6 @@ class LowerObjectiveLens extends SimpleLens{
   drawRays(){
     let rayShape = new THREE.Geometry();
 
-
     //0
     rayShape.vertices.push(new THREE.Vector3(-this.width / 2, -this.startY, 0));
     //1
@@ -76,6 +75,10 @@ class LowerObjectiveLens extends SimpleLens{
     this.scene.add(this.ray);
     this.scene.add(this.wire);
 
+  }
+
+  getEndY(){
+    return this.startY + this.lensHeight;
   }
 
 
