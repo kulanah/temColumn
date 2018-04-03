@@ -76,7 +76,6 @@ class LowerObjectiveLens extends SimpleLens{
     this.scene.add(this.ray);
     this.scene.add(this.wire);
 
-    console.log(this)
   }
 
 
