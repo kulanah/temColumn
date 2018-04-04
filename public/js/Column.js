@@ -82,9 +82,15 @@ class Column{
     this.components.push(newComp);
   }
 
-  addScreen(title){
+  addSpecimen(title){
     let startY = this.getStartY();
     let newComp = new Specimen(startY, this.width, this.scene, title);
+    this.components.push(newComp);
+  }
+  
+  addScreen(focalLength, title){
+    let startY = this.getStartY();
+    let newComp = new Screen(startY, focalLength, this.width, this.scene, title);
     this.components.push(newComp);
   }
 
