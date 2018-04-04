@@ -107,8 +107,8 @@ class OverhangLens extends SimpleLens{
     rayShape.faces.push(new THREE.Face3(7, 9, 8));
 
     rayShape.faces.push(new THREE.Face3(8, 10, 15));
-    rayShape.faces.push(new THREE.Face3(8, 10, 16));
-    rayShape.faces.push(new THREE.Face3(9, 8, 15));
+    rayShape.faces.push(new THREE.Face3(8, 16, 10));
+    rayShape.faces.push(new THREE.Face3(8, 9, 15));
     rayShape.faces.push(new THREE.Face3(9, 6, 16));
 
     //right back
@@ -118,7 +118,6 @@ class OverhangLens extends SimpleLens{
     rayShape.faces.push(new THREE.Face3(12, 1, 8));
     rayShape.faces.push(new THREE.Face3(10, 12, 8));
     rayShape.faces.push(new THREE.Face3(10, 9, 12));
-
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
 
