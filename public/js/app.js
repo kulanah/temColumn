@@ -198,6 +198,10 @@ class MicroscopeColumn {
     this.microscope.addScreen('Specimen');
     this.microscope.addLowerObjectiveLens(2, 3, 'Lower Objective Lens');
     this.microscope.addOverhangLens(1, 3, 0.75, 'Diffraction Lens');
+    this.microscope.addLabel(8, 2, 0.1);
+    this.microscope.addLabel(8, 2, 0.2);
+    this.microscope.addLabel(8, 2, 0.3);
+    this.microscope.addLabel(8, 2, 0.4);
     this.microscope.addAngledLens(1, 1, -2, -1, 'Fifth Lens');
     this.microscope.addAngledLens(1, 1, -2, -1, 'Fifth Lens');
     this.microscope.addAngledLens(1, 1, -2, -1, 'Fifth Lens');
