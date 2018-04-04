@@ -21,7 +21,6 @@ class SimpleLens extends ColumnComponent{
   drawLens(){
     this.lensShape = new THREE.SphereGeometry(.5, 16, 12);
     this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 2.75, 0.5, this.width * 2.5));
-    // this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.lensWidth * 1.5, 0.5, this.lensWidth * 1.25));
 
     this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
 
