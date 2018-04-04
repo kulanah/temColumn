@@ -2,10 +2,23 @@ class Screen extends ColumnComponent{
   constructor(startY, focalLength, width, scene, title){
     super(startY, width, scene, title);
     this.focalLength = focalLength;
+
+    this.rayGeo = new THREE.ConeGeometry(this.width, this.focalLength, 16, 1);
+    this.faceMat = new THREE.MeshPhongMaterial({
+      color: 0xff69b4, 
+      wireframe: false, 
+    });
+    this.frameMat = new THREE.MeshPhongMaterial({
+      color: 0xf4a1c8,
+      wireframe: true, 
+    });
   }
 
   drawRays(){
-
+    this.rayGeo.applyMatrix(new THREE.Matrix4().makeScale(1.5, 1,  0.5));
+    this.rayMesh = new THREE.Mesh(this.rayGeo, this.faceMat);
+    this.rayMesh.position.y = -this.startY - this.focalLength / 2;
+    this.scene.add(this.rayMesh);
   }
 
   drawScreen(){
