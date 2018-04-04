@@ -156,7 +156,7 @@ class MicroscopeColumn {
   }
 
   moveLight(){ 
-    if (this.keyLight.position.y < -20){
+    if (this.keyLight.position.y < -28){
       this.keyLight.position.y = 4;
       // this.delta = 0.1;
     } else if (this.keyLight.position.y > 1){
@@ -197,10 +197,7 @@ class MicroscopeColumn {
     this.microscope.addCylinderLens(1, 1, 'EDX Detector', 1);
     this.microscope.addScreen('Specimen');
     this.microscope.addLowerObjectiveLens(2, 3, 'Lower Objective Lens');
-    this.microscope.addOverhangLens(1, 2, 0.25, 'Diffraction Lens');
-    // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
-    // this.microscope.addSimpleLens(1.2, 3, 'Simple Lens');
-    // this.microscope.addAngledLens(2, 3, -2, -1, 'Fifth Lens');
+    this.microscope.addOverhangLens(1, 3, 0.75, 'Diffraction Lens');
 
     this.microscope.draw(); 
   }
