@@ -25,18 +25,6 @@ class OverhangLens extends SimpleLens{
     this.topMid = focal;
   }
 
-  drawLens(){
-    this.lensShape = new THREE.SphereGeometry(.5, 16, 12);
-    this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 2.75, 0.5, this.width * 2.5));
-
-    this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
-
-    this.lensMesh = new THREE.Mesh(this.lensShape, this.lensMat);
-    this.lensMesh.position.y = -this.lensHeight * 1.025 - this.startY;
-
-    this.scene.add(this.lensMesh);
-  }
-
   getEndY(){
     return this.startY + this.lensHeight + this.focalLength;
   }
