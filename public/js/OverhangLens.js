@@ -1,6 +1,6 @@
 class OverhangLens extends SimpleLens{
   constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title, delta){
-    super(0, startY, width, centerPoint, lensHeight, scene, title);
+    super(focalLength, startY, width, centerPoint, lensHeight, scene, title);
 
     this.delta = delta;
 
@@ -22,13 +22,12 @@ class OverhangLens extends SimpleLens{
     let sideHeight = slope * 2 * this.width;
 
     this.sideHeight = sideHeight;
-    this.focalLength = focal;
+    this.topMid = focal;
   }
 
   drawLens(){
     this.lensShape = new THREE.SphereGeometry(.5, 16, 12);
     this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 2.75, 0.5, this.width * 2.5));
-    // this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.lensWidth * 1.5, 0.5, this.lensWidth * 1.25));
 
     this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
 
@@ -39,7 +38,7 @@ class OverhangLens extends SimpleLens{
   }
 
   getEndY(){
-    return this.startY + this.lensHeight;
+    return this.startY + this.lensHeight + this.focalLength;
   }
 
 
@@ -51,9 +50,9 @@ class OverhangLens extends SimpleLens{
     //1
     rayShape.vertices.push(new THREE.Vector3(this.x2, -this.startY, 0));
     //2
-    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.focalLength, 0));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.topMid, 0));
     //3
-    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - (this.lensHeight + this.focalLength) / 2, this.depth));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - (this.lensHeight + this.topMid) / 2, this.depth));
     //4
     rayShape.vertices.push(new THREE.Vector3(this.x1, -this.startY - this.sideHeight, this.depth / 2));
     //5
@@ -72,14 +71,26 @@ class OverhangLens extends SimpleLens{
     rayShape.vertices.push(new THREE.Vector3(this.x1, -this.startY - this.sideHeight, 0));
     //12
     rayShape.vertices.push(new THREE.Vector3(this.x2, -this.startY - this.sideHeight, 0));
+    //13
+    rayShape.vertices.push(new THREE.Vector3(this.x1, -this.startY - this.lensHeight, this.depth / 4));
+    //14
+    rayShape.vertices.push(new THREE.Vector3(this.x1, -this.startY - this.lensHeight, this.depth / 4));
+    //15
+    rayShape.vertices.push(new THREE.Vector3(this.x2, -this.startY - this.lensHeight, this.depth / 4));
+    //16
+    rayShape.vertices.push(new THREE.Vector3(this.x2, -this.startY - this.lensHeight, this.depth / 4));
 
 
     //left front
     rayShape.faces.push(new THREE.Face3(0, 3, 2));
     rayShape.faces.push(new THREE.Face3(0, 4, 3));
-    rayShape.faces.push(new THREE.Face3(4, 5, 6));
     rayShape.faces.push(new THREE.Face3(4, 6, 7));
     rayShape.faces.push(new THREE.Face3(4, 7, 3));
+
+    rayShape.faces.push(new THREE.Face3(4, 5, 14));
+    rayShape.faces.push(new THREE.Face3(4, 5, 13));
+    rayShape.faces.push(new THREE.Face3(6, 4, 14));
+    rayShape.faces.push(new THREE.Face3(4, 6, 13));
 
     //left back
     rayShape.faces.push(new THREE.Face3(0, 2, 11));
@@ -89,12 +100,16 @@ class OverhangLens extends SimpleLens{
     rayShape.faces.push(new THREE.Face3(11, 5, 4));
     rayShape.faces.push(new THREE.Face3(11, 6, 5));
 
-    // //right front
+    //right front
     rayShape.faces.push(new THREE.Face3(1, 2, 3));
     rayShape.faces.push(new THREE.Face3(8, 1, 3));
     rayShape.faces.push(new THREE.Face3(7, 8, 3));
     rayShape.faces.push(new THREE.Face3(7, 9, 8));
-    rayShape.faces.push(new THREE.Face3(10, 8, 9));
+
+    rayShape.faces.push(new THREE.Face3(8, 10, 15));
+    rayShape.faces.push(new THREE.Face3(8, 10, 16));
+    rayShape.faces.push(new THREE.Face3(9, 8, 15));
+    rayShape.faces.push(new THREE.Face3(9, 6, 16));
 
     //right back
     rayShape.faces.push(new THREE.Face3(2, 1, 12));
@@ -104,7 +119,6 @@ class OverhangLens extends SimpleLens{
     rayShape.faces.push(new THREE.Face3(10, 12, 8));
     rayShape.faces.push(new THREE.Face3(10, 9, 12));
 
-
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
 
@@ -113,6 +127,41 @@ class OverhangLens extends SimpleLens{
 
     this.scene.add(this.ray);
     this.scene.add(this.wire);
+
+    let bottomRay = new THREE.Geometry();
+
+    //0
+    bottomRay.vertices.push(new THREE.Vector3(this.leftX, -this.startY - this.lensHeight, 0));
+    //1
+    bottomRay.vertices.push(new THREE.Vector3(this.x1, -this.startY - this.lensHeight, 0));
+    //2
+    bottomRay.vertices.push(new THREE.Vector3(this.x2, -this.startY - this.lensHeight, 0));
+    //3
+    bottomRay.vertices.push(new THREE.Vector3(this.rightX, -this.startY - this.lensHeight, 0));
+    //4
+    bottomRay.vertices.push(new THREE.Vector3(0,-this.startY -this.lensHeight - this.focalLength, 0));
+    //5
+    bottomRay.vertices.push(new THREE.Vector3(this.x1, -this.startY - this.lensHeight, this.depth / 4));
+    //6
+    bottomRay.vertices.push(new THREE.Vector3(this.x2, -this.startY - this.lensHeight, this.depth / 4));
+
+    bottomRay.faces.push(new THREE.Face3(0, 1, 4));
+    bottomRay.faces.push(new THREE.Face3(5, 0, 4));
+    bottomRay.faces.push(new THREE.Face3(4, 1, 5));
+
+    bottomRay.faces.push(new THREE.Face3(2, 3, 4));
+    bottomRay.faces.push(new THREE.Face3(3, 6, 4));
+    bottomRay.faces.push(new THREE.Face3(4, 6, 2));
+
+    bottomRay.computeFaceNormals();
+    bottomRay.computeVertexNormals();
+
+    this.bottomRay = new THREE.Mesh(bottomRay, this.faceMat);
+    this.bottomWire = new THREE.Mesh(bottomRay, this.frameMat);
+
+    this.scene.add(this.bottomRay);
+    this.scene.add(this.bottomWire);
+
   }
 
 
