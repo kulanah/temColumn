@@ -8,11 +8,6 @@ class LowerObjectiveLens extends SimpleLens{
 
     this.topLeft = - this.radius / 0.5;
     this.topRight = this.radius / 0.5;
-
-    this.faceMat = new THREE.MeshPhongMaterial({
-      color: 0xff69b4,
-    });
-
   }
 
   getBottomX(){
