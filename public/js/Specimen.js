@@ -1,12 +1,12 @@
 
 'use strict';
 class Specimen extends ColumnComponent{
-  constructor(startY, width, scene, title){
-    super(startY, width, scene, title);
+  constructor(startY, radius, scene, title){
+    super(startY, radius, scene, title);
   }
 
   drawScreen(){
-    let specimenGeo = new THREE.BoxGeometry(this.width * 4, 0.25, this.width * 2);
+    let specimenGeo = new THREE.BoxGeometry(this.radius * 4, 0.25, this.radius * 2);
     let specimenMat = new THREE.MeshPhongMaterial({color: 0xf48c42});
     let frameMat = new THREE.MeshPhongMaterial({color: 0x000000, wireframe: true});
 

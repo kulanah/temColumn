@@ -15,7 +15,7 @@ class Column{
     this.scene = scene;
 
 
-    this.width = 2.5; 
+    this.radius = 2.5; 
 
     this.lineMaterial = new THREE.LineBasicMaterial({color: 0xff0000, side: THREE.DoubleSide});
     this.lineGeometry = new THREE.Geometry();
@@ -32,24 +32,24 @@ class Column{
 
 
   addSimpleLens(focal, lensHeight, title){
-    let newComp = new SimpleLens(focal, this.getStartY(), this.width, 0, lensHeight, this.scene, title);
+    let newComp = new SimpleLens(focal, this.getStartY(), this.radius, 0, lensHeight, this.scene, title);
     this.components.push(newComp);
   }
 
 
   addAngledLens(focal, lensHeight, x1, x2, title){
-    let newComp = new AngledLens(focal, this.getStartY(), this.width, 0, lensHeight, x1, x2, this.scene, title);
+    let newComp = new AngledLens(focal, this.getStartY(), this.radius, 0, lensHeight, x1, x2, this.scene, title);
     this.components.push(newComp);
   }
 
 
   addCylinderLens(focal, lensHeight, title, radiusPercentage){
-    let radiusBot = this.width * radiusPercentage;
+    let radiusBot = this.radius * radiusPercentage;
     let newComp = new CylinderLens(
       focal, 
       this.getStartY(), 
       lensHeight, 
-      this.width, 
+      this.radius, 
       this.scene, 
       title, 
       radiusBot
@@ -65,7 +65,7 @@ class Column{
     let newComp = new LowerObjectiveLens(
       focal, 
       this.getStartY(), 
-      this.width, 
+      this.radius, 
       0,
       lensHeight, 
       this.scene, 
@@ -78,19 +78,19 @@ class Column{
 
 
   addOverhangLens(focal, lensHeight, delta, title){
-    let newComp = new OverhangLens(focal, this.getStartY(), this.width, 0, lensHeight, this.scene, title, delta);
+    let newComp = new OverhangLens(focal, this.getStartY(), this.radius, 0, lensHeight, this.scene, title, delta);
     this.components.push(newComp);
   }
 
   addSpecimen(title){
     let startY = this.getStartY();
-    let newComp = new Specimen(startY, this.width, this.scene, title);
+    let newComp = new Specimen(startY, this.radius, this.scene, title);
     this.components.push(newComp);
   }
   
   addScreen(focalLength, title){
     let startY = this.getStartY();
-    let newComp = new Screen(startY, focalLength, this.width, this.scene, title);
+    let newComp = new Screen(startY, focalLength, this.radius, this.scene, title);
     this.components.push(newComp);
   }
 
@@ -103,7 +103,7 @@ class Column{
 
   addExtractorBeam(title){
     let startY = this.getStartY();
-    let baseExtractorBeam = new ExtractorBeam(this.width / 4, this.scene, title, startY);
+    let baseExtractorBeam = new ExtractorBeam(this.radius / 4, this.scene, title, startY);
     this.components.push(baseExtractorBeam);
   }
 
@@ -111,9 +111,9 @@ class Column{
   addGun(title){
     //Placeholder options:
     let startY = -0.2;
-    let width = 0.5;
+    let radius = 0.5;
     let endY = 0.4;
-    let gun = new Gun(startY, width,this.scene, title, endY);
+    let gun = new Gun(startY, radius,this.scene, title, endY);
     this.components.push(gun);
   }
 

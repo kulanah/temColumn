@@ -1,11 +1,11 @@
 'use strict';
 class ExtractorBeam extends ColumnComponent{
-  constructor(width, scene, title, startY){
+  constructor(radius, scene, title, startY){
     let height = 1.5;
-    super(startY, width, scene, title, startY + height);
+    super(startY, radius, scene, title, startY + height);
     this.half = height / 2;
     this.height = height;
-    this.depth = this.width * 0.6;
+    this.depth = this.radius * 0.6;
     this.ExtractorBeamMaterial = new THREE.MeshPhongMaterial({
       color: 0xff0000,
       side: THREE.FrontSide
@@ -22,11 +22,11 @@ class ExtractorBeam extends ColumnComponent{
     //0
     ExtractorBeamBeam.vertices.push(new THREE.Vector3(0, -this.startY, 0));
     //1
-    ExtractorBeamBeam.vertices.push(new THREE.Vector3(-this.width, -this.startY - this.half, 0));
+    ExtractorBeamBeam.vertices.push(new THREE.Vector3(-this.radius, -this.startY - this.half, 0));
     //2
     ExtractorBeamBeam.vertices.push(new THREE.Vector3(0, -this.startY - this.half, this.depth));
     //3
-    ExtractorBeamBeam.vertices.push(new THREE.Vector3(this.width, -this.startY - this.half, 0));
+    ExtractorBeamBeam.vertices.push(new THREE.Vector3(this.radius, -this.startY - this.half, 0));
     //4
     ExtractorBeamBeam.vertices.push(new THREE.Vector3(0, -this.startY - this.half, -this.depth));
     //5

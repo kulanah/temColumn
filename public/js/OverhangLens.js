@@ -1,14 +1,14 @@
 class OverhangLens extends SimpleLens{
-  constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title, delta){
-    super(focalLength, startY, width, centerPoint, lensHeight, scene, title);
+  constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title, delta){
+    super(focalLength, startY, radius, centerPoint, lensHeight, scene, title);
 
     this.delta = delta;
 
-    this.leftX = -width - delta;
-    this.rightX = width + delta;
+    this.leftX = -radius - delta;
+    this.rightX = radius + delta;
 
-    this.x1 = -width;
-    this.x2 = width;
+    this.x1 = -radius;
+    this.x2 = radius;
 
     this.setCrossLinePoints();
 
@@ -16,10 +16,10 @@ class OverhangLens extends SimpleLens{
 
   setCrossLinePoints(){
     let rise = this.lensHeight;
-    let slope = Math.abs(rise) / (this.width * 2 + this.delta); 
-    let focal = slope * this.width;
+    let slope = Math.abs(rise) / (this.radius * 2 + this.delta); 
+    let focal = slope * this.radius;
 
-    let sideHeight = slope * 2 * this.width;
+    let sideHeight = slope * 2 * this.radius;
 
     this.sideHeight = sideHeight;
     this.topMid = focal;

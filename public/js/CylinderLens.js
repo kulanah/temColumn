@@ -1,8 +1,8 @@
 'use strict';
 class CylinderLens extends SimpleLens{
-  //use width as top radius
-  constructor(focalLength, startY, lensHeight, width, scene, title, radiusBottom){
-    super(focalLength, startY, width, 0, lensHeight, scene, title);
+  //use radius as top radius
+  constructor(focalLength, startY, lensHeight, radius, scene, title, radiusBottom){
+    super(focalLength, startY, radius, 0, lensHeight, scene, title);
     this.radiusBottom = radiusBottom;
     this.endY = this.startY + this.focalLength + this.lensHeight;
     this.height = this.endY - this.startY;
@@ -16,13 +16,13 @@ class CylinderLens extends SimpleLens{
     //0
     topRay.vertices.push(new THREE.Vector3(0, -this.startY, 0));
     //1
-    topRay.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY, this.width));
+    topRay.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY, this.radius));
     //2
-    topRay.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
+    topRay.vertices.push(new THREE.Vector3(-this.radius, -this.lensHeight - this.startY, 0));
     //3
-    topRay.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
+    topRay.vertices.push(new THREE.Vector3(this.radius, -this.lensHeight - this.startY, 0));
     //4
-    topRay.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY, -this.width));
+    topRay.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY, -this.radius));
 
     topRay.faces.push(new THREE.Face3(0,2,1));
     topRay.faces.push(new THREE.Face3(0,1,3));
@@ -33,7 +33,7 @@ class CylinderLens extends SimpleLens{
     topRay.computeVertexNormals();
     this.topRay = new THREE.Mesh(topRay, this.faceMat);
 
-    let rayShape = new THREE.CylinderGeometry(this.width, this.radiusBottom, this.height, 8, 1);
+    let rayShape = new THREE.CylinderGeometry(this.radius, this.radiusBottom, this.height, 8, 1);
 
     this.rayMesh = new THREE.Mesh(rayShape, this.faceMat);
     this.wireMesh = new THREE.Mesh(rayShape, this.frameMat);
@@ -63,7 +63,7 @@ class CylinderLens extends SimpleLens{
   }
 
   updateBotRadius(newRadPercent){
-    this.radiusBottom = this.width * newRadPercent;
+    this.radiusBottom = this.radius * newRadPercent;
     this.clear();
     this.draw();
   }
