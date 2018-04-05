@@ -26,23 +26,23 @@ class LowerObjectiveLens extends SimpleLens{
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, this.radius));
 
     //3 
-    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius, -this.startY - this.focalLength, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius, -this.startY - this.lensHeight, 0));
     //4 
-    rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.focalLength, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.lensHeight, 0));
     //5
-    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius / 2, -this.startY - this.focalLength, this.radius));
+    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius / 2, -this.startY - this.lensHeight, this.radius / 2));
 
     //6 
-    rayShape.vertices.push(new THREE.Vector3(this.innerRight, -this.startY - this.focalLength, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerRight, -this.startY - this.lensHeight, 0));
     //7 
-    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius, -this.startY - this.focalLength, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius, -this.startY - this.lensHeight, 0));
     //8
-    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius / 2, -this.startY - this.focalLength, this.radius));
+    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius / 2, -this.startY - this.lensHeight, this.radius / 2));
 
     //9
-    rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.lensHeight, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.lensHeight - this.focalLength, 0));
     //10
-    rayShape.vertices.push(new THREE.Vector3(this.innerRight, -this.startY - this.lensHeight, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerRight, -this.startY - this.lensHeight - this.focalLength, 0));
 
     rayShape.faces.push(new THREE.Face3(0, 5, 2));
     rayShape.faces.push(new THREE.Face3(0, 3, 5));
@@ -78,7 +78,7 @@ class LowerObjectiveLens extends SimpleLens{
   }
 
   getEndY(){
-    return this.startY + this.lensHeight;
+    return this.startY + this.lensHeight + this.focalLength;
   }
 
 
