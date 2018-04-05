@@ -1,5 +1,5 @@
 class OverhangLens extends SimpleLens{
-  constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title, delta){
+  constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title, delta, xStart){
     super(focalLength, startY, radius, centerPoint, lensHeight, scene, title);
 
     this.delta = delta;
@@ -7,8 +7,8 @@ class OverhangLens extends SimpleLens{
     this.leftX = -radius - delta;
     this.rightX = radius + delta;
 
-    this.x1 = -radius;
-    this.x2 = radius;
+    this.x1 = -xStart;
+    this.x2 = xStart;
 
     this.setCrossLinePoints();
 

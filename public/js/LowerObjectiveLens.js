@@ -15,6 +15,10 @@ class LowerObjectiveLens extends SimpleLens{
 
   }
 
+  getBottomX(){
+    return this.innerRight;
+  }
+
   drawRays(){
     let rayShape = new THREE.Geometry();
 
