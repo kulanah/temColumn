@@ -1,13 +1,13 @@
 'use strict';
 class LowerObjectiveLens extends SimpleLens{
-  constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title, innerLeft, innerRight){
-    super(focalLength, startY, width, centerPoint, lensHeight, scene, title);
+  constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title, innerLeft, innerRight){
+    super(focalLength, startY, radius, centerPoint, lensHeight, scene, title);
 
     this.innerLeft = innerLeft;
     this.innerRight = innerRight;
 
-    this.topLeft = - this.width / 0.5;
-    this.topRight = this.width / 0.5;
+    this.topLeft = - this.radius / 0.5;
+    this.topRight = this.radius / 0.5;
 
     this.faceMat = new THREE.MeshPhongMaterial({
       color: 0xff69b4,
@@ -19,25 +19,25 @@ class LowerObjectiveLens extends SimpleLens{
     let rayShape = new THREE.Geometry();
 
     //0
-    rayShape.vertices.push(new THREE.Vector3(-this.width / 2, -this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(-this.radius / 2, -this.startY, 0));
     //1
-    rayShape.vertices.push(new THREE.Vector3(this.width / 2, -this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.radius / 2, -this.startY, 0));
     //2
-    rayShape.vertices.push(new THREE.Vector3(0, -this.startY, this.width));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY, this.radius));
 
     //3 
-    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.width, -this.startY - this.focalLength, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius, -this.startY - this.focalLength, 0));
     //4 
     rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.focalLength, 0));
     //5
-    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.width / 2, -this.startY - this.focalLength, this.width));
+    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius / 2, -this.startY - this.focalLength, this.radius));
 
     //6 
     rayShape.vertices.push(new THREE.Vector3(this.innerRight, -this.startY - this.focalLength, 0));
     //7 
-    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.width, -this.startY - this.focalLength, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius, -this.startY - this.focalLength, 0));
     //8
-    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.width / 2, -this.startY - this.focalLength, this.width));
+    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius / 2, -this.startY - this.focalLength, this.radius));
 
     //9
     rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.lensHeight, 0));

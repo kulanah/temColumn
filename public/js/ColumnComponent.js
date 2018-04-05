@@ -1,9 +1,9 @@
 'use strict';
 class ColumnComponent{
-  constructor(startY, width, scene, title, endY){
+  constructor(startY, radius, scene, title, endY){
 
     this.startY = startY;
-    this.width = width;
+    this.radius = radius;
     this.scene = scene;
     this.title = title;
     this.endY = endY;
@@ -16,7 +16,7 @@ class ColumnComponent{
     height *= percentage;
     let yPos = height + this.startY;
 
-    this.labels.push(new Label(this.width * 1.5 , 0.25 * size, this.scene, yPos));
+    this.labels.push(new Label(this.radius * 1.5 , 0.25 * size, this.scene, yPos));
   }
 
 

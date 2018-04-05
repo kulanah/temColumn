@@ -1,14 +1,14 @@
 class OverhangLens extends SimpleLens{
-  constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title, delta){
-    super(focalLength, startY, width, centerPoint, lensHeight, scene, title);
+  constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title, delta){
+    super(focalLength, startY, radius, centerPoint, lensHeight, scene, title);
 
     this.delta = delta;
 
-    this.leftX = -width - delta;
-    this.rightX = width + delta;
+    this.leftX = -radius - delta;
+    this.rightX = radius + delta;
 
-    this.x1 = -width;
-    this.x2 = width;
+    this.x1 = -radius;
+    this.x2 = radius;
 
     this.setCrossLinePoints();
 
@@ -16,25 +16,13 @@ class OverhangLens extends SimpleLens{
 
   setCrossLinePoints(){
     let rise = this.lensHeight;
-    let slope = Math.abs(rise) / (this.width * 2 + this.delta); 
-    let focal = slope * this.width;
+    let slope = Math.abs(rise) / (this.radius * 2 + this.delta); 
+    let focal = slope * this.radius;
 
-    let sideHeight = slope * 2 * this.width;
+    let sideHeight = slope * 2 * this.radius;
 
     this.sideHeight = sideHeight;
     this.topMid = focal;
-  }
-
-  drawLens(){
-    this.lensShape = new THREE.SphereGeometry(.5, 16, 12);
-    this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 2.75, 0.5, this.width * 2.5));
-
-    this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
-
-    this.lensMesh = new THREE.Mesh(this.lensShape, this.lensMat);
-    this.lensMesh.position.y = -this.lensHeight * 1.025 - this.startY;
-
-    this.scene.add(this.lensMesh);
   }
 
   getEndY(){

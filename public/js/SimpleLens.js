@@ -1,9 +1,9 @@
 'use strict';
 class SimpleLens extends ColumnComponent{
-  constructor(focalLength, startY, width, centerPoint, lensHeight, scene, title){
-    super(startY, width, scene, title);
+  constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title){
+    super(startY, radius, scene, title);
     this.focalLength = focalLength;
-    this.depth = width * .6;
+    this.depth = radius * .6;
     this.centerPoint = centerPoint;
     this.lensHeight = lensHeight;
     this.endY = this.startY + this.focalLength + this.lensHeight;
@@ -16,14 +16,14 @@ class SimpleLens extends ColumnComponent{
       color: 0xf4a1c8,
       wireframe: true, 
     });
+
+    this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
   }
 
   drawLens(){
-    this.lensShape = new THREE.SphereGeometry(.5, 16, 12);
-    this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.width * 2.75, 0.5, this.width * 2.5));
-    // this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(this.lensWidth * 1.5, 0.5, this.lensWidth * 1.25));
+    this.lensShape = new THREE.SphereGeometry(2, 16, 12);
+    this.lensShape.applyMatrix(new THREE.Matrix4().makeScale(3, 0.1, 1.25));
 
-    this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
 
     this.lensMesh = new THREE.Mesh(this.lensShape, this.lensMat);
     this.lensMesh.position.y = -this.lensHeight - this.startY;
@@ -40,9 +40,9 @@ class SimpleLens extends ColumnComponent{
     //1
     rayShape.vertices.push(new THREE.Vector3(0, -this.lensHeight - this.startY, this.depth, 0));
     //2
-    rayShape.vertices.push(new THREE.Vector3(-this.width, -this.lensHeight - this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(-this.radius, -this.lensHeight - this.startY, 0));
     //3
-    rayShape.vertices.push(new THREE.Vector3(this.width, -this.lensHeight - this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.radius, -this.lensHeight - this.startY, 0));
     //4
     rayShape.vertices.push(new THREE.Vector3(0,-this.lensHeight - this.startY, -this.depth));
     //5
