@@ -78,8 +78,13 @@ class Column{
 
 
   addOverhangLens(focal, lensHeight, delta, title){
-    let newComp = new OverhangLens(focal, this.getStartY(), this.radius, 0, lensHeight, this.scene, title, delta);
-    this.components.push(newComp);
+    if (this.components[this.components.length - 1] instanceof LowerObjectiveLens){
+      let xVal = this.components[this.components.length - 1].getBottomX();
+      let newComp = new OverhangLens(focal, this.getStartY(), this.radius, 0, lensHeight, this.scene, title, delta, xVal);
+      this.components.push(newComp);
+    } else {
+      throw new Error('Can\'t place overhang lens after anything but lower objective lens');
+    }
   }
 
   addSpecimen(title){
