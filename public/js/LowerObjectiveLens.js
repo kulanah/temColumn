@@ -30,14 +30,14 @@ class LowerObjectiveLens extends SimpleLens{
     //4 
     rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.lensHeight, 0));
     //5
-    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius / 2, -this.startY - this.lensHeight, this.radius));
+    rayShape.vertices.push(new THREE.Vector3(this.innerLeft - this.radius / 2, -this.startY - this.lensHeight, this.radius / 2));
 
     //6 
     rayShape.vertices.push(new THREE.Vector3(this.innerRight, -this.startY - this.lensHeight, 0));
     //7 
     rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius, -this.startY - this.lensHeight, 0));
     //8
-    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius / 2, -this.startY - this.lensHeight, this.radius));
+    rayShape.vertices.push(new THREE.Vector3(this.innerRight + this.radius / 2, -this.startY - this.lensHeight, this.radius / 2));
 
     //9
     rayShape.vertices.push(new THREE.Vector3(this.innerLeft, -this.startY - this.lensHeight - this.focalLength, 0));
