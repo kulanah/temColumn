@@ -71,12 +71,14 @@ class MicroscopeColumn {
     let zVal = 10;
 
     // let keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 100%, 100%)'), 1);
-    this.keyLight = new THREE.SpotLight(new THREE.Color('hsl(0, 100%, 100%)'), 5, 20);
-    this.keyLight.position.set(0, -0.1, 10);
+    this.keyLight = new THREE.SpotLight(new THREE.Color(0,100,0), 5, 20);
+    this.keyLight.position.set(0, -0.1, 18);
     this.keyLight.target.position.set = (0,-10,0);
     this.keyLight.angle = 0.2;
     this.keyLight.penumbra = 1;
     this.keyLight.decay = 2;
+    this.keyLight.scale.x = 4;
+    this.keyLight.scale.z = 5;
 
 
     this.pointLight = new THREE.PointLight('#ffd7b8', 0.5);
@@ -95,8 +97,8 @@ class MicroscopeColumn {
     topLight.position.set(0, 10, 0).normalize();
 
 
-    let keyHelper = new THREE.SpotLightHelper(this.keyLight);
-    let pointHelper = new THREE.PointLightHelper(this.pointLight);
+    // let keyHelper = new THREE.SpotLightHelper(this.keyLight);
+    // let pointHelper = new THREE.PointLightHelper(this.pointLight);
 
     // this.scene.add(keyHelper);
     // this.scene.add(pointHelper);
