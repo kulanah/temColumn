@@ -24,7 +24,6 @@ class SimpleLens extends ColumnComponent{
 
     this.lensMat = new THREE.MeshBasicMaterial({color: 0xffff00, transparent: true, opacity: 0.7, wireframe: false});
   }
-  //a5f2f3
 
 
   drawLens(){
@@ -75,9 +74,9 @@ class SimpleLens extends ColumnComponent{
   }
 
 
-  addAperture(percent){
-    this.apertures.push(new Aperture(this.radius, this.scene, 'Aperture', percent, this.lensHeight, this.radius, this.startY));
-    this.radius = this.baseRadius * percent;
+  addAperture(height, width, title){
+    this.apertures.push(new Aperture(this.radius, this.scene, title, height, width, this.lensHeight, this.radius, this.startY));
+    this.radius = this.baseRadius * width; 
   }
 
 

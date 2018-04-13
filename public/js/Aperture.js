@@ -1,5 +1,5 @@
 class Aperture extends ColumnComponent{
-  constructor(radius, scene, title, heightPercent, lensHeight, lensRadius, lensStart){
+  constructor(radius, scene, title, heightPercent, widthPercent, lensHeight, lensRadius, lensStart){
     super(0, radius, scene, title, 0);
 
     this.heightPercent = heightPercent;

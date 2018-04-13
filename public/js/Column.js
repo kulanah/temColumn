@@ -127,9 +127,9 @@ class Column{
   }
 
 
-  addAperture(lensNum, heightPercent){
+  addAperture(lensNum, heightPercent, widthPercent, name){
     if (this.components[lensNum]){
-      this.components[lensNum].addAperture(heightPercent);
+      this.components[lensNum].addAperture(heightPercent, widthPercent, name);
     } else {
       throw new Error ('The component you\'re trying to add a apperture for doesn\'t exist');
     }
