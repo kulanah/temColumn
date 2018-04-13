@@ -3,22 +3,20 @@ class Aperture extends ColumnComponent{
     super(0, radius, scene, title, 0);
 
     this.heightPercent = heightPercent;
+    this.widthPercent = widthPercent;
     this.lensStart = lensStart;
     this.lensHeight = lensHeight;
     this.lensRadius = lensRadius;
+    this.apertureDepth = radius * 1.75;
 
-    this.apertureDepth = this.radius * 2;
-
-    this.baseLens = this.lensRadius;
+    this.baseLensRadius = this.lensRadius;
     
-    this.width = 5;
     this.baseApertureWidth = this.radius * 2;
 
-    this.startY = (this.lensHeight * this.heightPercent) + this.lensStart;
+    this.startY = (this.lensHeight * this.heightPercent);
     this.endY = this.startY + 0.5;
 
-    this.lensRadius = this.baseLens * this.heightPercent * this.heightPercent;
-
+    this.lensRadius = this.baseLensRadius * this.heightPercent * this.widthPercent;
   }
 
   draw(){
@@ -26,29 +24,20 @@ class Aperture extends ColumnComponent{
   }
 
   drawAperture(){
-
-
-    /*
-
-      apertureX = rayWidth + 1/2 apertureWidth
-
-
-
-    */
     let appertureMat = new THREE.MeshBasicMaterial({color: 0x5555cc});
 
-    let apertureWidth = this.baseApertureWidth; // TODO:  Minus some value based on 
-    let appertureLeft = new THREE.CubeGeometry(apertureWidth, 0.25, this.apertureDepth, 1, 1, 1);
+    let apertureWidth = this.baseApertureWidth; 
+    let appertureGeo = new THREE.CubeGeometry(apertureWidth, 0.25, this.apertureDepth, 1, 1, 1);
 
-    this.aperture1 = new THREE.Mesh(appertureLeft, appertureMat);
-    this.aperture1.position.y = -this.startY;
-    this.aperture1.position.x = -this.baseWidth + this.lensRadius;
+    this.aperture1 = new THREE.Mesh(appertureGeo, appertureMat);
+    this.aperture1.position.y = -this.startY - this.lensStart;
+    this.aperture1.position.x = -this.lensRadius * 1.8  - (0.5 * this.baseApertureWidth);
 
     this.scene.add(this.aperture1);
 
-    this.aperture2 = new THREE.Mesh(appertureLeft, appertureMat);
-    this.aperture2.position.y = -this.startY;
-    this.aperture2.position.x = this.lensRadius + this.width / 2;
+    this.aperture2 = new THREE.Mesh(appertureGeo, appertureMat);
+    this.aperture2.position.y = -this.startY - this.lensStart;
+    this.aperture2.position.x = this.lensRadius * 1.8 + (0.5 * this.baseApertureWidth);
 
     this.scene.add(this.aperture2);
   }
@@ -60,11 +49,11 @@ class Aperture extends ColumnComponent{
 
 
   updateWidth(newWidth){
-    // this.clear();
-    // this.lensRadius = this.baseLens * (1 - newWidth) / 2;
-  }
-
-  getNewRadius(){
-    return this.heightPercent;
+    this.clear();
+    this.widthPercent = newWidth;
+    this.lensRadius = this.baseLensRadius * this.heightPercent * this.widthPercent;
+    if (newWidth === 0){
+      return true;
+    }
   }
 }
