@@ -8,6 +8,11 @@ class SimpleLens extends ColumnComponent{
     this.lensHeight = lensHeight;
     this.endY = this.startY + this.focalLength + this.lensHeight;
 
+
+    this.baseRadius = radius;
+
+    this.apertures = [];
+
     this.faceMat = new THREE.MeshPhongMaterial({
       color: 0xff69b4, 
       wireframe: false, 
@@ -17,8 +22,10 @@ class SimpleLens extends ColumnComponent{
       wireframe: true, 
     });
 
-    this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
+    this.lensMat = new THREE.MeshBasicMaterial({color: 0xffff00, transparent: true, opacity: 0.7, wireframe: false});
   }
+  //a5f2f3
+
 
   drawLens(){
     this.lensShape = new THREE.SphereGeometry(2, 16, 12);
@@ -30,10 +37,10 @@ class SimpleLens extends ColumnComponent{
 
     this.scene.add(this.lensMesh);
   }
+
   
   drawRays(){
     let rayShape = new THREE.Geometry();
-
 
     //0
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
@@ -67,15 +74,38 @@ class SimpleLens extends ColumnComponent{
     this.scene.add(this.wire);
   }
 
+
+  addAperture(percent){
+    this.apertures.push(new Aperture(this.radius, this.scene, 'Aperture', percent, this.lensHeight, this.radius, this.startY));
+    this.radius = this.baseRadius * percent;
+  }
+
+
+  updateAperture(newPercent){
+    //TODO: fix 
+    this.apertures[0].updateWidth(newPercent);
+    this.radius = this.baseRadius * (1 - newPercent);
+    this.clear();
+    this.draw();
+  }
+
+
   draw(){
     super.draw();
     this.drawLens();
     this.drawRays();
+    if (this.apertures){
+      for (let aperture in this.apertures){
+        this.apertures[aperture].draw();
+      }
+    }
   }
+
 
   getEndY(){
     return this.startY + this.lensHeight + this.focalLength;
   }
+
 
   updateStartY(newStart){
     this.clear();
@@ -84,6 +114,7 @@ class SimpleLens extends ColumnComponent{
     this.lensHeight += startDiff;
     this.draw();
   }
+
 
   clear(){
     super.clear();
@@ -95,6 +126,7 @@ class SimpleLens extends ColumnComponent{
     this.ray = null;
   }
 
+
   updateFocalLength(newLen){
     this.clear();
 
@@ -102,5 +134,4 @@ class SimpleLens extends ColumnComponent{
     this.rayShape = null;
     this.draw();
   }
-
 }
