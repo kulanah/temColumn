@@ -146,8 +146,22 @@ class Column{
 
 
   draw(){
+    var blocked = false;
     for (let i = 0; i < this.components.length; ++i){
-      this.components[i].draw();
+      if (!blocked){
+        blocked = this.components[i].draw();
+        if (blocked === undefined){ 
+          blocked = false;
+        }
+      } else {
+        this.components[i].drawLens();
+      }
+    }
+  }
+
+  clear(){
+    for (let i = 0; i < this.components.length; ++i){
+      this.components[i].clear();
     }
   }
 
@@ -175,9 +189,9 @@ class Column{
   }
 
   updateAperture(lensNum, newWidth){
-    if (this.components[lensNum]){
-      this.components[lensNum].updateAperture(newWidth);
-    }
+    this.components[lensNum].updateAperture(newWidth);
+    this.clear();
+    this.draw();
   }
 
 
