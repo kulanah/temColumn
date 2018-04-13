@@ -71,6 +71,41 @@ class SimpleLens extends ColumnComponent{
 
     this.scene.add(this.ray);
     this.scene.add(this.wire);
+
+    return false;
+  }
+
+  drawRaysWithApertures(){
+    let rayShape = new THREE.Geometry();
+
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.apertures[0].startY, this.depth));
+    rayShape.vertices.push(new THREE.Vector3(-this.baseRadius, -this.startY - this.apertures[0].startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.baseRadius, -this.startY - this.apertures[0].startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(-this.radius, -this.startY - this.apertures[0].startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(this.radius, -this.startY - this.apertures[0].startY, 0));
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.lensHeight, 0));
+
+    rayShape.faces.push(new THREE.Face3(0, 2, 1));
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
+    if (this.radius !== 0){
+      rayShape.faces.push(new THREE.Face3(4, 6, 1));
+      rayShape.faces.push(new THREE.Face3(6, 5, 1));
+    }
+
+    rayShape.computeFaceNormals();
+    rayShape.computeVertexNormals();
+    this.ray = new THREE.Mesh(rayShape, this.faceMat);
+    this.wire = new THREE.Mesh(rayShape, this.frameMat);
+
+    this.scene.add(this.ray);
+    this.scene.add(this.wire);
+
+
+    if (this.radius === 0){
+      return true;
+    }
+    return false;
   }
 
 
@@ -81,22 +116,22 @@ class SimpleLens extends ColumnComponent{
 
 
   updateAperture(newPercent){
-    //TODO: fix 
     this.apertures[0].updateWidth(newPercent);
-    this.radius = this.baseRadius * (1 - newPercent);
+    this.radius = this.baseRadius * newPercent;
     this.clear();
-    this.draw();
   }
 
 
   draw(){
     super.draw();
     this.drawLens();
-    this.drawRays();
-    if (this.apertures){
+    if (this.apertures[0]){
       for (let aperture in this.apertures){
         this.apertures[aperture].draw();
       }
+      return this.drawRaysWithApertures();
+    } else {
+      return this.drawRays();
     }
   }
 
