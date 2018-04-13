@@ -12,10 +12,10 @@ class Screen extends ColumnComponent{
       color: 0xf4a1c8,
       wireframe: true, 
     });
+    this.rayGeo.applyMatrix(new THREE.Matrix4().makeScale(1.5, 1,  0.5));
   }
 
   drawRays(){
-    this.rayGeo.applyMatrix(new THREE.Matrix4().makeScale(1.5, 1,  0.5));
     this.rayMesh = new THREE.Mesh(this.rayGeo, this.faceMat);
     this.rayMesh.position.y = -this.startY - this.focalLength / 2;
     this.scene.add(this.rayMesh);
@@ -43,12 +43,10 @@ class Screen extends ColumnComponent{
     this.scene.add(this.ringMesh);
     this.scene.add(this.screenMesh);
     this.scene.add(this.innerringMesh);
-
-    
-
   }
   
   draw(){
+    console.log(this);
     this.drawRays();
     this.drawScreen();
   }
