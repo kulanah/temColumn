@@ -187,8 +187,9 @@ class SimpleLens extends ColumnComponent{
     this.scene.remove(this.ray);
     this.scene.remove(this.wire);
 
-    this.scene.reove
-
+    if (this.apertures[0] !== undefined){
+      this.apertures[0].clear();
+    }
     this.ray = null;
   }
 
