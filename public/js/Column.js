@@ -153,9 +153,7 @@ class Column{
         if (blocked === undefined){ 
           blocked = false;
         }
-      } else {
-        this.components[i].drawLens();
-      }
+      } 
     }
   }
 
