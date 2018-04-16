@@ -18,9 +18,10 @@ class Aperture extends ColumnComponent{
     this.endY = this.startY + 0.5;
 
 
-    console.log('baseLensRad: ' + this.baseLensRadius);
-    console.log('heightPercent: ' + this.heightPercent);
-    console.log('widthPercent: ' + this.widthPercent);
+    // console.log('baseLensRad: ' + this.baseLensRadius);
+    // console.log('heightPercent: ' + this.heightPercent);
+    // console.log('widthPercent: ' + this.widthPercent);
+    // console.log('lensStart: ' + this.lensStart);
     this.lensRadius = this.baseLensRadius * (1 - this.heightPercent) * this.widthPercent;
   }
 
@@ -36,7 +37,7 @@ class Aperture extends ColumnComponent{
 
     this.aperture1 = new THREE.Mesh(appertureGeo, appertureMat);
     this.aperture1.position.y = -this.startY;
-    console.log('lensRadius: ' +  this.lensRadius);
+    // console.log('lensRadius: ' +  this.lensRadius);
     this.aperture1.position.x = -this.lensRadius * 1.05  - (0.5 * this.baseApertureWidth);
 
     this.scene.add(this.aperture1);

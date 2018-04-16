@@ -45,7 +45,7 @@ class MicroscopeColumn {
     this.initColumn();
     this.initBackground();
     this.controls.addEventListener('change', this.render);
-    // this.initPositionChecker();
+    this.initPositionChecker();
   }
 
   initTitle(){
@@ -109,12 +109,13 @@ class MicroscopeColumn {
 
 
   initPositionChecker(){
-    let sphereGeo = new THREE.SphereGeometry(.01, 10, 10);
+    let sphereGeo = new THREE.SphereGeometry(0.1, 10, 10);
     let sphereMat = new THREE.MeshBasicMaterial({color: 0xff0000});
 
     this.sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    this.sphereMesh.position.y = -0.6;
-    this.sphereMesh.position.z = 6;
+    this.sphereMesh.position.y = -6.45;
+    this.sphereMesh.position.z = 0;
+    this.sphereMesh.position.x = 1.25;
     this.scene.add(this.  sphereMesh);
   }
 
