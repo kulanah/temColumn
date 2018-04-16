@@ -135,60 +135,6 @@ class SimpleLens extends ColumnComponent{
     rayShape.faces.push(new THREE.Face3(7,5,6));
     rayShape.faces.push(new THREE.Face3(6,10,7));
 
-    // rayShape.faces.push(new THREE.Face3(6,3,1));
-    // rayShape.faces.push(new THREE.Face3(6,1,5));
-    // rayShape.faces.push(new THREE.Face3(7,6,5));
-    // rayShape.faces.push(new THREE.Face3(3,6,9));
-    // rayShape.faces.push(new THREE.Face3(7,6,5));
-
-
-
-    let testLine = new THREE.Geometry();
-
-    testLine.vertices.push(new THREE.Vector3(this.baseRadius,-this.startY - this.lensHeight, 0));
-    testLine.vertices.push(new THREE.Vector3(0, -this.startY- this.lensHeight - this.focalLength, 0 ));
-
-    let newLine = new THREE.Line(testLine, new THREE.LineBasicMaterial({color: 0x00ff00}));
-    this.scene.add(newLine);
-
-
-
-    // //0
-    // rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
-    // //1
-    // rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.apertures[0].startY, this.depth));
-    // //2
-    // rayShape.vertices.push(new THREE.Vector3(-this.baseRadius, -this.startY - this.apertures[0].startY, 0));
-    // //3
-    // rayShape.vertices.push(new THREE.Vector3(this.baseRadius, -this.startY - this.apertures[0].startY, 0));
-    // //4
-    // rayShape.vertices.push(new THREE.Vector3(-this.radius, -this.startY - this.apertures[0].startY, 0));
-    // //5
-    // rayShape.vertices.push(new THREE.Vector3(this.radius, -this.startY - this.apertures[0].startY, 0));
-
-    // //6
-    // rayShape.vertices.push(new THREE.Vector3(endX, -this.startY - this.lensHeight, 0));
-    // //7
-    // rayShape.vertices.push(new THREE.Vector3(-endX, -this.startY - this.lensHeight, 0));
-    // //8
-    // rayShape.vertices.push(new  THREE.Vector3(0, -this.startY - this.lensHeight - this.focalLength, 0));
-
-    // //old 6
-    // // rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.lensHeight, 0));
-
-    // rayShape.faces.push(new THREE.Face3(0, 2, 1));
-    // rayShape.faces.push(new THREE.Face3(0, 1, 3));
-
-    // rayShape.faces.push(new THREE.Face3(0, 1, 3));
-    // rayShape.faces.push(new THREE.Face3(0, 1, 3));
-    // rayShape.faces.push(new THREE.Face3(0, 1, 3));
-    // if (this.radius !== 0){
-    //   rayShape.faces.push(new THREE.Face3(1, 7, 6));
-    //   rayShape.faces.push(new THREE.Face3(1, 4, 7));
-    //   rayShape.faces.push(new THREE.Face3(1, 6, 5));
-    //   rayShape.faces.push(new THREE.Face3(6, 7, 8));
-    // }
-
 
 
     rayShape.computeFaceNormals();
