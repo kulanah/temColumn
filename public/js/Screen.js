@@ -46,7 +46,6 @@ class Screen extends ColumnComponent{
   }
   
   draw(){
-    console.log(this);
     this.drawRays();
     this.drawScreen();
   }
