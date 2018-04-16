@@ -140,7 +140,7 @@ class SimpleLens extends ColumnComponent{
 
 
   addAperture(height, width, title){
-    this.apertures.push(new Aperture(this.radius, this.scene, title, height, width, this.lensHeight, this.radius, this.startY));
+    this.apertures.push(new Aperture(this.radius, this.scene, title, height, width, this.lensHeight, this.startY, this.focalLength));
     this.radius = this.baseRadius * width; 
   }
 
@@ -155,13 +155,13 @@ class SimpleLens extends ColumnComponent{
   draw(){
     super.draw();
     if (this.apertures[0]){
-      for (let aperture in this.apertures){
-        this.apertures[aperture].draw();
+      // for (let aperture in this.apertures){
+        this.apertures[0].draw();
       }
-      return this.drawRaysWithApertures();
-    } else {
+    //   return this.drawRaysWithApertures();
+    // } else {
       return this.drawRays();
-    }
+    // }
   }
 
 

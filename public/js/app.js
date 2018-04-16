@@ -184,7 +184,7 @@ class MicroscopeColumn {
     this.microscope.addSimpleLens(1.2, 4, 'Condensor Lens 1');
     this.microscope.addLabel(2, 2, 0.15);
     this.microscope.addLabel(2, 2, 0.3);
-    this.microscope.addAperture(2, 0.55, 1.0, 'Condesor 1 Aperture');
+    this.microscope.addAperture(2, 0.5, 1.0, 'Condesor 1 Aperture');
     this.microscope.addSimpleLens(1.2, 2, 'Condensor Lens 2');
     this.microscope.addLabel(3, 2, 0.9);
     this.microscope.addSimpleLens(0.5, 2, 'Minicondensor Lens');
