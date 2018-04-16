@@ -23,6 +23,8 @@ class SimpleLens extends ColumnComponent{
     });
 
     this.lensMat = new THREE.MeshBasicMaterial({color: 0xffff00, transparent: true, opacity: 0.7, wireframe: false});
+
+    this.drawLens();
   }
 
 
@@ -78,20 +80,48 @@ class SimpleLens extends ColumnComponent{
   drawRaysWithApertures(){
     let rayShape = new THREE.Geometry();
 
+    let rise = this.apertures[0].lensStart;
+    let run = this.radius;
+    let slope = rise / run;
+    let endX = this.lensHeight / slope;
+
+    //0
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
+    //1
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.apertures[0].startY, this.depth));
+    //2
     rayShape.vertices.push(new THREE.Vector3(-this.baseRadius, -this.startY - this.apertures[0].startY, 0));
+    //3
     rayShape.vertices.push(new THREE.Vector3(this.baseRadius, -this.startY - this.apertures[0].startY, 0));
+    //4
     rayShape.vertices.push(new THREE.Vector3(-this.radius, -this.startY - this.apertures[0].startY, 0));
+    //5
     rayShape.vertices.push(new THREE.Vector3(this.radius, -this.startY - this.apertures[0].startY, 0));
-    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.lensHeight, 0));
+
+    //6
+    rayShape.vertices.push(new THREE.Vector3(endX, -this.startY - this.lensHeight, 0));
+    //7
+    rayShape.vertices.push(new THREE.Vector3(-endX, -this.startY - this.lensHeight, 0));
+    //8
+    rayShape.vertices.push(new  THREE.Vector3(0, -this.startY - this.lensHeight - this.focalLength, 0));
+
+    //old 6
+    // rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.lensHeight, 0));
 
     rayShape.faces.push(new THREE.Face3(0, 2, 1));
     rayShape.faces.push(new THREE.Face3(0, 1, 3));
+
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
     if (this.radius !== 0){
-      rayShape.faces.push(new THREE.Face3(4, 6, 1));
-      rayShape.faces.push(new THREE.Face3(6, 5, 1));
+      rayShape.faces.push(new THREE.Face3(1, 7, 6));
+      rayShape.faces.push(new THREE.Face3(1, 4, 7));
+      rayShape.faces.push(new THREE.Face3(1, 6, 5));
+      rayShape.faces.push(new THREE.Face3(6, 7, 8));
     }
+
+
 
     rayShape.computeFaceNormals();
     rayShape.computeVertexNormals();
@@ -124,7 +154,6 @@ class SimpleLens extends ColumnComponent{
 
   draw(){
     super.draw();
-    this.drawLens();
     if (this.apertures[0]){
       for (let aperture in this.apertures){
         this.apertures[aperture].draw();
@@ -157,6 +186,9 @@ class SimpleLens extends ColumnComponent{
 
     this.scene.remove(this.ray);
     this.scene.remove(this.wire);
+
+    this.scene.reove
+
     this.ray = null;
   }
 

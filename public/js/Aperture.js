@@ -13,7 +13,7 @@ class Aperture extends ColumnComponent{
     
     this.baseApertureWidth = this.radius * 2;
 
-    this.startY = (this.lensHeight * this.heightPercent);
+    this.startY = (this.lensHeight * this.heightPercent) //+ lensStart;
     this.endY = this.startY + 0.5;
 
     this.lensRadius = this.baseLensRadius * this.heightPercent * this.widthPercent;
