@@ -7,6 +7,10 @@ $('#focalslider2').on('input', function(){
   column.updateFocalLength(3, this.value);
 });
 
+$('#apertureslider').on('input', function(){
+  column.updateAperture(2, this.value);
+});
+
 $('#rayradiusslider').on('input', function(){
   column.updateBotRadius(5, this.value);
 });

@@ -8,6 +8,11 @@ class SimpleLens extends ColumnComponent{
     this.lensHeight = lensHeight;
     this.endY = this.startY + this.focalLength + this.lensHeight;
 
+
+    this.baseRadius = radius;
+
+    this.apertures = [];
+
     this.faceMat = new THREE.MeshPhongMaterial({
       color: 0xff69b4, 
       wireframe: false, 
@@ -17,8 +22,11 @@ class SimpleLens extends ColumnComponent{
       wireframe: true, 
     });
 
-    this.lensMat = new THREE.MeshBasicMaterial({color: 0xa5f2f3, transparent: true, opacity: 0.7, wireframe: false});
+    this.lensMat = new THREE.MeshBasicMaterial({color: 0xffff00, transparent: true, opacity: 0.7, wireframe: false});
+
+    this.drawLens();
   }
+
 
   drawLens(){
     this.lensShape = new THREE.SphereGeometry(2, 16, 12);
@@ -30,10 +38,10 @@ class SimpleLens extends ColumnComponent{
 
     this.scene.add(this.lensMesh);
   }
+
   
   drawRays(){
     let rayShape = new THREE.Geometry();
-
 
     //0
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
@@ -65,17 +73,102 @@ class SimpleLens extends ColumnComponent{
 
     this.scene.add(this.ray);
     this.scene.add(this.wire);
+
+    return false;
   }
+
+  drawRaysWithApertures(){
+    let rayShape = new THREE.Geometry();
+
+    let rise = this.apertures[0].lensStart;
+    let run = this.radius;
+    let slope = rise / run;
+    let endX = this.lensHeight / slope;
+
+    //0
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
+    //1
+    rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.apertures[0].startY, this.depth));
+    //2
+    rayShape.vertices.push(new THREE.Vector3(-this.baseRadius, -this.startY - this.apertures[0].startY, 0));
+    //3
+    rayShape.vertices.push(new THREE.Vector3(this.baseRadius, -this.startY - this.apertures[0].startY, 0));
+    //4
+    rayShape.vertices.push(new THREE.Vector3(-this.radius, -this.startY - this.apertures[0].startY, 0));
+    //5
+    rayShape.vertices.push(new THREE.Vector3(this.radius, -this.startY - this.apertures[0].startY, 0));
+
+    //6
+    rayShape.vertices.push(new THREE.Vector3(endX, -this.startY - this.lensHeight, 0));
+    //7
+    rayShape.vertices.push(new THREE.Vector3(-endX, -this.startY - this.lensHeight, 0));
+    //8
+    rayShape.vertices.push(new  THREE.Vector3(0, -this.startY - this.lensHeight - this.focalLength, 0));
+
+    //old 6
+    // rayShape.vertices.push(new THREE.Vector3(0, -this.startY - this.lensHeight, 0));
+
+    rayShape.faces.push(new THREE.Face3(0, 2, 1));
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
+
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
+    rayShape.faces.push(new THREE.Face3(0, 1, 3));
+    if (this.radius !== 0){
+      rayShape.faces.push(new THREE.Face3(1, 7, 6));
+      rayShape.faces.push(new THREE.Face3(1, 4, 7));
+      rayShape.faces.push(new THREE.Face3(1, 6, 5));
+      rayShape.faces.push(new THREE.Face3(6, 7, 8));
+    }
+
+
+
+    rayShape.computeFaceNormals();
+    rayShape.computeVertexNormals();
+    this.ray = new THREE.Mesh(rayShape, this.faceMat);
+    this.wire = new THREE.Mesh(rayShape, this.frameMat);
+
+    this.scene.add(this.ray);
+    this.scene.add(this.wire);
+
+
+    if (this.radius === 0){
+      return true;
+    }
+    return false;
+  }
+
+
+  addAperture(height, width, title){
+    this.apertures.push(new Aperture(this.radius, this.scene, title, height, width, this.lensHeight, this.radius, this.startY));
+    this.radius = this.baseRadius * width; 
+  }
+
+
+  updateAperture(newPercent){
+    this.apertures[0].updateWidth(newPercent);
+    this.radius = this.baseRadius * newPercent;
+    this.clear();
+  }
+
 
   draw(){
     super.draw();
-    this.drawLens();
-    this.drawRays();
+    if (this.apertures[0]){
+      for (let aperture in this.apertures){
+        this.apertures[aperture].draw();
+      }
+      return this.drawRaysWithApertures();
+    } else {
+      return this.drawRays();
+    }
   }
+
 
   getEndY(){
     return this.startY + this.lensHeight + this.focalLength;
   }
+
 
   updateStartY(newStart){
     this.clear();
@@ -85,6 +178,7 @@ class SimpleLens extends ColumnComponent{
     this.draw();
   }
 
+
   clear(){
     super.clear();
     this.scene.remove(this.labelBox1);
@@ -92,8 +186,13 @@ class SimpleLens extends ColumnComponent{
 
     this.scene.remove(this.ray);
     this.scene.remove(this.wire);
+
+    if (this.apertures[0] !== undefined){
+      this.apertures[0].clear();
+    }
     this.ray = null;
   }
+
 
   updateFocalLength(newLen){
     this.clear();
@@ -102,5 +201,4 @@ class SimpleLens extends ColumnComponent{
     this.rayShape = null;
     this.draw();
   }
-
 }

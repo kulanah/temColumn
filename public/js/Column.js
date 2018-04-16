@@ -87,17 +87,20 @@ class Column{
     }
   }
 
+
   addSpecimen(title){
     let startY = this.getStartY();
     let newComp = new Specimen(startY, this.radius, this.scene, title);
     this.components.push(newComp);
   }
   
+
   addScreen(focalLength, title){
     let startY = this.getStartY();
     let newComp = new Screen(startY, focalLength, this.radius, this.scene, title);
     this.components.push(newComp);
   }
+
 
   getStartY(){
     if (this.components.length != 0){
@@ -105,6 +108,7 @@ class Column{
     }
     return 0;
   }
+
 
   addExtractorBeam(title){
     let startY = this.getStartY();
@@ -123,6 +127,15 @@ class Column{
   }
 
 
+  addAperture(lensNum, heightPercent, widthPercent, name){
+    if (this.components[lensNum]){
+      this.components[lensNum].addAperture(heightPercent, widthPercent, name);
+    } else {
+      throw new Error ('The component you\'re trying to add a apperture for doesn\'t exist');
+    }
+  }
+
+
   addLabel(lensNum, size, percentage){
     if (this.components[lensNum]){
       this.components[lensNum].addLabel(size, percentage);
@@ -133,8 +146,20 @@ class Column{
 
 
   draw(){
+    var blocked = false;
     for (let i = 0; i < this.components.length; ++i){
-      this.components[i].draw();
+      if (!blocked){
+        blocked = this.components[i].draw();
+        if (blocked === undefined){ 
+          blocked = false;
+        }
+      } 
+    }
+  }
+
+  clear(){
+    for (let i = 0; i < this.components.length; ++i){
+      this.components[i].clear();
     }
   }
 
@@ -159,6 +184,12 @@ class Column{
     if (this.components[lensNum + 1]){
       this.components[lensNum + 1].updateStartY(this.components[lensNum].getEndY());
     }
+  }
+
+  updateAperture(lensNum, newWidth){
+    this.components[lensNum].updateAperture(newWidth);
+    this.clear();
+    this.draw();
   }
 
 

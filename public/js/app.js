@@ -17,7 +17,7 @@ class MicroscopeColumn {
 
       this.sceneHeight = this.window.height() - 35;
 
-      this.delta = -0.1;
+      this.delta = -0.2;
 
       this.init();
       this.animate();
@@ -71,12 +71,14 @@ class MicroscopeColumn {
     let zVal = 10;
 
     // let keyLight = new THREE.DirectionalLight(new THREE.Color('hsl(0, 100%, 100%)'), 1);
-    this.keyLight = new THREE.SpotLight(new THREE.Color('hsl(0, 100%, 100%)'), 5, 20);
-    this.keyLight.position.set(0, -0.1, 10);
+    this.keyLight = new THREE.SpotLight(new THREE.Color(0,100,0), 5, 20);
+    this.keyLight.position.set(0, -0.1, 18);
     this.keyLight.target.position.set = (0,-10,0);
     this.keyLight.angle = 0.2;
     this.keyLight.penumbra = 1;
     this.keyLight.decay = 2;
+    this.keyLight.scale.x = 4;
+    this.keyLight.scale.z = 5;
 
 
     this.pointLight = new THREE.PointLight('#ffd7b8', 0.5);
@@ -95,8 +97,8 @@ class MicroscopeColumn {
     topLight.position.set(0, 10, 0).normalize();
 
 
-    let keyHelper = new THREE.SpotLightHelper(this.keyLight);
-    let pointHelper = new THREE.PointLightHelper(this.pointLight);
+    // let keyHelper = new THREE.SpotLightHelper(this.keyLight);
+    // let pointHelper = new THREE.PointLightHelper(this.pointLight);
 
     // this.scene.add(keyHelper);
     // this.scene.add(pointHelper);
@@ -156,14 +158,10 @@ class MicroscopeColumn {
   }
 
   moveLight(){ 
-    if (this.keyLight.position.y < -28){
+    if (this.keyLight.position.y < -35){
       this.keyLight.position.y = 4;
-      // this.delta = 0.1;
-    } else if (this.keyLight.position.y > 1){
-      this.delta = -0.1;
-    }
+    } 
 
-    // console.log(this.keyLight.position.y);
     this.scene.remove(this.keyLight);
     this.scene.remove(this.keyLight.target);
     let x = this.keyLight.position.x;
@@ -174,14 +172,11 @@ class MicroscopeColumn {
     this.scene.add(this.keyLight);
     this.scene.add(this.keyLight.target);
 
-    // this.sphereMesh.position.y = y;
     this.render();
   }
 
   createLenses(){
     //TODO pull this out to public API and create public access ot this section
-    // this.microscope.addSimpleLens(2, 5, 'Second Lens');
-    // this.microscope.addSimpleLens(2, 5, 'Third Lens');
     this.microscope.addGun('Electron Gun');
     this.microscope.addExtractorBeam('Electron Extractor');
     this.microscope.addLabel(1, 1, 0.2);
@@ -189,6 +184,7 @@ class MicroscopeColumn {
     this.microscope.addSimpleLens(1.2, 4, 'Condensor Lens 1');
     this.microscope.addLabel(2, 2, 0.15);
     this.microscope.addLabel(2, 2, 0.3);
+    this.microscope.addAperture(2, 0.55, 1.0, 'Condesor 1 Aperture');
     this.microscope.addSimpleLens(1.2, 2, 'Condensor Lens 2');
     this.microscope.addLabel(3, 2, 0.9);
     this.microscope.addSimpleLens(0.5, 2, 'Minicondensor Lens');
@@ -197,14 +193,14 @@ class MicroscopeColumn {
     this.microscope.addCylinderLens(1, 1, 'EDX Detector', 1);
     this.microscope.addSpecimen('Specimen');
     this.microscope.addLowerObjectiveLens(1, 1, 'Lower Objective Lens');
-    this.microscope.addOverhangLens(1, 3, 0.75, 'Diffraction Lens');
+    this.microscope.addOverhangLens(2, 2, 0.75, 'Diffraction Lens');
     this.microscope.addLabel(8, 2, 0.1);
     this.microscope.addLabel(8, 2, 0.2);
     this.microscope.addLabel(8, 2, 0.3);
     this.microscope.addLabel(8, 2, 0.4);
-    this.microscope.addAngledLens(1, 1, -2, -1, 'Fifth Lens');
-    this.microscope.addAngledLens(1, 1, -2, -1, 'Fifth Lens');
-    this.microscope.addAngledLens(1, 1, -2, -1, 'Fifth Lens');
+    this.microscope.addAngledLens(0.5, 0.5, -2, -1, 'Fifth Lens');
+    this.microscope.addAngledLens(0.5, 0.5, -2, -1, 'Fifth Lens');
+    this.microscope.addAngledLens(3, 1, -2, -1, 'Fifth Lens');
     this.microscope.addScreen(2, 'Screen');
 
     this.microscope.draw(); 
@@ -228,6 +224,11 @@ class MicroscopeColumn {
 
   updateBotRadius(lensNum, newRadPercent){
     this.microscope.updateBotRadius(lensNum, newRadPercent)
+    this.render();
+  }
+
+  updateAperture(lensNum, newWidthPercent){
+    this.microscope.updateAperture(lensNum, newWidthPercent);
     this.render();
   }
 
