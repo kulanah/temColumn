@@ -45,7 +45,7 @@ class MicroscopeColumn {
     this.initColumn();
     this.initBackground();
     this.controls.addEventListener('change', this.render);
-    // this.initPositionChecker();
+    this.initPositionChecker();
   }
 
   initTitle(){
@@ -109,12 +109,13 @@ class MicroscopeColumn {
 
 
   initPositionChecker(){
-    let sphereGeo = new THREE.SphereGeometry(.01, 10, 10);
+    let sphereGeo = new THREE.SphereGeometry(0.1, 10, 10);
     let sphereMat = new THREE.MeshBasicMaterial({color: 0xff0000});
 
     this.sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
-    this.sphereMesh.position.y = -0.6;
-    this.sphereMesh.position.z = 6;
+    this.sphereMesh.position.y = -6.45;
+    this.sphereMesh.position.z = 0;
+    this.sphereMesh.position.x = 1.25;
     this.scene.add(this.  sphereMesh);
   }
 
@@ -184,7 +185,7 @@ class MicroscopeColumn {
     this.microscope.addSimpleLens(1.2, 4, 'Condensor Lens 1');
     this.microscope.addLabel(2, 2, 0.15);
     this.microscope.addLabel(2, 2, 0.3);
-    this.microscope.addAperture(2, 0.55, 1.0, 'Condesor 1 Aperture');
+    this.microscope.addAperture(2, 0.5, 1.0, 'Condesor 1 Aperture');
     this.microscope.addSimpleLens(1.2, 2, 'Condensor Lens 2');
     this.microscope.addLabel(3, 2, 0.9);
     this.microscope.addSimpleLens(0.5, 2, 'Minicondensor Lens');
