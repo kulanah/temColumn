@@ -199,8 +199,6 @@ class SimpleLens extends ColumnComponent{
 
   clear(){
     super.clear();
-    this.scene.remove(this.labelBox1);
-    this.scene.remove(this.labelBox2);
 
     this.scene.remove(this.ray);
     this.scene.remove(this.wire);
