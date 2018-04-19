@@ -77,6 +77,7 @@ class SimpleLens extends ColumnComponent{
     return false;
   }
 
+
   drawRaysWithApertures(){
     let rayShape = new THREE.Geometry();
 
@@ -84,18 +85,7 @@ class SimpleLens extends ColumnComponent{
     let run = this.baseRadius;
     let slope = rise / run;
 
-    console.log(this.apertures[0].lensStart + this.startY);
     let endX = (this.apertures[0].startY - this.startY) * slope;
-
-    console.log('startPoint: ' + this.startY);
-    console.log('lensHeight: ' + this.lensHeight);
-    console.log('apertureStart: ' + (this.apertures[0].startY - this.startY));
-    
-    console.log('rise: ' + rise); 
-    console.log('baseRadius: ' + this.baseRadius);
-    console.log('radisu: ' + this.radius);
-    console.log('endX: ' + endX);
-    console.log('');
 
     //0
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
