@@ -1,9 +1,9 @@
 'use strict';
 class ColumnComponent{
-  constructor(startY, width, scene, title, endY){
+  constructor(startY, radius, scene, title, endY){
 
     this.startY = startY;
-    this.width = width;
+    this.radius = radius;
     this.scene = scene;
     this.title = title;
     this.endY = endY;

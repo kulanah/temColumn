@@ -1,11 +1,11 @@
 'use strict';
 class Gun extends ColumnComponent{
-  constructor(startY, width, scene, title, endY){
-    super(startY, width, scene, title, endY);
+  constructor(startY, radius, scene, title, endY){
+    super(startY, radius, scene, title, endY);
   }
 
   drawGun(){
-    this.gunGeo = new THREE.CylinderGeometry(this.width, this.width, this.endY - this.startY, 8, 1);
+    this.gunGeo = new THREE.CylinderGeometry(this.radius * 2, this.radius * 2, this.endY - this.startY, 8, 1);
     this.gunMat = new THREE.MeshPhongMaterial({color: 0xaaaaaa});
 
     this.gunMesh = new THREE.Mesh(this.gunGeo, this.gunMat);
