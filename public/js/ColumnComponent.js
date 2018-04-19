@@ -17,6 +17,7 @@ class ColumnComponent{
     let yPos = height + this.startY;
 
     this.labels.push(new Label(this.radius * 1.5 , 0.25 * size, this.scene, yPos));
+    this.labels[this.labels.length - 1].draw();
   }
 
 
@@ -38,18 +39,18 @@ class ColumnComponent{
 
 
   draw(){
-    let i = this.labels.length - 1;
-    while(i >= 0){
-      this.labels[i].draw();
-      --i;
-    }
+    // let i = this.labels.length - 1;
+    // while(i >= 0){
+    //   this.labels[i].draw();
+    //   --i;
+    // }
   }
 
   clear(){
-    let i = this.labels.length;
-    while(i > 0){
-      this.labels[i - 1].clear();
-      --i;
-    }
+    // let i = this.labels.length;
+    // while(i > 0){
+    //   this.labels[i - 1].clear();
+    //   --i;
+    // }
   }
 }
