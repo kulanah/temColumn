@@ -59,6 +59,7 @@ class CylinderLens extends SimpleLens{
     this.scene.remove(this.rayMesh);
     this.scene.remove(this.wireMesh);
     this.scene.remove(this.topWireMesh);
+    this.scene.remove(this.topRay);
     this.scene.remove(this.lensMesh);
   }
 

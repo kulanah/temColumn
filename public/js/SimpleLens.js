@@ -77,6 +77,7 @@ class SimpleLens extends ColumnComponent{
     return false;
   }
 
+
   drawRaysWithApertures(){
     let rayShape = new THREE.Geometry();
 
@@ -84,15 +85,7 @@ class SimpleLens extends ColumnComponent{
     let run = this.baseRadius;
     let slope = rise / run;
 
-    console.log(this.apertures[0].lensStart);
-    console.log(this.apertures[0].lensStart + this.startY);
     let endX = (this.apertures[0].startY - this.startY) * slope;
-
-    console.log('rise: ' + rise); 
-    console.log('baseRadius: ' + this.baseRadius);
-    console.log('radisu: ' + this.radius);
-    console.log(endX)
-
 
     //0
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
@@ -117,7 +110,6 @@ class SimpleLens extends ColumnComponent{
     //10
     rayShape.vertices.push(new THREE.Vector3(0, -this.apertures[0].startY, this.depth));
 
-
     rayShape.faces.push(new THREE.Face3(0,2,1));
     rayShape.faces.push(new THREE.Face3(0,1,3));
     rayShape.faces.push(new THREE.Face3(0,4,2));
@@ -125,15 +117,17 @@ class SimpleLens extends ColumnComponent{
     rayShape.faces.push(new THREE.Face3(5,1,2));
     rayShape.faces.push(new THREE.Face3(5,1,8));
     rayShape.faces.push(new THREE.Face3(8,1,2));
-    rayShape.faces.push(new THREE.Face3(1,5,10));
-    rayShape.faces.push(new THREE.Face3(6,1,10));
     rayShape.faces.push(new THREE.Face3(6,1,9));
     rayShape.faces.push(new THREE.Face3(6,3,1));
     rayShape.faces.push(new THREE.Face3(3,1,9));
     rayShape.faces.push(new THREE.Face3(3,6,9));
-    rayShape.faces.push(new THREE.Face3(7,10,5));
-    rayShape.faces.push(new THREE.Face3(7,5,6));
-    rayShape.faces.push(new THREE.Face3(6,10,7));
+    if (this.radius !== 0){
+      rayShape.faces.push(new THREE.Face3(6,1,10));
+      rayShape.faces.push(new THREE.Face3(1,5,10));
+      rayShape.faces.push(new THREE.Face3(7,10,5));
+      rayShape.faces.push(new THREE.Face3(7,5,6));
+      rayShape.faces.push(new THREE.Face3(6,10,7));
+    }
 
 
 
@@ -145,7 +139,6 @@ class SimpleLens extends ColumnComponent{
     this.scene.add(this.ray);
     this.scene.add(this.wire);
 
-
     if (this.radius === 0){
       return true;
     }
@@ -155,7 +148,7 @@ class SimpleLens extends ColumnComponent{
 
   addAperture(height, width, title){
     this.apertures.push(new Aperture(this.radius, this.scene, title, height, width, this.lensHeight, this.startY, this.focalLength));
-    this.radiusAtHeight = this.baseRadius * height;
+    this.radiusAtHeight = this.baseRadius * (1 - height);
     this.radius = this.radiusAtHeight * width; 
   }
 
@@ -196,8 +189,6 @@ class SimpleLens extends ColumnComponent{
 
   clear(){
     super.clear();
-    this.scene.remove(this.labelBox1);
-    this.scene.remove(this.labelBox2);
 
     this.scene.remove(this.ray);
     this.scene.remove(this.wire);

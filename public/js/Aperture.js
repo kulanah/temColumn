@@ -18,9 +18,9 @@ class Aperture extends ColumnComponent{
     this.endY = this.startY + 0.5;
 
 
-    // console.log('baseLensRad: ' + this.baseLensRadius);
-    // console.log('heightPercent: ' + this.heightPercent);
-    // console.log('widthPercent: ' + this.widthPercent);
+    console.log('baseLensRad: ' + this.baseLensRadius);
+    console.log('heightPercent: ' + this.heightPercent);
+    console.log('widthPercent: ' + this.widthPercent);
     // console.log('lensStart: ' + this.lensStart);
     this.lensRadius = this.baseLensRadius * (1 - this.heightPercent) * this.widthPercent;
   }
@@ -58,7 +58,7 @@ class Aperture extends ColumnComponent{
   updateWidth(newWidth){
     this.clear();
     this.widthPercent = newWidth;
-    this.lensRadius = this.baseLensRadius * this.heightPercent * this.widthPercent;
+    this.lensRadius = this.baseLensRadius * (1 - this.heightPercent) * this.widthPercent;
     if (newWidth === 0){
       return true;
     }

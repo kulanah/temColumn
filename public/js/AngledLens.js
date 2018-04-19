@@ -100,12 +100,20 @@ class AngledLens extends SimpleLens{
     super.updateFocalLength(newLen);
   }
 
-  clearScene(){
+  clear(){
+    super.clear();
     this.scene.remove(this.ray);
-    this.ray = null;
+    this.ray = null;    this.scene.remove(this.ray2);
+    this.ray2 = null;
 
     this.scene.remove(this.ray2);
     this.ray2 = null;
+
+    this.scene.remove(this.wire1);
+    this.wire1 = null;
+
+    this.scene.remove(this.wire2);
+    this.wire2 = null;
   }
 
   updateStartY(newStart){

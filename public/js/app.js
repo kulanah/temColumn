@@ -45,7 +45,7 @@ class MicroscopeColumn {
     this.initColumn();
     this.initBackground();
     this.controls.addEventListener('change', this.render);
-    this.initPositionChecker();
+    // this.initPositionChecker();
   }
 
   initTitle(){
@@ -188,6 +188,7 @@ class MicroscopeColumn {
     this.microscope.addAperture(2, 0.5, 1.0, 'Condesor 1 Aperture');
     this.microscope.addSimpleLens(1.2, 2, 'Condensor Lens 2');
     this.microscope.addLabel(3, 2, 0.9);
+    this.microscope.addAperture(3, 0.01, 1.0, 'Condesor 2 Aperture');
     this.microscope.addSimpleLens(0.5, 2, 'Minicondensor Lens');
     this.microscope.addLabel(4, 2, 0.1);
     this.microscope.addLabel(4, 2, 0.3);
