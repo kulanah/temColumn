@@ -84,14 +84,18 @@ class SimpleLens extends ColumnComponent{
     let run = this.baseRadius;
     let slope = rise / run;
 
-    console.log(this.apertures[0].lensStart);
     console.log(this.apertures[0].lensStart + this.startY);
     let endX = (this.apertures[0].startY - this.startY) * slope;
 
+    console.log('startPoint: ' + this.startY);
+    console.log('lensHeight: ' + this.lensHeight);
+    console.log('apertureStart: ' + (this.apertures[0].startY - this.startY));
+    
     console.log('rise: ' + rise); 
     console.log('baseRadius: ' + this.baseRadius);
     console.log('radisu: ' + this.radius);
-    console.log(endX)
+    console.log('endX: ' + endX);
+    console.log('');
 
     //0
     rayShape.vertices.push(new THREE.Vector3(0, -this.startY, 0));
@@ -154,7 +158,7 @@ class SimpleLens extends ColumnComponent{
 
   addAperture(height, width, title){
     this.apertures.push(new Aperture(this.radius, this.scene, title, height, width, this.lensHeight, this.startY, this.focalLength));
-    this.radiusAtHeight = this.baseRadius * height;
+    this.radiusAtHeight = this.baseRadius * (1 - height);
     this.radius = this.radiusAtHeight * width; 
   }
 

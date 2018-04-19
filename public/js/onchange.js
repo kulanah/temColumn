@@ -11,6 +11,10 @@ $('#apertureslider').on('input', function(){
   column.updateAperture(2, this.value);
 });
 
+$('#aperture2slider').on('input', function(){
+  column.updateAperture(3, this.value);
+});
+
 $('#rayradiusslider').on('input', function(){
   column.updateBotRadius(5, this.value);
 });
