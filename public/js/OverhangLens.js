@@ -107,4 +107,12 @@ class OverhangLens extends SimpleLens{
   }
 
 
+  clear(){
+    this.scene.remove(this.bottomRay);
+    this.scene.remove(this.bottomWire);
+
+    this.scene.remove(this.ray);
+    this.scene.remove(this.wire);
+  }
+
 }
