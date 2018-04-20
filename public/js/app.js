@@ -227,7 +227,7 @@ class MicroscopeColumn {
   }
 
   updateBotRadius(lensNum, newRadPercent){
-    this.microscope.updateBotRadius(lensNum, newRadPercent)
+    this.microscope.updateBotRadius(lensNum, newRadPercent);
     this.render();
   }
 
