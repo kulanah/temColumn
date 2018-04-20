@@ -118,7 +118,7 @@ class MicroscopeColumn {
     this.sphereMesh.position.y = -6.45;
     this.sphereMesh.position.z = 0;
     this.sphereMesh.position.x = 1.25;
-    this.scene.add(this.  sphereMesh);
+    this.scene.add(this.sphereMesh);
   }
 
   initBackground(){
@@ -260,5 +260,7 @@ class MicroscopeColumn {
   }
 
 }
-const column = new MicroscopeColumn('testThree');
-export { column };
+
+export {MicroscopeColumn};
+// const column = new MicroscopeColumn('testThree');
+// export { column };
