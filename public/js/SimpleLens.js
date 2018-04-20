@@ -1,4 +1,7 @@
 'use strict';
+import { ColumnComponent } from './ColumnComponent.js';
+import { Aperture } from './Aperture.js';
+
 class SimpleLens extends ColumnComponent{
   constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title){
     super(startY, radius, scene, title);
@@ -208,3 +211,5 @@ class SimpleLens extends ColumnComponent{
     this.draw();
   }
 }
+
+export { SimpleLens };

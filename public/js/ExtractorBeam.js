@@ -1,4 +1,5 @@
 'use strict';
+import { ColumnComponent } from './ColumnComponent.js';
 class ExtractorBeam extends ColumnComponent{
   constructor(radius, scene, title, startY){
     let height = 1.5;
@@ -74,3 +75,4 @@ class ExtractorBeam extends ColumnComponent{
   }
   
 }
+export { ExtractorBeam };

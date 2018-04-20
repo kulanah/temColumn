@@ -1,4 +1,6 @@
 'use strict';
+
+import { Column } from './Column.js';
 class MicroscopeColumn {
   constructor(divId){
     if (document.getElementById(divId) === null){
@@ -225,7 +227,7 @@ class MicroscopeColumn {
   }
 
   updateBotRadius(lensNum, newRadPercent){
-    this.microscope.updateBotRadius(lensNum, newRadPercent)
+    this.microscope.updateBotRadius(lensNum, newRadPercent);
     this.render();
   }
 
@@ -258,3 +260,5 @@ class MicroscopeColumn {
   }
 
 }
+const column = new MicroscopeColumn('testThree');
+export { column };

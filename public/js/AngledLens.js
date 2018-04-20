@@ -1,4 +1,5 @@
 'use strict';
+import { SimpleLens } from './SimpleLens.js';
 class AngledLens extends SimpleLens{
   constructor(focalLength, startY, radius, centerPoint, lensHeight, x1, x2, scene, title){
     super(focalLength, startY, radius, centerPoint, lensHeight, scene, title);
@@ -127,3 +128,5 @@ class AngledLens extends SimpleLens{
     return this.startY + this.lensHeight + this.focalLength;
   }
 }
+
+export { AngledLens };

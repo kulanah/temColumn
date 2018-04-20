@@ -1,4 +1,5 @@
 'use strict';
+import { SimpleLens } from './SimpleLens.js';
 class CylinderLens extends SimpleLens{
   //use radius as top radius
   constructor(focalLength, startY, lensHeight, radius, scene, title, radiusBottom){
@@ -73,3 +74,5 @@ class CylinderLens extends SimpleLens{
     return this.lensHeight + this.height + this.startY;
   }
 }
+
+export { CylinderLens };
