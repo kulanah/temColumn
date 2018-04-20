@@ -1,4 +1,15 @@
 'use strict';
+
+import { AngledLens } from './AngledLens.js';
+import { CylinderLens } from './CylinderLens.js';
+import { ExtractorBeam } from './ExtractorBeam.js';
+import { Gun } from './Gun';
+import { LowerObjectiveLens } from './LowerObjectiveLens.js';
+import { OverhangLens } from './OverhangLens.js';
+import { Screen } from './Screen.js';
+import { SimpleLens } from './SimpleLens.js';
+import { Specimen } from './Specimen.js';
+
 class Column{
   constructor(height, scene){
     this.components = new Array();
@@ -206,3 +217,5 @@ class Column{
     this.components[lensNum].updateBotRadius(newRadiusPercentage);
   }
 }
+
+export { Column };

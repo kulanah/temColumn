@@ -1,3 +1,4 @@
+import { SimpleLens } from './SimpleLens.js';
 class OverhangLens extends SimpleLens{
   constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title, delta, xStart){
     super(focalLength, startY, radius, centerPoint, lensHeight, scene, title);
@@ -114,5 +115,6 @@ class OverhangLens extends SimpleLens{
     this.scene.remove(this.ray);
     this.scene.remove(this.wire);
   }
-
 }
+
+export { OverhangLens };

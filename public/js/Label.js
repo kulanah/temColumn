@@ -24,10 +24,6 @@ class Label{
     this.scene.remove(this.label1);
     this.scene.remove(this.label2);
   }
-
-
-
-
-
-
 }
+
+export { Label };

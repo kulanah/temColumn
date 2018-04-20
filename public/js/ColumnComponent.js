@@ -1,4 +1,5 @@
 'use strict';
+import { Label } from './Label.js';
 class ColumnComponent{
   constructor(startY, radius, scene, title, endY){
 
@@ -54,3 +55,5 @@ class ColumnComponent{
     // }
   }
 }
+
+export { ColumnComponent };

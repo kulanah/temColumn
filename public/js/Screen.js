@@ -1,3 +1,4 @@
+import { ColumnComponent } from './ColumnComponent.js';
 class Screen extends ColumnComponent{
   constructor(startY, focalLength, radius, scene, title){
     super(startY, radius, scene, title);
@@ -50,3 +51,5 @@ class Screen extends ColumnComponent{
     this.drawScreen();
   }
 }
+
+export { Screen };

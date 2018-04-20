@@ -1,3 +1,5 @@
+
+import { ColumnComponent } from './ColumnComponent.js';
 class Aperture extends ColumnComponent{
   constructor(radius, scene, title, heightPercent, widthPercent, lensHeight, lensStart, focalLength){
     super(0, radius, scene, title, 0);
@@ -64,3 +66,5 @@ class Aperture extends ColumnComponent{
     }
   }
 }
+
+export { Aperture };

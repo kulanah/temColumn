@@ -1,5 +1,6 @@
 
 'use strict';
+import { ColumnComponent } from './ColumnComponent.js';
 class Specimen extends ColumnComponent{
   constructor(startY, radius, scene, title){
     super(startY, radius, scene, title);
@@ -38,3 +39,5 @@ class Specimen extends ColumnComponent{
     super.clear();
   }
 }
+
+export { Specimen };

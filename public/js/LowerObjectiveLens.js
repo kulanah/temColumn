@@ -1,4 +1,5 @@
 'use strict';
+import { SimpleLens } from './SimpleLens.js';
 class LowerObjectiveLens extends SimpleLens{
   constructor(focalLength, startY, radius, centerPoint, lensHeight, scene, title, innerLeft, innerRight){
     super(focalLength, startY, radius, centerPoint, lensHeight, scene, title);
@@ -105,9 +106,6 @@ class LowerObjectiveLens extends SimpleLens{
   getEndY(){
     return this.startY + this.lensHeight + this.focalLength;
   }
-
-
-  
-
-
 }
+
+export { LowerObjectiveLens };

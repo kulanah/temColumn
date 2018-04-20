@@ -1,4 +1,5 @@
 'use strict';
+import { ColumnComponent } from './ColumnComponent.js';
 class Gun extends ColumnComponent{
   constructor(startY, radius, scene, title, endY){
     super(startY, radius, scene, title, endY);
@@ -22,3 +23,5 @@ class Gun extends ColumnComponent{
     this.drawGun();
   }
 }
+
+export { Gun };

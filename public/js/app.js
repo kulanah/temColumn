@@ -1,4 +1,6 @@
 'use strict';
+
+import { Column } from './Column.js';
 class MicroscopeColumn {
   constructor(divId){
     if (document.getElementById(divId) === null){
@@ -258,3 +260,5 @@ class MicroscopeColumn {
   }
 
 }
+const column = new MicroscopeColumn('testThree');
+export { column };
