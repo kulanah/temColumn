@@ -262,5 +262,3 @@ class MicroscopeColumn {
 }
 
 export {MicroscopeColumn};
-// const column = new MicroscopeColumn('testThree');
-// export { column };
