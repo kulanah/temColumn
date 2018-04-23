@@ -127,9 +127,15 @@ class MicroscopeColumn {
 
     let backgroundTexture;
 
-    loader.load('./public/img/columnbackground.png', function(texture){
-      backgroundTexture = texture;
-    });
+    if (!this.open){
+      loader.load('./public/img/columnbackgroundclosed.png', function(texture){
+        backgroundTexture = texture;
+      });
+    } else {
+      loader.load('./public/img/columnbackgroundopen.png', function(texture){
+        backgroundTexture = texture;
+      });
+    }
 
     manager.onLoad = function(){
       this.scene.background = backgroundTexture;
@@ -308,6 +314,12 @@ class MicroscopeColumn {
     }
     this.title.text(newTitle);
     this.render();
+  }
+
+  toggleValve(){
+    this.open = !this.open;
+    this.initBackground();
+    console.log('toggled');
   }
 
 }
