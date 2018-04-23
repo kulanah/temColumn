@@ -19,11 +19,15 @@ class MicroscopeColumn {
 
       this.sceneHeight = this.window.height() - 35;
 
+
+      this.open = true;
       this.delta = -0.2;
 
       this.init();
       this.animate();
       this.drawScene();
+
+      this.toggleValve();
     }
   }
 
@@ -319,9 +323,8 @@ class MicroscopeColumn {
   toggleValve(){
     this.open = !this.open;
     this.initBackground();
-    console.log('toggled');
+    this.microscope.toggleValve();
   }
-
 }
 
 export {MicroscopeColumn};

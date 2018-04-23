@@ -1,6 +1,10 @@
-import {column} from './app.js';
 
-export function setOnChange(){
+  $('#testButton').on('click', function(){
+    columnVar.toggleValve();
+    console.log('sup');
+
+
+  });
   $('#focalslider').on('input', function(){
     column.updateFocalLength(2, this.value);
   });
@@ -24,4 +28,3 @@ export function setOnChange(){
   $('#focusslider').on('input', function(){
     column.focusColumn(this.value - 1);
   });
-}

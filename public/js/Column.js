@@ -25,6 +25,7 @@ class Column{
 
     this.scene = scene;
 
+    this.open = false;
 
     this.radius = 2.5; 
 
@@ -215,6 +216,20 @@ class Column{
 
   updateBotRadius(lensNum, newRadiusPercentage){
     this.components[lensNum].updateBotRadius(newRadiusPercentage);
+  }
+
+  toggleValve(){
+    //TODO: fix this so it's more modular
+    console.log(this.savedWidth);
+    if (!this.open){
+      // this.savedWidth = this.components[2].getApertureWidth();
+      this.updateAperture(2, 0);
+    } else {
+      this.updateAperture(2, 1);
+    }
+
+    // this.draw();
+    this.open = !this.open;
   }
 }
 

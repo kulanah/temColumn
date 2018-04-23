@@ -162,6 +162,9 @@ class SimpleLens extends ColumnComponent{
     this.clear();
   }
 
+  getApertureWidth(){
+    return this.apertures[0].getWidth();
+  }
 
   draw(){
     super.draw();

@@ -31,6 +31,7 @@ For all componentNumber arguments indexing starts at 0.
 |updateRightBoundry | componentNumber, newRightValue | Sets new x value for the right end of the split beam lenses.|AngledLens|
 |updateBotRadius | componentNumber, newCylinderRadius| Sets the new radius for the cylinder shaped lens above the specimen.|CylinderLens|
 |updateAperture | componentNumber, newWidthPercentage | Sets the width to the chosen aperture to the new value.  Each value is a percentage of the total width that the aperture starts at.|Aperture|
+|toggleValve|none|Toggles the column valve.  Changes background image and clears most of the column rays when off|Column instance the user creates|
 
 ### Column Components
 

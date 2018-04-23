@@ -53,7 +53,9 @@ class Aperture extends ColumnComponent{
 
   clear(){
     this.scene.remove(this.aperture1);
+    this.aperture1 = null;
     this.scene.remove(this.aperture2);
+    this.aperture2 = null;
   }
 
 
@@ -64,6 +66,10 @@ class Aperture extends ColumnComponent{
     if (newWidth === 0){
       return true;
     }
+  }
+
+  getWidth(){
+    return this.widthPercent;
   }
 }
 

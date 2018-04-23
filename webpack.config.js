@@ -5,16 +5,16 @@ module.exports = {
   entry: './public/js/app.js',
   devServer:{
     contentBase: __dirname + '/dist',
-    hot: true,
+    // hot: true,
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'index.html'
-    }),
-    new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
-  ],
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     filename: 'index.html',
+  //     template: 'index.html'
+  //   }),
+  //   new webpack.NamedModulesPlugin(),
+  //   new webpack.HotModuleReplacementPlugin()
+  // ],
   output: {
     path: __dirname + '/dist',
     filename: 'bundle.js',
