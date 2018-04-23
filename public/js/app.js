@@ -180,31 +180,82 @@ class MicroscopeColumn {
 
   createLenses(){
     //TODO pull this out to public API and create public access ot this section
+    //0
     this.microscope.addGun('Electron Gun');
+
+    //1
     this.microscope.addExtractorBeam('Electron Extractor');
+    
+    //1.0
     this.microscope.addLabel(1, 1, 0.2);
+    
+    //1.1
     this.microscope.addLabel(1, 1, 0.4);
+    
+    //2
     this.microscope.addSimpleLens(1.2, 4, 'Condensor Lens 1');
+    
+    //2.0
+    this.microscope.addAperture(2, 0.5, 1.0, 'Condensor 1 Aperture');
+    
+    //2.1
     this.microscope.addLabel(2, 2, 0.15);
+    
+    //2.2
     this.microscope.addLabel(2, 2, 0.3);
-    this.microscope.addAperture(2, 0.5, 1.0, 'Condesor 1 Aperture');
+    
+    //3
     this.microscope.addSimpleLens(1.2, 2, 'Condensor Lens 2');
-    this.microscope.addLabel(3, 2, 0.9);
+    
+    //3.0
     this.microscope.addAperture(3, 0.01, 1.0, 'Condesor 2 Aperture');
+
+    //3.1
+    this.microscope.addLabel(3, 2, 0.9);
+
+    //4
     this.microscope.addSimpleLens(0.5, 2, 'Minicondensor Lens');
+
+    //4.0
     this.microscope.addLabel(4, 2, 0.1);
+
+    //4.1
     this.microscope.addLabel(4, 2, 0.3);
+
+    //5
     this.microscope.addCylinderLens(1, 1, 'EDX Detector', 1);
+
+    //6
     this.microscope.addSpecimen('Specimen');
+
+    //7
     this.microscope.addLowerObjectiveLens(1, 1, 'Lower Objective Lens');
+    
+    //8
     this.microscope.addOverhangLens(2, 2, 0.75, 'Diffraction Lens');
+    
+    //8.0
     this.microscope.addLabel(8, 2, 0.1);
+    
+    //8.1
     this.microscope.addLabel(8, 2, 0.2);
+    
+    //8.2
     this.microscope.addLabel(8, 2, 0.3);
+    
+    //8.3
     this.microscope.addLabel(8, 2, 0.4);
+    
+    //9
     this.microscope.addAngledLens(0.5, 0.5, -2, -1, 'Fifth Lens');
+    
+    //10
     this.microscope.addAngledLens(0.5, 0.5, -2, -1, 'Fifth Lens');
+    
+    //11
     this.microscope.addAngledLens(3, 1, -2, -1, 'Fifth Lens');
+    
+    //12
     this.microscope.addScreen(2, 'Screen');
 
     this.microscope.draw(); 
@@ -262,5 +313,3 @@ class MicroscopeColumn {
 }
 
 export {MicroscopeColumn};
-// const column = new MicroscopeColumn('testThree');
-// export { column };
