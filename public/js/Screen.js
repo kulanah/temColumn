@@ -50,6 +50,10 @@ class Screen extends ColumnComponent{
     this.drawRays();
     this.drawScreen();
   }
+  clear(){
+    super.clear();
+    this.scene.remove(this.rayMesh);
+  }
 }
 
 export { Screen };

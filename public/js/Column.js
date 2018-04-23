@@ -220,15 +220,12 @@ class Column{
 
   toggleValve(){
     //TODO: fix this so it's more modular
-    console.log(this.savedWidth);
     if (!this.open){
-      // this.savedWidth = this.components[2].getApertureWidth();
       this.updateAperture(2, 0);
     } else {
       this.updateAperture(2, 1);
     }
 
-    // this.draw();
     this.open = !this.open;
   }
 }
